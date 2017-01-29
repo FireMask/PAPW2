@@ -1,6 +1,8 @@
 define(['jquery', 'handlebars'],  function($, HB) {
   var Test = function(){
-      $("body").html("jq, hb");
+      this.show = function(){
+        return $("body").html("asd");
+      }
   }
   return Test;
 });

@@ -1,0 +1,1 @@
+{"version":3,"sources":["test1.css","test2.css"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA;ACJA;AACA;AACA;AACA","file":"style.css","sourcesContent":["*, html, body{\r\n  margin: 0;\r\n  padding: 0;\r\n}\r\n","div{\r\n  background-color: red;\r\n}\r\n"]}

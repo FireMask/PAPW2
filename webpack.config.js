@@ -1,10 +1,10 @@
 var webpack = require('webpack');
 module.exports = {
     entry: {
-        main: __dirname + "/main.js"
+        main: __dirname + "/resources/assets/js/main.js"
     },
     output: {
-        path: __dirname + "/../../../public/js/dist/",
+        path: __dirname + "/public/js/dist/",
         filename: "[name].bundle.js",
         chunkFilename: "[id].bundle.js"
     },
@@ -18,9 +18,9 @@ module.exports = {
     ],
     resolve: {
         alias: {
-            'jquery': __dirname + '/../../../node_modules/jquery/dist/jquery.js',
-            'handlebars': __dirname + '/../../../node_modules/handlebars/dist/handlebars.js',
-            'vue': __dirname + '/../../../node_modules/vue/dist/vue.js'
+            'jquery': __dirname + '/node_modules/jquery/dist/jquery.js',
+            'handlebars': __dirname + '/node_modules/handlebars/dist/handlebars.js',
+            'vue': __dirname + '/node_modules/vue/dist/vue.js'
         }
     },
     module: {
