@@ -2,21 +2,17 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>AdminLTE 2 | Starter</title>
-    <!-- Tell the browser to be responsive to screen width -->
+    <title>Starter</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.6 -->
     <link rel="stylesheet" href="js/dist/Bootstrap/css/bootstrap.min.css">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="js/dist/Font-Awesome/css/font-awesome.min.css">
-    <!-- Ionicons -->
     <link rel="stylesheet" href="js/dist/Ionicons/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="js/dist/AdminLTE/css/AdminLTE.min.css">
-    <link rel="stylesheet" href="js/dist/AdminLTE/css/skins/skin-blue.min.css">
+    <link rel="stylesheet" href="js/dist/AdminLTE/css/skins/skin-purple.min.css">
   </head>
 
-  <body class="hold-transition skin-blue sidebar-mini">
+  <body class="hold-transition skin-purple sidebar-mini">
     <div class="wrapper">
       <!-- Main Header -->
       <header class="main-header">
@@ -78,7 +74,7 @@
                 <!-- Menu toggle button -->
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-bell-o"></i>
-                  <span class="label label-warning">10</span>
+                  <span class="label label-warning">4</span>
                 </a>
                 <ul class="dropdown-menu">
                   <li class="header">You have 10 notifications</li>

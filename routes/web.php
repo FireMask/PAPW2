@@ -14,3 +14,5 @@
 Route::get('/', function () {
     return view('templates/main');
 });
+
+Route::resource('/Empresa', 'EmpresaController');
