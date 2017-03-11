@@ -16,7 +16,7 @@ require('laravel-elixir-vue-2');
  elixir((mix) => {
    mix.styles([
      'resources/assets/css/test1.css',
-     'resources/assets/css/test2.css'
+     'resources/assets/css/landing.css'
    ], 'public/css/style.css').
    webpack([
      'resources/assets/js/main.js'
