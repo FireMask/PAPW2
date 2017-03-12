@@ -1,5 +1,7 @@
 @extends('layouts.master')
 
+@section('title', 'Usuarios')
+
 @section('headers')
   @include('layouts.headers')
 @stop
@@ -17,12 +19,9 @@
 @stop
 
 @section('content-header')
-  <section class="content-header">
-      <h1>
-          Usuarios
-      </h1>
-  </section>
 @stop
+
+@section('Encabezado', 'Usuarios')
 
 @section('content')
 <table id="table_id" class="table table-striped table-bordered dataTable order-column" cellspacing="0" width="100%">
@@ -46,13 +45,11 @@
         <td>{{ $emp->apellido_materno }}</td>
         <td>{{ $emp->correo_usuario }}</td>
         <td>{{ $emp->rol->nombre }}</td>
-        <td>
-          <td>
-            <form action="/usuario/{{ $emp->idUsuario }}" method="post">
-              <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              <button type="submit" class="btn btn-sm btn-danger">Borrar</button>
-            </form>
-          </td>
+        <td align="center">
+          <form action="/usuario/{{ $emp->idUsuario }}" method="post">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <button type="submit" class="btn btn-sm btn-danger">Borrar</button>
+          </form>
         </td>
     </tr>
     @endforeach

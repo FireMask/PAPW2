@@ -11,7 +11,6 @@
         <link rel="stylesheet" href="js/dist/AdminLTE/css/AdminLTE.min.css">
         <link rel="stylesheet" href="js/dist/AdminLTE/css/skins/skin-purple.min.css">
         <!-- Custom -->
-        <link rel="stylesheet" href="css/app.css">
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>

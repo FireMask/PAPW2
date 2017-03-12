@@ -8,27 +8,27 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Usuario extends Model
 {
   use SoftDeletes;
-    protected $table = "Usuario";
+  protected $table = "Usuario";
 
-    protected $primaryKey = "idUsuario";
+  protected $primaryKey = "idUsuario";
 
-    protected $fillable = [
-        "nombres",
-        "apellido_paterno",
-        "apellido_materno",
-        "correo_usuario",
-        "contra_usuario",
-        "idRol",
-        "activo"
-    ];
+  protected $fillable = [
+      "nombres",
+      "apellido_paterno",
+      "apellido_materno",
+      "correo_usuario",
+      "contra_usuario",
+      "idRol",
+      "activo"
+  ];
 
-    function rol() {
-        return $this->hasOne('App\Models\Rol', 'idRol', 'idRol');
-    }
+  function rol() {
+      return $this->hasOne('App\Models\Rol', 'idRol', 'idRol');
+  }
 
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at'
-    ];
+  protected $dates = [
+      'created_at',
+      'updated_at',
+      'deleted_at'
+  ];
 }
