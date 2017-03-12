@@ -25,7 +25,7 @@
     <br>
     <br>
     <div class="content col-md-6 col-md-offset-3">
-        <div class="login centered vertical-center" id="loginbody">
+        <div class="login centered" id="loginbody">
             <div>
                 <div class="space-small-login"></div>
                 <div class="login_wrapper">

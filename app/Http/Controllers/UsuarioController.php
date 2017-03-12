@@ -9,36 +9,17 @@ use App\Models\Rol;
 
 class UsuarioController extends Controller
 {
-      /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index(){
       $users = Usuario::with('rol')->get();
-      return view('ListaUsuarios', compact('users'));
+      return view('admin.usuario.view-usuario', compact('users'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create(){
-        //
+        $roles = Rol::all();
+        return view('admin.usuario.add-usuario', compact('roles'));
     }
 
-    public function registrar(){
-      $roles = Rol::all();
-      return view('registroUsuario', compact('roles'));
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request){
       $usuario = new Usuario;
       $usuario->nombres = $request->nombres;
@@ -48,50 +29,29 @@ class UsuarioController extends Controller
       $usuario->contra_usuario = sha1($request->contra_usuario);
       $usuario->idRol = $request->rol;
       $usuario->save();
-      $roles = Rol::All();
-      return view('ListaUsuarios', compact('roles'));
+      return redirect('/usuarios');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id){
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id){
-        //
+        $roles = Rol::all();
+        $usuario = Usuario::find($id);
+        return view('admin.usuario.edit-usuario', compact('usuario', 'roles'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id){
-        //
+        try{
+            $user = Usuario::find($id);
+            $user->fill($request->all());
+            $user->save();
+            return redirect('/usuarios');
+        }catch(Exception $ex){
+            return redirect('usuario/'.$id.'/edit');
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id){
       $usuario = Usuario::find($id);
       $usuario->delete();
-      return redirect()->route('users');
+      return redirect('/usuarios');
     }
 }
