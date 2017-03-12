@@ -20,7 +20,8 @@ module.exports = {
         alias: {
             'jquery': __dirname + '/node_modules/jquery/dist/jquery.js',
             'handlebars': __dirname + '/node_modules/handlebars/dist/handlebars.js',
-            'vue': __dirname + '/node_modules/vue/dist/vue.js'
+            'vue': __dirname + '/node_modules/vue/dist/vue.js',
+            'datatables': __dirname + '/node_modules/datatables.net-bs/js/dataTables.bootstrap.js'
         }
     },
     module: {

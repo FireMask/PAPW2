@@ -14,10 +14,6 @@ class Rol extends Model
         "nombre"
     ];
 
-    public function usuarios() {
-        return $this->belongsTo('app\Models\Usuario', 'idRol');
-    }
-
     protected $dates = [
         'created_at',
         'updated_at',

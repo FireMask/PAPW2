@@ -26,5 +26,6 @@ require('laravel-elixir-vue-2');
    copy('node_modules/font-awesome/css', 'public/js/dist/Font-Awesome/css').
    copy('node_modules/font-awesome/fonts', 'public/js/dist/Font-Awesome/fonts').
    copy('node_modules/ionicons/dist/css', 'public/js/dist/Ionicons/css').
-   copy('node_modules/jquery/dist', 'public/js/dist/jQuery/dist');
+   copy('node_modules/jquery/dist', 'public/js/dist/jQuery/dist').
+   copy('node_modules/datatables.net-bs', 'public/js/dist/DataTables');
  });

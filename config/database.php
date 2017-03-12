@@ -54,15 +54,15 @@ return [
 
         'mysql' => [
             'read' => [
-                'host' => '127.0.0.1',
+                'host' => '69.162.102.178',
             ],
             'write' => [
-                'host' => '127.0.0.1',
+                'host' => '69.162.102.178',
             ],
             'driver'    => 'mysql',
-            'database'  => 'webcotizacion',
-            'username'  => 'root',
-            'password'  => 'root',
+            'database'  => 'moviefle_PAPW_CRM',
+            'username'  => 'moviefle_papw2',
+            'password'  => 'AndresDavid12345',
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',

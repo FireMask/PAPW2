@@ -1,5 +1,5 @@
-define(['jquery', './test/test'],  function($, Test) {
+define(['jquery', 'datatables'],  function($, DataTable) {
 	$(document).ready(function() {
-		new Test.show();
+		$('#table_id').DataTable();
 	});
 });

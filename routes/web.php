@@ -19,22 +19,12 @@ Route::get('/', function () {
     return view('templates/landing');
 });
 
-Route::get('/registro', function () {
-    $roles = Rol::all();
-    return view('templates/registro', compact('roles'));
-});
+Route::get('/registro', 'UsuarioController@registrar');
+Route::get('/usuarios', [
+  'as'=> 'users' ,
+  'uses' => 'UsuarioController@index'
+]);
+Route::post('/usuario/{id}', 'UsuarioController@destroy');
+Route::post('/registroUsuario', 'UsuarioController@store');
 
-Route::resource('/Empresa', 'EmpresaController');
-
-Route::post('/registroUsuario', function (Request $input) {
-    $usuario = new Usuario;
-    $usuario->nombres = $input::get('nombres');
-    $usuario->apellido_paterno = $input::get('apellido_paterno');
-    $usuario->apellido_materno = $input::get('apellido_materno');
-    $usuario->nombre_usuario = $input::get('correo');
-    $usuario->contra_usuario = $input::get('contra_usuario');
-    $usuario->idRol = $input::get('rol');
-    $usuario->save();
-    $roles = Rol::all();
-    return view('templates/registro', compact('roles'));
-});
+Route::resource('/empresa', 'EmpresaController');
