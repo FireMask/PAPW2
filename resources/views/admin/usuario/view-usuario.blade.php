@@ -24,7 +24,7 @@
 @section('Encabezado', 'Usuarios')
 
 @section('content')
-<table id="table_id" class="table table-striped table-bordered dataTable order-column" cellspacing="0" width="100%">
+<table id="table_id" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
   <thead>
       <tr>
           <th>ID Usuario</th>

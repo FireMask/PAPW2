@@ -38,10 +38,15 @@ class UsuarioController extends Controller
         return view('admin.usuario.edit-usuario', compact('usuario', 'roles'));
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request){
         try{
-            $user = Usuario::find($id);
-            $user->fill($request->all());
+            $user = Usuario::find($request->idUsuario);
+            $user->nombres = $request->nombres;
+            $user->apellido_paterno = $request->apellido_paterno;
+            $user->apellido_materno = $request->apellido_materno;
+            $user->correo_usuario = $request->correo_usuario;
+            $user->contra_usuario = $request->contra_usuario;
+            $user->idRol = $request->idRol;
             $user->save();
             return redirect('/usuarios');
         }catch(Exception $ex){

@@ -31,6 +31,7 @@
         <div class="col-md-8 col-md-offset-2">
             <form class="login-form" action="/editarUsuario" method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="idUsuario" value="{{ $usuario->idUsuario }}">
                 <div class="form-group">
                     <label for="nombres">Nombres:</label>
                     <input type="text" value="{{ $usuario->nombres }}" class="form-control" id="nombres" name="nombres">
@@ -45,7 +46,7 @@
                 </div>
                 <div class="form-group">
                     <label for="correo">Correo:</label>
-                    <input type="email" value="{{ $usuario->correo_usuario }}" class="form-control" id="correo" name="correo">
+                    <input type="email" value="{{ $usuario->correo_usuario }}" class="form-control" id="correo_usuario" name="correo_usuario">
                 </div>
                 <div class="form-group">
                     <label for="contra_usuario">Contraseña:</label>
@@ -53,7 +54,7 @@
                 </div>
                 <div class="form-group">
                     <label for="rol">Puesto:</label>
-                    <select class="form-control" id="rol" name="rol">
+                    <select class="form-control" id="rol" name="idRol">
                         @if ($roles->count())
                             @foreach($roles as $rol)
                                  <option {{ $usuario->idRol == $rol->idRol ? 'selected' : '' }} value="{{ $rol->idRol }}">{{ $rol->nombre }}</option>

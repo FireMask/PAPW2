@@ -1,3 +1,8 @@
+*, html, body{
+  margin: 0;
+  padding: 0;
+}
+
 *, html{
   margin: 0;
   padding: 0;
@@ -44,32 +49,4 @@ body{
     }
 }
 
-
-
-/*
-.landing {
-    background: #605CA8;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: rgb(200,200,200);
-}
-
-.login, .mensaje-bienvenida {
-    height: 60vh;
-    padding: 50px 20px;
-}
-
-.login {
-    background: #545096;
-}
-
-.login-form, .mensaje-bienvenida .mensaje {
-    position: relative;
-    width: 100%;
-    top: 50%;
-    transform: translateY(-50%);
-}
-*/
 /*# sourceMappingURL=style.css.map */

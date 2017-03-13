@@ -1,5 +1,7 @@
-define(['jquery', 'datatables'],  function($, DataTable) {
+define(['jquery', 'datatables-bs'],  function($, DataTable) {
 	$(document).ready(function() {
-		$('#table_id').DataTable();
+		$('#table_id').DataTable({
+			"scrollX": true
+		});
 	});
 });
