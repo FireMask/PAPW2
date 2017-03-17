@@ -52,22 +52,22 @@ return [
             'prefix' => '',
         ],
 
+        // 'mysql' => [
+        //     'read' => [
+        //         'host' => '127.0.0.1'
+        //     ],
+        //     'write' => [
+        //         'host' => '127.0.0.1'
+        //     ],
+        //     'driver'    => 'mysql',
+        //     'database'  => 'papw2',
+        //     'username'  => 'root',
+        //     'password'  => 'root',
+        //     'charset'   => 'utf8',
+        //     'collation' => 'utf8_unicode_ci',
+        //     'prefix'    => '',
+        // ],
         'mysql' => [
-            'read' => [
-                'host' => '127.0.0.1'
-            ],
-            'write' => [
-                'host' => '127.0.0.1'
-            ],
-            'driver'    => 'mysql',
-            'database'  => 'papw2',
-            'username'  => 'root',
-            'password'  => 'root',
-            'charset'   => 'utf8',
-            'collation' => 'utf8_unicode_ci',
-            'prefix'    => '',
-        ],
-        /*'mysql' => [
             'read' => [
                 'host' => '69.162.102.178',
             ],
@@ -81,7 +81,7 @@ return [
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
-        ],*/
+        ],
 
         'pgsql' => [
             'driver' => 'pgsql',

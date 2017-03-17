@@ -16,7 +16,7 @@ class LoginController extends Controller
     }
 
     public function store(Request $request){
-        
+        return Redirect::to('index');
     }
 
     public function logout(){

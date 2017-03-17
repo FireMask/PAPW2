@@ -12,7 +12,7 @@
             <div class="pull-left info">
                 <p>Alexander Pierce</p>
                 <!-- Status -->
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                <a href=""><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
 
@@ -32,7 +32,7 @@
         <ul class="sidebar-menu">
             <li class="header">Administrador</li>
             <li class="treeview">
-                <a href="#"><i class="fa fa-link"></i> <span>Usuarios</span>
+                <a href=""><i class="fa fa-link"></i> <span>Usuarios</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
@@ -43,7 +43,7 @@
                 </ul>
             </li>
             <li class="treeview">
-                <a href="#"><i class="fa fa-link"></i> <span>Monedas</span>
+                <a href=""><i class="fa fa-link"></i> <span>Monedas</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
@@ -54,7 +54,7 @@
                 </ul>
             </li>
             <li class="treeview">
-                <a href="#"><i class="fa fa-link"></i> <span>Roles</span>
+                <a href=""><i class="fa fa-link"></i> <span>Roles</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
