@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class apiController extends Controller
 {
 	public function getUsers(){
-		$usuarios = Usuario::all();
+		$usuarios = Usuario::with('rol')->get();
 		return response()->json(['usuarios' => $usuarios]);
 	}
 }

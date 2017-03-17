@@ -21,10 +21,14 @@ class Empresa extends Model
       "direccion",
       "iva",
       "telefono",
-      "moneda_defecto",
-      "correo_principal",
+      "idMoneda",
+      "correoPrincipal",
       "logo"
     ];
+
+    function moneda() {
+        return $this->hasOne('App\Models\TipoDeMoneda', 'idMoneda', 'idMoneda');
+    }
 
     protected $dates = [
         'created_at',

@@ -1,11 +1,7 @@
-<!-- Main Header -->
 <header class="main-header">
-    <!-- Logo -->
     <a href="/index" class="logo">
-        <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>A</b>LT</span>
-        <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Admin</b>LTE</span>
+        <span class="logo-mini"><b>PA</b>PW</span>
+        <span class="logo-lg"><b>Programación</b>Web</span>
     </a>
 
     <!-- Header Navbar -->

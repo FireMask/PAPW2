@@ -10,29 +10,17 @@
                 <img src="/js/dist/AdminLTE/img/user2-160x160.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-                <p>Alexander Pierce</p>
+                <p>Andres Lira</p>
                 <!-- Status -->
                 <a href=""><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
 
-        <!-- search form (Optional) -->
-        <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Search...">
-                <span class="input-group-btn">
-                    <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                    </button>
-                </span>
-            </div>
-        </form>
-        <!-- /.search form -->
-
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
             <li class="header">Administrador</li>
             <li class="treeview">
-                <a href=""><i class="fa fa-link"></i> <span>Usuarios</span>
+                <a href=""><i class="fa fa-user-o"></i> <span>Usuarios</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
@@ -43,7 +31,7 @@
                 </ul>
             </li>
             <li class="treeview">
-                <a href=""><i class="fa fa-link"></i> <span>Monedas</span>
+                <a href=""><i class="fa fa-money"></i> <span>Monedas</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
@@ -54,7 +42,7 @@
                 </ul>
             </li>
             <li class="treeview">
-                <a href=""><i class="fa fa-link"></i> <span>Roles</span>
+                <a href=""><i class="fa fa-users"></i> <span>Roles</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
@@ -63,6 +51,31 @@
                     <li><a href="/rol">Ver Roles</a></li>
                     <li><a href="/rol/create">Nuevo Rol</a></li>
                 </ul>
+            </li>
+            <li class="treeview">
+                <a href=""><i class="fa fa-truck"></i> <span>Proveedores</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/proveedor">Ver Proveedores</a></li>
+                    <li><a href="/proveedor/create">Nuevo Proveedor</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href=""><i class="fa fa-wrench"></i> <span>Fabricantes</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/fabricante">Ver Fabricantes</a></li>
+                    <li><a href="/fabricante/create">Nuevo Fabricantes</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="/empresa"><i class="fa fa-gear"></i> <span>Empresa</span></a>
             </li>
         </ul>
         <!-- /.sidebar-menu -->

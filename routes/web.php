@@ -9,9 +9,10 @@ Route::get('index', function () {
 });
 
 Route::resource('login', 'LoginController');
+
 Route::resource('usuario', 'UsuarioController');
 Route::resource('rol', 'RolController');
 Route::resource('moneda', 'TipoDeMonedaController');
-
-
-Route::resource('/empresa', 'EmpresaController');
+Route::resource('proveedor', 'ProveedorController');
+Route::resource('fabricante', 'FabricanteController');
+Route::resource('empresa', 'EmpresaController');
