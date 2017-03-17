@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
-use App\Models\Cliente;
+use App\Models\Producto;
 
-class ClienteController extends Controller
+class ProductoController extends Controller
 {
 
     public function index(){

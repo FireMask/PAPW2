@@ -14,7 +14,12 @@ class TipoDeMoneda extends Model
     protected $primaryKey = "idMoneda";
 
     protected $fillable = [
-        //Agregar campos modificables
+        'nombre',
+        'simbolo',
+        'presicion',
+        'separador_millares',
+        'separador_decimales',
+        'codigo'
     ];
 
     protected $dates = [

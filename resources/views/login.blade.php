@@ -32,7 +32,7 @@
                     <div Class="animate form login_form">
                         <section Class="login_content">
                             <div class="form">
-                                <form action="/login" method="post">
+                                <form action="/login" method="POST">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <input autocomplete="false" name="hidden" type="text" style="display:none;">
                                     <br>

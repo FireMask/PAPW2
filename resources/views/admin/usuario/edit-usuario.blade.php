@@ -29,16 +29,17 @@
 @section('content')
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <form class="login-form" action="/editarUsuario" method="post">
+            <form class="login-form" action="/usuario/{{ $usuario->idUsuario }}" method="POST">
+                <input name="_method" type="hidden" value="PUT">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="idUsuario" value="{{ $usuario->idUsuario }}">
                 <div class="form-group">
                     <label for="nombres">Nombres:</label>
-                    <input type="text" value="{{ $usuario->nombres }}" class="form-control" id="nombres" name="nombres">
+                    <input required type="text" value="{{ $usuario->nombres }}" class="form-control" id="nombres" name="nombres">
                 </div>
                 <div class="form-group">
                     <label for="apellido_paterno">Apellido paterno:</label>
-                    <input type="text" value="{{ $usuario->apellido_paterno }}" class="form-control" id="apellido_paterno" name="apellido_paterno">
+                    <input required type="text" value="{{ $usuario->apellido_paterno }}" class="form-control" id="apellido_paterno" name="apellido_paterno">
                 </div>
                 <div class="form-group">
                     <label for="apellido_materno">Apellido materno:</label>
@@ -46,11 +47,11 @@
                 </div>
                 <div class="form-group">
                     <label for="correo">Correo:</label>
-                    <input type="email" value="{{ $usuario->correo_usuario }}" class="form-control" id="correo_usuario" name="correo_usuario">
+                    <input required type="email" value="{{ $usuario->correo_usuario }}" class="form-control" id="correo_usuario" name="correo_usuario">
                 </div>
                 <div class="form-group">
                     <label for="contra_usuario">Contraseña:</label>
-                    <input type="password" class="form-control" id="contra_usuario" name="contra_usuario">
+                    <input required type="password" class="form-control" id="contra_usuario" name="contra_usuario">
                 </div>
                 <div class="form-group">
                     <label for="rol">Puesto:</label>

@@ -21,15 +21,15 @@ class UsuarioController extends Controller
     }
 
     public function store(Request $request){
-      $usuario = new Usuario;
-      $usuario->nombres = $request->nombres;
-      $usuario->apellido_paterno = $request->apellido_paterno;
-      $usuario->apellido_materno = $request->apellido_materno;
-      $usuario->correo_usuario = $request->correo;
-      $usuario->contra_usuario = sha1($request->contra_usuario);
-      $usuario->idRol = $request->rol;
-      $usuario->save();
-      return redirect('/usuarios');
+        $usuario = new Usuario;
+        $usuario->nombres = $request->nombres;
+        $usuario->apellido_paterno = $request->apellido_paterno;
+        $usuario->apellido_materno = $request->apellido_materno;
+        $usuario->correo_usuario = $request->correo_usuario;
+        $usuario->contra_usuario = sha1($request->contra_usuario);
+        $usuario->idRol = $request->rol;
+        $usuario->save();
+        return redirect('/usuario');
     }
 
     public function edit($id){
@@ -41,22 +41,17 @@ class UsuarioController extends Controller
     public function update(Request $request){
         try{
             $user = Usuario::find($request->idUsuario);
-            $user->nombres = $request->nombres;
-            $user->apellido_paterno = $request->apellido_paterno;
-            $user->apellido_materno = $request->apellido_materno;
-            $user->correo_usuario = $request->correo_usuario;
-            $user->contra_usuario = $request->contra_usuario;
-            $user->idRol = $request->idRol;
+            $user->fill($request->all());
             $user->save();
-            return redirect('/usuarios');
+            return redirect('/usuario');
         }catch(Exception $ex){
             return redirect('usuario/'.$id.'/edit');
         }
     }
 
     public function destroy($id){
-      $usuario = Usuario::find($id);
-      $usuario->delete();
-      return redirect('/usuarios');
+        $usuario = Usuario::find($id);
+        $usuario->delete();
+        return redirect('/usuario');
     }
 }
