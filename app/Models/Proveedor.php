@@ -9,7 +9,7 @@ class Proveedor extends Model
 {
     use SoftDeletes;
 
-    protected $table = "Proveedor";
+    protected $table = "proveedor";
 
     protected $primaryKey = "idProveedor";
 

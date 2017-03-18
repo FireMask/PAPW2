@@ -9,7 +9,7 @@ class UsuarioCliente extends Model
 {
     use SoftDeletes;
 
-    protected $table = "Usuario_Cliente";
+    protected $table = "usuario_cliente";
 
     //protected $primaryKey = "idUsuario";
 

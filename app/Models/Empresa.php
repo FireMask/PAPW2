@@ -9,7 +9,7 @@ class Empresa extends Model
 {
     use SoftDeletes;
 
-    protected $table = "Empresa";
+    protected $table = "empresa";
 
     protected $primaryKey = "idEmpresa";
 

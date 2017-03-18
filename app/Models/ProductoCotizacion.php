@@ -9,7 +9,7 @@ class ProductoCotizacion extends Model
 {
     use SoftDeletes;
 
-    protected $table = "Producto_Cotizacion";
+    protected $table = "producto_cotizacion";
 
     protected $primaryKey = "idUsuario";
 
