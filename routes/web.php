@@ -19,3 +19,6 @@ Route::resource('empresa', 'EmpresaController');
 Route::resource('producto', 'ProductoController');
 Route::resource('cliente', 'ClienteController');
 Route::resource('cotizacion', 'CotizacionController');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

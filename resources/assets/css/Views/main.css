@@ -1,0 +1,29 @@
+body{
+    background-color: #ecf0f5;
+}
+
+footer.bg-lightgray {
+    display: none;
+}
+
+#loginbody {
+    padding: 20px;
+}
+
+@media (min-width: 400px) and (min-height: 400px){
+    #loginbody{
+        width: 500px;
+        margin: 60px auto;
+    }
+}
+
+@media (min-height: 600px){
+    footer.bg-lightgray{
+        display: block;
+        width: 100%;
+        position: fixed;
+        background-color:LightGray;
+        bottom: 0;
+        margin: 20px 0 0 0;
+    }
+}
