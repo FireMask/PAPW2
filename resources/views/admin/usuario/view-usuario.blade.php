@@ -51,14 +51,15 @@
         <td>{{ $emp->correo_usuario }}</td>
         <td>{{ $emp->rol->nombre }}</td>
         <td align="center">
-            <form action="/usuario/{{ $emp->idUsuario }}/edit" method="GET">
-              <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              <button type="submit" class="btn btn-sm btn-warning">Editar</button>
-            </form>
-            <form action="/usuario/{{ $emp->idUsuario }}" method="POST">
+            <a href="/usuario/{{ $emp->idUsuario }}/edit">
+                <span class="fa fa-pencil"></span> Editar
+            </a>
+            <form id="borrarsito" action="/usuario/{{ $emp->idUsuario }}" method="POST">
                 <input name="_method" type="hidden" value="DELETE">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <button type="submit" class="btn btn-sm btn-danger">Borrar</button>
+                <a href="javascript:{}" onclick="document.getElementById('borrarsito').submit();">
+                    <span class="fa fa-trash"></span> Eliminar
+                </a>
             </form>
         </td>
     </tr>

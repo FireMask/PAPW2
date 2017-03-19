@@ -8,3 +8,5 @@
 <link rel="stylesheet" href="/js/dist/AdminLTE/css/AdminLTE.min.css">
 <link rel="stylesheet" href="/js/dist/AdminLTE/css/skins/skin-purple.min.css">
 <link rel="stylesheet" href="/js/dist/DataTables/css/dataTables.bootstrap.css">
+<!-- Custom Styles -->
+<link rel="stylesheet" href="/public/css/main.css">

@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="js/dist/Bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="js/dist/Font-Awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
 
 </head>
 <body>

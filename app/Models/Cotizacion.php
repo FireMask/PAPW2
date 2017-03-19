@@ -20,8 +20,8 @@ class Cotizacion extends Model
         'validez',
         'pago',
         'total',
-        'nota',
-        'aprovada'
+        'aprovada',
+        'finalizada'
     ];
 
     function moneda() {

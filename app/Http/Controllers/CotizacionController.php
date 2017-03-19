@@ -2,53 +2,45 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cotizacion;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Redirector;
+use App\Models\Cliente;
 use App\Models\TipoDeMoneda;
+use App\Models\Usuario;
+use Illuminate\Http\Request;
+use App\Models\Cotizacion;
 
 class CotizacionController extends Controller
 {
 
     public function index(){
-        $cotizaciones = Cotizacion::with('moneda')->get();
+        $cotizaciones = Cotizacion::with('moneda', 'cliente', 'usuario')->get();
         return view('admin.cotizacion.view-cotizacion', compact('cotizaciones'));
     }
 
     public function create(){
-        $proveedores = Proveedor::all();
-        $fabricantes = Fabricante::all();
-        return view('admin.producto.add-producto', compact('proveedores', 'fabricantes'));
+        $monedas = TipoDeMoneda::all();
+        $clientes = Cliente::all();
+        $usuarios = Usuario::all();
+        return view('admin.cotizacion.add-cotizacion', compact('monedas', 'clientes', 'usuarios'));
     }
 
     public function store(Request $request){
-        $producto = new Producto;
-        $producto->fill($request->all());
-        $producto->save();
-        return redirect('/producto');
+
     }
 
     public function edit($id){
-        $producto = Producto::find($id);
-        $proveedores = Proveedor::all();
-        $fabricantes = Fabricante::all();
-        return view('admin.producto.edit-producto', compact('producto', 'proveedores', 'fabricantes'));
+
     }
 
     public function update(Request $request){
         try{
-            $producto = Producto::find($request->idProducto);
-            $producto->fill($request->all());
-            $producto->save();
-            return redirect('/producto');
-        }catch(Exception $ex){
-            return redirect('producto/'.$request->idProducto.'/edit');
-        }
+            $cotizacion = Cotizacion::find($request->idCotizacion);
+            $cotizacion->aprobada = $request->aprobada ? 1 : 0;
+            $cotizacion->save();
+            return redirect('/cotizacion');
+        }catch(Exception $ex){}
     }
 
     public function destroy($id){
-        $producto = Producto::find($id);
-        $producto->delete();
-        return redirect('/producto');
+
     }
 }

@@ -15,9 +15,11 @@ require('laravel-elixir-vue-2');
 
  elixir(function(mix){
    mix.styles([
-     'resources/assets/css/test1.css',
      'resources/assets/css/landing.css'
-   ], 'public/css/style.css').
+   ], 'public/css/login.css').
+   styles([
+       'resources/assets/css/Views/main.css',
+   ], 'public/css/main.css').
    copy('node_modules/admin-lte/dist', 'public/js/dist/AdminLTE').
    copy('node_modules/bootstrap/dist', 'public/js/dist/Bootstrap').
    copy('node_modules/font-awesome/css', 'public/js/dist/Font-Awesome/css').

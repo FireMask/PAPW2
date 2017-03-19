@@ -63,8 +63,15 @@
                         @endif
                     </select>
                 </div>
-                <div class="form-group" align="center">
-                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                <div class="form-group">
+                    <div class="col-md-6" align="left">
+                        <a class="btn btn-default" href="/usuario">
+                            <i class="fa fa-arrow-left"></i> Regresar
+                        </a>
+                    </div>
+                    <div class="col-md-6" align="right">
+                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                    </div>
                 </div>
             </form>
         </div>

@@ -20,81 +20,28 @@
         <ul class="sidebar-menu">
             <li class="header">Administrador</li>
             <li class="treeview">
-                <a href=""><i class="fa fa-user-o"></i> <span>Usuarios</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="/usuario">Ver Usuarios</a></li>
-                    <li><a href="/usuario/create">Nuevo Usuario</a></li>
-                </ul>
+                <a href="/cotizacion"><i class="fa fa-file-text"></i> <span>Cotizaciones</span></a>
             </li>
             <li class="treeview">
-                <a href=""><i class="fa fa-money"></i> <span>Monedas</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="/moneda">Ver Monedas</a></li>
-                    <li><a href="/moneda/create">Nueva Moneda</a></li>
-                </ul>
+                <a href="/cliente"><i class="fa fa-users"></i> <span>Clientes</span></a>
             </li>
             <li class="treeview">
-                <a href=""><i class="fa fa-users"></i> <span>Roles</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="/rol">Ver Roles</a></li>
-                    <li><a href="/rol/create">Nuevo Rol</a></li>
-                </ul>
+                <a href="/producto"><i class="fa fa-shopping-basket"></i> <span>Productos</span></a>
             </li>
             <li class="treeview">
-                <a href=""><i class="fa fa-truck"></i> <span>Proveedores</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="/proveedor">Ver Proveedores</a></li>
-                    <li><a href="/proveedor/create">Nuevo Proveedor</a></li>
-                </ul>
+                <a href="/usuario"><i class="fa fa-user"></i> <span>Usuarios</span></a>
             </li>
             <li class="treeview">
-                <a href=""><i class="fa fa-wrench"></i> <span>Fabricantes</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="/fabricante">Ver Fabricantes</a></li>
-                    <li><a href="/fabricante/create">Nuevo Fabricantes</a></li>
-                </ul>
+                <a href="/moneda"><i class="fa fa-money"></i> <span>Monedas</span></a>
             </li>
             <li class="treeview">
-                <a href=""><i class="fa fa-shopping-basket"></i> <span>Productos</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="/producto">Ver Productos</a></li>
-                    <li><a href="/producto/create">Nuevo Productos</a></li>
-                </ul>
+                <a href="/rol"><i class="fa fa-tags"></i> <span>Roles</span></a>
             </li>
             <li class="treeview">
-                <a href=""><i class="fa fa-shopping-basket"></i> <span>Clientes</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="/cliente">Ver Clientes</a></li>
-                    <li><a href="/cliente/create">Nuevo Clientes</a></li>
-                </ul>
+                <a href="/proveedor"><i class="fa fa-truck"></i> <span>Proveedores</span></a>
+            </li>
+            <li class="treeview">
+                <a href="/fabricante"><i class="fa fa-wrench"></i> <span>Fabricantes</span></a>
             </li>
             <li class="treeview">
                 <a href="/empresa"><i class="fa fa-gear"></i> <span>Empresa</span></a>

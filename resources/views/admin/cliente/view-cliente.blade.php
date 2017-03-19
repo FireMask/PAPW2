@@ -44,7 +44,7 @@
           <th>Correo</th>
           <th>Teléfono Empresa</th>
           <th>Teléfono Personal</th>
-          <th>Propecto</th>
+          <th>Prospecto</th>
           <th>Opciones</th>
       </tr>
   </thead>
@@ -65,14 +65,15 @@
         <td>{{ $cli->telefono_personal }}</td>
         <td>{{ $cli->prospecto }}</td>
         <td align="center">
-            <form action="/cliente/{{ $cli->idCliente }}/edit" method="GET">
-              <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              <button type="submit" class="btn btn-sm btn-warning">Editar</button>
-            </form>
-            <form action="/cliente/{{ $cli->idCliente }}" method="POST">
+            <a href="/cliente/{{ $cli->idCliente }}/edit">
+                <span class="fa fa-pencil"></span> Editar
+            </a>
+            <form id="borrarsito" action="/cliente/{{ $cli->idCliente }}" method="POST">
                 <input name="_method" type="hidden" value="DELETE">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <button type="submit" class="btn btn-sm btn-danger">Borrar</button>
+                <a href="javascript:{}" onclick="document.getElementById('borrarsito').submit();">
+                    <span class="fa fa-trash"></span> Eliminar
+                </a>
             </form>
         </td>
     </tr>

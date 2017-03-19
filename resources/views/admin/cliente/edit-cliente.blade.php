@@ -68,7 +68,7 @@
                 </div>
                 <div class="form-group">
                     <label for="correo">Correo:</label>
-                    <input required type="email" class="form-control" id="correo" name="correo" value="{{ $cliente->correo }}">
+                    <input type="email" class="form-control" id="correo" name="correo" value="{{ $cliente->correo }}">
                 </div>
                 <div class="form-group">
                     <label for="telefono_empresa">Telefono Empresa:</label>

@@ -36,11 +36,16 @@
                 <input required type="text" class="form-control" id="nombre" name="nombre">
             </div>
             <button type="submit" class="btn btn-default">Registrar</button>
-            <div align="right">
-                <a class="btn btn-default" href="/fabricante">
-                    <i class="fa fa-back"></i> Regresar
-                </a>
-            </span>
+            <div class="form-group">
+                <div class="col-md-6" align="left">
+                    <a class="btn btn-default" href="/fabricante">
+                        <i class="fa fa-arrow-left"></i> Regresar
+                    </a>
+                </div>
+                <div class="col-md-6" align="right">
+                    <button type="submit" class="btn btn-primary">Agregar</button>
+                </div>
+            </div>
         </form>
     </div>
 </div>
