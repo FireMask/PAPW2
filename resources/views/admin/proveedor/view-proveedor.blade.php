@@ -43,14 +43,15 @@
         <td>{{ $prov->idProveedor }}</td>
 		<td>{{ $prov->nombre }}</td>
         <td align="center">
-            <form action="/proveedor/{{ $prov->idProveedor }}/edit" method="GET">
-              <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              <button type="submit" class="btn btn-sm btn-warning">Editar</button>
-            </form>
-            <form action="/proveedor/{{ $prov->idProveedor }}" method="POST">
+            <a href="/proveedor/{{ $prov->idProveedor }}/edit">
+                <span class="fa fa-pencil"></span> Editar
+            </a>
+            <form id="borrarsito" action="/proveedor/{{ $prov->idProveedor }}" method="POST">
                 <input name="_method" type="hidden" value="DELETE">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <button type="submit" class="btn btn-sm btn-danger">Borrar</button>
+                <a href="javascript:{}" onclick="document.getElementById('borrarsito').submit();">
+                    <span class="fa fa-trash"></span> Eliminar
+                </a>
             </form>
         </td>
     </tr>

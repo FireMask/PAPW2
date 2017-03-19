@@ -20,9 +20,21 @@ class Cotizacion extends Model
         'validez',
         'pago',
         'total',
-        'nota',
-        'aprovada'
+        'aprovada',
+        'finalizada'
     ];
+
+    function moneda() {
+        return $this->hasOne('App\Models\TipoDeMoneda', 'idMoneda', 'idMoneda');
+    }
+
+    function usuario() {
+        return $this->hasOne('App\Models\Usuario', 'idUsuario', 'idUsuario');
+    }
+
+    function cliente() {
+        return $this->hasOne('App\Models\Cliente', 'idCliente', 'idCliente');
+    }
 
     protected $dates = [
         'created_at',

@@ -27,16 +27,16 @@
 <table id="table_id" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
   <thead>
       <tr>
-		  <td>Nombre</td>
-	      <td>Propietario</td>
-	      <td>Acividad Economica</td>
-	      <td>Numero Registro</td>
-	      <td>Direccion</td>
-	      <td>IVA</td>
-	      <td>Teléfono</td>
-	      <td>Moneda Defecto</td>
-	      <td>Correo Principal</td>
-		  <td>Logo</td>
+		  <th>Nombre</th>
+	      <th>Propietario</th>
+	      <th>Acividad Economica</th>
+	      <th>Numero Registro</th>
+	      <th>Direccion</th>
+	      <th>IVA</th>
+	      <th>Teléfono</th>
+	      <th>Moneda Defecto</th>
+	      <th>Correo Principal</th>
+		  <th>Logo</th>
       </tr>
   </thead>
   <tbody>

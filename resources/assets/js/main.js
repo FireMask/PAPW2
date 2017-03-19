@@ -15,7 +15,7 @@ define(['jquery', 'datatables', 'vue', 'bootstrap-checkbox'],  function($, DataT
 				usuariosMostrados: [],
 				paginaActual: 0,
 				indiceCentral: 0,
-				datosPorPagina: 1,
+				datosPorPagina: 4,
 				busqueda: ''
 			},
 			computed: {

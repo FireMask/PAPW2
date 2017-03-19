@@ -53,14 +53,15 @@
         <td>{{ $mon->separador_decimales }}</td>
         <td>{{ $mon->codigo }}</td>
         <td align="center">
-            <form action="/moneda/{{ $mon->idMoneda }}/edit" method="GET">
-              <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              <button type="submit" class="btn btn-sm btn-warning">Editar</button>
-            </form>
-            <form action="/moneda/{{ $mon->idMoneda }}" method="POST">
+            <a href="/moneda/{{ $mon->idMoneda }}/edit">
+                <span class="fa fa-pencil"></span> Editar
+            </a>
+            <form id="borrarsito" action="/moneda/{{ $mon->idMoneda }}" method="POST">
                 <input name="_method" type="hidden" value="DELETE">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <button type="submit" class="btn btn-sm btn-danger">Borrar</button>
+                <a href="javascript:{}" onclick="document.getElementById('borrarsito').submit();">
+                    <span class="fa fa-trash"></span> Eliminar
+                </a>
             </form>
         </td>
     </tr>

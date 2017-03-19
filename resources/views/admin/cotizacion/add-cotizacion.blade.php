@@ -29,7 +29,7 @@
 @section('content')
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
-        <form class="login-form" action="/usuario" method="POST">
+        <form class="login-form" action="/cotizacion" method="POST">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="form-group">
                 <label for="nombres">Nombres:</label>
@@ -61,10 +61,9 @@
                     @endif
                 </select>
             </div>
-            <button type="submit" class="btn btn-default">Registrar</button>
             <div class="form-group">
                 <div class="col-md-6" align="left">
-                    <a class="btn btn-default" href="/usuario">
+                    <a class="btn btn-default" href="/cotizacion">
                         <i class="fa fa-arrow-left"></i> Regresar
                     </a>
                 </div>

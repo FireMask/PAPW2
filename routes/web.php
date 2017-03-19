@@ -18,3 +18,4 @@ Route::resource('fabricante', 'FabricanteController');
 Route::resource('empresa', 'EmpresaController');
 Route::resource('producto', 'ProductoController');
 Route::resource('cliente', 'ClienteController');
+Route::resource('cotizacion', 'CotizacionController');

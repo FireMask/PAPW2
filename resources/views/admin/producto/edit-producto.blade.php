@@ -69,8 +69,15 @@
                     <label for="precio">Precio:</label>
                     <input required type="number" step="0.01" value="{{ $producto->precio }}" class="form-control" id="precio" name="precio">
                 </div>
-                <div class="form-group" align="center">
-                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                <div class="form-group">
+                    <div class="col-md-6" align="left">
+                        <a class="btn btn-default" href="/producto">
+                            <i class="fa fa-arrow-left"></i> Regresar
+                        </a>
+                    </div>
+                    <div class="col-md-6" align="right">
+                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                    </div>
                 </div>
             </form>
         </div>
