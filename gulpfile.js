@@ -2,6 +2,8 @@ const elixir = require('laravel-elixir');
 
 require('laravel-elixir-vue-2');
 
+require('laravel-elixir-vueify');
+
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -18,6 +20,7 @@ require('laravel-elixir-vue-2');
      'resources/assets/css/test1.css',
      'resources/assets/css/landing.css'
    ], 'public/css/style.css').
+   browserify('app.js').
    webpack([
      'resources/assets/js/main.js'
    ], 'public/js/dist/main.js').

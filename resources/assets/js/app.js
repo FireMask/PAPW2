@@ -13,8 +13,11 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
+var viewUsario = Vue.component('view-usuario', require('./components/admin/usuario/view-usuario.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    components: {
+        'view-usuario': viewUsario
+    }
 });
