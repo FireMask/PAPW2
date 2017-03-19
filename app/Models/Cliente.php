@@ -19,6 +19,7 @@ class Cliente extends Model
         'giro',
         'direccion',
         'codigo_postal',
+        'pais',
         'estado',
         'municipio',
         'correo',

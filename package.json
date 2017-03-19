@@ -18,11 +18,12 @@
   "dependencies": {
     "admin-lte": "^2.3.11",
     "bootstrap": "^3.3.7",
+    "bootstrap-checkbox": "^1.4.0",
+    "datatables.net-bs": "^2.1.1",
     "font-awesome": "^4.7.0",
     "handlebars": "^4.0.6",
     "ionicons": "^3.0.0",
     "mdbootstrap": "^4.3.0",
-    "datatables.net-bs": "^2.1.1",
     "vue": "^2.1.10"
   }
 }

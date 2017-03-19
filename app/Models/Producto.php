@@ -17,10 +17,18 @@ class Producto extends Model
         'codigo',
         'modelo',
         'descripcion',
-        'idFabricante',//
-        'idProveedor',//
+        'idFabricante',
+        'idProveedor',
         'precio'
     ];
+
+    function fabricante(){
+        return $this->hasOne('App\Models\Fabricante', 'idFabricante', 'idFabricante');
+    }
+
+    function proveedor(){
+        return $this->hasOne('App\Models\Proveedor', 'idProveedor', 'idProveedor');
+    }
 
     protected $dates = [
         'created_at',

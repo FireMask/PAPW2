@@ -20,12 +20,7 @@ class TipoDeMonedaController extends Controller
 
     public function store(Request $request){
         $moneda = new TipoDeMoneda;
-        $moneda->nombre = $request->nombre;
-        $moneda->simbolo = $request->simbolo;
-        $moneda->presicion = $request->presicion;
-        $moneda->separador_millares = $request->separador_millares;
-        $moneda->separador_decimales = $request->separador_decimales;
-        $moneda->codigo = $request->codigo;
+        $moneda->fill($request->all());
         $moneda->save();
         return redirect('/moneda');
     }

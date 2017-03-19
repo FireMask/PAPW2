@@ -16,3 +16,5 @@ Route::resource('moneda', 'TipoDeMonedaController');
 Route::resource('proveedor', 'ProveedorController');
 Route::resource('fabricante', 'FabricanteController');
 Route::resource('empresa', 'EmpresaController');
+Route::resource('producto', 'ProductoController');
+Route::resource('cliente', 'ClienteController');

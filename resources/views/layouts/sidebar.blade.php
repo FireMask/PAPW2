@@ -75,6 +75,28 @@
                 </ul>
             </li>
             <li class="treeview">
+                <a href=""><i class="fa fa-shopping-basket"></i> <span>Productos</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/producto">Ver Productos</a></li>
+                    <li><a href="/producto/create">Nuevo Productos</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href=""><i class="fa fa-shopping-basket"></i> <span>Clientes</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/cliente">Ver Clientes</a></li>
+                    <li><a href="/cliente/create">Nuevo Clientes</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
                 <a href="/empresa"><i class="fa fa-gear"></i> <span>Empresa</span></a>
             </li>
         </ul>

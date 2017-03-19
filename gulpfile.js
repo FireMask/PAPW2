@@ -13,7 +13,7 @@ require('laravel-elixir-vue-2');
  |
  */
 
- elixir((mix) => {
+ elixir(function(mix){
    mix.styles([
      'resources/assets/css/test1.css',
      'resources/assets/css/landing.css'
@@ -27,5 +27,6 @@ require('laravel-elixir-vue-2');
    copy('node_modules/font-awesome/fonts', 'public/js/dist/Font-Awesome/fonts').
    copy('node_modules/ionicons/dist/css', 'public/js/dist/Ionicons/css').
    copy('node_modules/jquery/dist', 'public/js/dist/jQuery/dist').
-   copy('node_modules/datatables.net-bs', 'public/js/dist/DataTables');
+   copy('node_modules/datatables.net-bs', 'public/js/dist/DataTables').
+    copy('node_modules/bootstrap-checkbox/js', 'public/js/dist/Bootstrap-Checkbox');
  });

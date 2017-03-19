@@ -22,12 +22,8 @@ class UsuarioController extends Controller
 
     public function store(Request $request){
         $usuario = new Usuario;
-        $usuario->nombres = $request->nombres;
-        $usuario->apellido_paterno = $request->apellido_paterno;
-        $usuario->apellido_materno = $request->apellido_materno;
-        $usuario->correo_usuario = $request->correo_usuario;
+        $usuario->fill($request->all());
         $usuario->contra_usuario = sha1($request->contra_usuario);
-        $usuario->idRol = $request->rol;
         $usuario->save();
         return redirect('/usuario');
     }
@@ -45,7 +41,7 @@ class UsuarioController extends Controller
             $user->save();
             return redirect('/usuario');
         }catch(Exception $ex){
-            return redirect('usuario/'.$id.'/edit');
+            return redirect('usuario/'.$request->idUsuario.'/edit');
         }
     }
 
