@@ -15,14 +15,15 @@
         <div class="content">
             <div class="login">
                 <div class="box box-primary" id="loginbody">
-                    <form action="/index" method="GET">
+                    <form action="/login" method="POST">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="form-group">
                             <label for="email">Correo:</label>
-                            <input type="email" class="form-control" id="email">
+                            <input type="email" class="form-control" id="email" name="email">
                         </div>
                         <div class="form-group">
                             <label for="pwd">Contraseña:</label>
-                            <input type="password" class="form-control" id="pass">
+                            <input type="password" class="form-control" id="pwd" name="pass">
                         </div>
                         <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
                     </form>

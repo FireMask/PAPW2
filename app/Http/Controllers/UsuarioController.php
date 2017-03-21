@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
@@ -38,6 +39,7 @@ class UsuarioController extends Controller
         try{
             $user = Usuario::find($request->idUsuario);
             $user->fill($request->all());
+            $user->contra_usuario = sha1($request->contra_usuario);
             $user->save();
             return redirect('/usuario');
         }catch(Exception $ex){

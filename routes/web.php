@@ -10,15 +10,15 @@ Route::get('index', function () {
 
 Route::resource('login', 'LoginController');
 
-Route::resource('usuario', 'UsuarioController');
-Route::resource('rol', 'RolController');
-Route::resource('moneda', 'TipoDeMonedaController');
-Route::resource('proveedor', 'ProveedorController');
-Route::resource('fabricante', 'FabricanteController');
-Route::resource('empresa', 'EmpresaController');
-Route::resource('producto', 'ProductoController');
-Route::resource('cliente', 'ClienteController');
-Route::resource('cotizacion', 'CotizacionController');
-Auth::routes();
-
-Route::get('/home', 'HomeController@index');
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('usuario', 'UsuarioController');
+    Route::resource('rol', 'RolController');
+    Route::resource('moneda', 'TipoDeMonedaController');
+    Route::resource('proveedor', 'ProveedorController');
+    Route::resource('fabricante', 'FabricanteController');
+    Route::resource('empresa', 'EmpresaController');
+    Route::resource('producto', 'ProductoController');
+    Route::resource('cliente', 'ClienteController');
+    Route::resource('cotizacion', 'CotizacionController');
+    Route::get('logout', 'LoginController@logout');
+});
