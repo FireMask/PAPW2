@@ -6,6 +6,17 @@ footer.bg-lightgray {
     display: none;
 }
 
+div.login > div{
+    padding: 10px 15px;
+}
+
+@media (min-width: 500px){
+    div.login{
+        width: 600px;
+        margin: 0 auto;
+    }
+}
+
 #loginbody {
     padding: 20px;
 }
