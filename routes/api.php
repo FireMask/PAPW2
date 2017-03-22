@@ -18,3 +18,5 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:api');
 
 Route::get('/usuarios', 'apiController@getUsers');
+Route::get('/usuarios/{id}/clientes', 'apiController@getUserClients');
+Route::get('/usuarios/{id}/estadisticas', 'apiController@getUserStadistics');
