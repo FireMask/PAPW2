@@ -1,7 +1,7 @@
 <header class="main-header">
     <a href="/index" class="logo">
-        <span class="logo-mini"><b>PA</b>PW</span>
-        <span class="logo-lg"><b>Programación</b>Web</span>
+        <span class="logo-mini"><b>C</b>L</span>
+        <span class="logo-lg"><b>CRM</b>Lite</span>
     </a>
 
     <!-- Header Navbar -->
@@ -148,7 +148,7 @@
                                 <a href="#" class="btn btn-default btn-flat">Profile</a>
                             </div>
                             <div class="pull-right">
-                                <a href="logout" class="btn btn-default btn-flat">Sign out</a>
+                                <a href="/logout" class="btn btn-default btn-flat">Sign out</a>
                             </div>
                         </li>
                     </ul>

@@ -6,8 +6,27 @@ footer.bg-lightgray {
     display: none;
 }
 
+#bgLogin{
+    display: none;
+}
+
 div.login > div{
     padding: 10px 15px;
+}
+
+#idplogin{
+    padding: 0 10px;
+    text-align: center;
+    font-size: 16pt;
+}
+
+.helpbuttons{
+    padding: 10px 0;
+    cursor: pointer;
+}
+
+#loginbody {
+    padding: 20px 20px 0 20px;
 }
 
 @media (min-width: 500px){
@@ -17,14 +36,10 @@ div.login > div{
     }
 }
 
-#loginbody {
-    padding: 20px;
-}
-
 @media (min-width: 400px) and (min-height: 400px){
     #loginbody{
         width: 500px;
-        margin: 60px auto;
+        margin: 0 auto;
     }
 }
 
@@ -36,5 +51,10 @@ div.login > div{
         background-color:LightGray;
         bottom: 0;
         margin: 20px 0 0 0;
+    }
+    #bgLogin{
+        display: block;
+        position: fixed;
+        height:100%;
     }
 }
