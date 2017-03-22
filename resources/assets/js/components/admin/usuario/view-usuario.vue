@@ -9,9 +9,9 @@
         </div>
         <div class="box-footer no-padding">
             <ul class="nav nav-stacked">
-                <li><a href="#">Ventas promedio mensuales<span class="pull-right badge bg-blue">66</span></a></li>
-                <li><a href="#">Ventas del mes <span class="pull-right badge bg-aqua">6</span></a></li>
-                <li><a href="#">Ventas totales <span class="pull-right badge bg-green">666</span></a></li>
+                <li><a href="#">Ventas promedio mensuales<span class="pull-right badge bg-blue">{{ estadisticas.promedioMensual }}</span></a></li>
+                <li><a href="#">Ventas del mes <span class="pull-right badge bg-aqua">{{ estadisticas.ventasDelMes }}</span></a></li>
+                <li><a href="#">Ventas totales <span class="pull-right badge bg-green">{{ estadisticas.ventasTotales }}</span></a></li>
             </ul>
         </div>
     </div>
@@ -20,9 +20,28 @@
 <script>
 export default {
     data () {
-        return {};
+        return {
+            estadisticas: {
+                ventasTotales: 0,
+                promedioMensual: 0,
+                ventasDelMes: 0
+            }
+        };
     },
-    props: ['data']
+    props: ['data'],
+    methods: {
+        loadData: function () {
+            $.get('/api/usuarios/' + this.data.idUsuario + '/estadisticas', function (response) {
+                this.estadisticas = response;
+            }.bind(this));
+        }
+    },
+    mounted: function() {
+        this.loadData();
+    },
+    beforeUpdate: function() {
+        this.loadData();
+    }
 };
 </script>
 

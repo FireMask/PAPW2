@@ -1,4 +1,4 @@
-define(['jquery', 'datatables', 'vue', 'bootstrap-checkbox'],  function($, DataTable, Vue, Checkbox) {
+define(['jquery', 'datatables', 'vue', 'bootstrap-checkbox', 'chartjs'],  function($, DataTable, Vue, Checkbox, Chart) {
 	$(document).ready(function() {
 		$('#table_id').DataTable({
 			"scrollX": true
@@ -6,91 +6,21 @@ define(['jquery', 'datatables', 'vue', 'bootstrap-checkbox'],  function($, DataT
 
         $(":checkbox").checkboxpicker();
 
+		Vue.component('lista-usuario', require('./components/admin/usuario/lista-usuario.vue'));
 		Vue.component('view-usuario', require('./components/admin/usuario/view-usuario.vue'));
+		Vue.component('perfil-usuario', require('./components/admin/usuario/perfil-usuario.vue'));
+		Vue.component('modal', require('./components/modal.vue'));
 
-		const app = new Vue({
-		    el: '#listaUsuarios',
+		var usuarios = new Vue({
+		    el: '#pantallaUsuarios',
 			data: {
-				usuarios: [],
-				usuariosMostrados: [],
-				paginaActual: 0,
-				indiceCentral: 0,
-				datosPorPagina: 4,
-				busqueda: ''
-			},
-			computed: {
-				usuariosFiltrados: function () {
-					var self = this;
-					this.busqueda = this.busqueda.trim().toLowerCase();
-
-					if(this.busqueda == ''){
-						return this.usuarios;
-					}
-
-					var usuarios = this.usuarios.filter(function(item){
-						return item.nombres.toLowerCase().indexOf(self.busqueda) !== -1;
-					});
-					this.paginaActual = 0;
-					return usuarios;
-				},
-				paginas: function() {
-					return Math.ceil(this.usuariosFiltrados.length / this.datosPorPagina);
-				},
-				centro: function() {
-					var centro = 0;
-					if (this.paginas > 5) {
-						if (this.paginaActual < 2) {
-							centro = 2;
-						} else if (this.paginaActual > this.paginas - 3) {
-							centro = this.paginas - 3;
-						} else {
-							centro = this.paginaActual;
-						}
-					}
-					return centro;
-				},
-				inicio: function() {
-					return this.centro - 2 > 0 ? this.centro - 2 : 0;
-				},
-				fin: function() {
-					return (this.inicio + 5 > this.paginas ? this.paginas : this.inicio + 5) - this.inicio;
-				}
+				usuarioSeleccionado: null
 			},
 			methods: {
-		        loadData: function () {
-		            $.get('/api/usuarios', function (response) {
-		                this.usuarios = response.usuarios;
-						this.mostrarPagina();
-		            }.bind(this));
-		        },
-				mostrarPagina: function() {
-					var usados = (this.paginaActual * this.datosPorPagina) + this.datosPorPagina;
-					var restantes = usados > this.usuariosFiltrados.length ? this.usuariosFiltrados.length - (this.paginaActual * this.datosPorPagina) : this.datosPorPagina;
-					this.usuariosMostrados = this.usuariosFiltrados.slice((this.paginaActual * this.datosPorPagina), (this.paginaActual * this.datosPorPagina) + restantes);
-				},
-				pagina: function(numero) {
-					this.paginaActual = numero;
-					this.mostrarPagina();
-				},
-				paginaSiguiente: function() {
-					if (this.paginaActual < Math.ceil(this.usuariosFiltrados.length / this.datosPorPagina) - 1) {
-						this.paginaActual++;
-						this.mostrarPagina();
-					}
-				},
-				paginaAnterior: function() {
-					if (this.paginaActual > 0) {
-						this.paginaActual--;
-						this.mostrarPagina();
-					}
+				seleccionado: function(usuario) {
+					this.usuarioSeleccionado = usuario;
 				}
-		    },
-		    mounted: function () {
-		        this.loadData();
-		        setInterval(function () {
-		            this.loadData();
-		        }.bind(this), 30000);
-		    }
+			}
 		});
 	});
 });

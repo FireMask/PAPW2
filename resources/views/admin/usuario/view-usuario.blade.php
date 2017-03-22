@@ -25,48 +25,9 @@
 
 @section('content')
 
-<div align="right">
-    <a class="btn btn-app" href="/usuario/create">
-        <i class="fa fa-plus"></i> Agregar
-    </a>
-</div>
-<div id="listaUsuarios">
-    <div class="content">
-        <div class="row">
-            <form class="form-horizontal col-md-6">
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="correo">Buscar:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" v-on:keyup="mostrarPagina();" v-model="busqueda">
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="row">
-            <div v-for="usuario in usuariosMostrados">
-                <div class="col-md-6">
-                    <view-usuario :data="usuario"></view-usuario>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-2">
-                <button style="min-width: 15%;" class="btn btn-app" v-on:click="paginaAnterior();">
-                    <i class="fa fa-arrow-left"></i>
-                </button>
-            </div>
-            <div class="col-xs-8" align="center">
-                <button style="min-width: 15%;" v-for="n in fin" class="btn btn-app" v-on:click="pagina(n + inicio - 1);" align="center">
-                    <span>@{{ n + inicio }}</span>
-                </button>
-            </div>
-            <div class="col-xs-2">
-                <button style="min-width: 15%;" class="btn btn-app" v-on:click="paginaSiguiente();">
-                    <i class="fa fa-arrow-right"></i>
-                </button>
-            </div>
-        </div>
-    </div>
+<div id="pantallaUsuarios">
+    <perfil-usuario v-if="usuarioSeleccionado != null" :usuario="usuarioSeleccionado"></perfil-usuario>
+    <lista-usuario v-on:usuario="seleccionado"></lista-usuario>
 </div>
 
 <!-- <table id="table_id" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
