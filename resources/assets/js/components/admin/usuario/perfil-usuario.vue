@@ -1,3 +1,4 @@
+
 <template>
     <section class="content">
         <modal v-if="showModal">
