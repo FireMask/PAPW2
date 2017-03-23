@@ -8,6 +8,6 @@
 <link rel="stylesheet" href="/js/dist/AdminLTE/css/AdminLTE.min.css">
 <link rel="stylesheet" href="/js/dist/AdminLTE/css/skins/skin-purple.min.css">
 <link rel="stylesheet" href="/js/dist/DataTables/css/dataTables.bootstrap.css">
-<link rel="stylesheet" href="/js/dist/Boostrap-Fileinput/css/fileinput.min.css">
+<link rel="stylesheet" href="/js/dist/Bootstrap-Datepicker/css/bootstrap-datepicker.css">
 <!-- Custom Styles -->
 <link rel="stylesheet" href="/css/main.css">
