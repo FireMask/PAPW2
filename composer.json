@@ -8,6 +8,7 @@
         "php": ">=5.6.4",
         "components/jquery": "^3.1",
         "laravel/framework": "5.3.*",
+        "laravel/passport": "~1.0",
         "twbs/bootstrap": "^3.3"
     },
     "require-dev": {
