@@ -18,15 +18,12 @@
   @include('layouts.scripts')
 @stop
 
-@section('content-header')
-  <section class="content-header">
-      <h1>
-          Editar de empleado
-      </h1>
-  </section>
-@stop
-
 @section('content')
+    <section class="content-header">
+        <h1 style="margin-bottom: 20px;">
+            Editar Usuario
+        </h1>
+    </section>
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="box box-default box-add-edit">
@@ -76,7 +73,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="rol">Puesto:</label>
-                                <select required class="form-control input-lg" id="rol" name="rol">
+                                <select required class="form-control input-lg" id="rol" name="idRol">
                                     @if ($roles->count())
                                         @foreach($roles as $rol)
                                             <option {{ ($usuario->idRol == $rol->idRol)?'selected':'' }} value="{{ $rol->idRol }}">{{ $rol->nombre }}</option>

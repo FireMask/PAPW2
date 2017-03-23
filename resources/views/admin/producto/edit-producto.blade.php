@@ -18,15 +18,12 @@
   @include('layouts.scripts')
 @stop
 
-@section('content-header')
-  <section class="content-header">
-      <h1>
-          Editar de Producto
-      </h1>
-  </section>
-@stop
-
 @section('content')
+    <section class="content-header">
+        <h1 style="margin-bottom: 20px;">
+            Editar Moneda
+        </h1>
+    </section>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <form class="login-form" action="/producto/{{ $producto->idProducto }}" method="POST">

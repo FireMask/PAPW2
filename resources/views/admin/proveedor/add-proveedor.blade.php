@@ -18,35 +18,32 @@
   @include('layouts.scripts')
 @stop
 
-@section('content-header')
-  <section class="content-header">
-      <h1>
-          Nuevo Proveedor
-      </h1>
-  </section>
-@stop
-
 @section('content')
-<div class="row">
-    <div class="col-md-8 col-md-offset-2">
-        <form class="login-form" action="/proveedor" method="POST">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <div class="form-group">
-                <label for="nombres">Nombre:</label>
-                <input required type="text" class="form-control" id="nombre" name="nombre">
-            </div>
-            <button type="submit" class="btn btn-default">Registrar</button>
-            <div class="form-group">
-                <div class="col-md-6" align="left">
-                    <a class="btn btn-default" href="/proveedor">
-                        <i class="fa fa-arrow-left"></i> Regresar
-                    </a>
+    <section class="content-header">
+        <h1 style="margin-bottom: 20px;">
+            Agregar Proveedor
+        </h1>
+    </section>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <form class="login-form" action="/proveedor" method="POST">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <div class="form-group">
+                    <label for="nombres">Nombre:</label>
+                    <input required type="text" class="form-control" id="nombre" name="nombre">
                 </div>
-                <div class="col-md-6" align="right">
-                    <button type="submit" class="btn btn-primary">Agregar</button>
+                <button type="submit" class="btn btn-default">Registrar</button>
+                <div class="form-group">
+                    <div class="col-md-6" align="left">
+                        <a class="btn btn-default" href="/proveedor">
+                            <i class="fa fa-arrow-left"></i> Regresar
+                        </a>
+                    </div>
+                    <div class="col-md-6" align="right">
+                        <button type="submit" class="btn btn-primary">Agregar</button>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
 @stop
