@@ -13,16 +13,15 @@ class Usuario extends Model
 
     protected $primaryKey = "idUsuario";
 
-    protected $hidden = ['contra_usuario'];
-
     protected $fillable = [
         "nombres",
         "apellido_paterno",
         "apellido_materno",
         "correo_usuario",
         "contra_usuario",
-        "idRol",
-        "activo"
+        "imagen_perfil",
+        "fecha_nacimiento",
+        "idRol"
     ];
 
     function rol() {

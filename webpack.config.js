@@ -23,7 +23,8 @@ module.exports = {
             'vue': __dirname + '/node_modules/vue/dist/vue.js',
             'datatables': __dirname + '/node_modules/datatables.net-bs/js/dataTables.bootstrap.js',
             'bootstrap-checkbox': __dirname + '/node_modules/bootstrap-checkbox/js/bootstrap-checkbox.js',
-            'chartjs': __dirname + '/node_modules/chart.js/dist/Chart.js'
+            'chartjs': __dirname + '/node_modules/chart.js/dist/Chart.js',
+            'bootstrap-fileinput': __dirname + '/node_modules/bootstrap-fileinput/js/fileinput.js'
         }
     },
     module: {

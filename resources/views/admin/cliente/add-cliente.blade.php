@@ -28,7 +28,8 @@
 
 @section('content')
 <div class="row">
-    <div class="col-md-8 col-md-offset-2">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="box box-default box-add-edit">
         <form class="login-form" action="/cliente" method="POST">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="form-group">
@@ -79,7 +80,7 @@
                 <label for="prospecto">Prospecto:</label>
                 <input type="checkbox" id="prospecto" name="prospecto">
             </div>
-            <div class="form-group">
+            <div class="row">
                 <div class="col-md-6" align="left">
                     <a class="btn btn-default" href="/usuario">
                         <i class="fa fa-arrow-left"></i> Regresar

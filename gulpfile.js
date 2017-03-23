@@ -35,6 +35,7 @@ elixir(function(mix){
     copy('node_modules/jquery/dist', 'public/js/dist/jQuery/dist').
     copy('node_modules/datatables.net-bs', 'public/js/dist/DataTables').
     copy('node_modules/bootstrap-checkbox/dist', 'public/js/dist/Bootstrap-Checkbox').
+    copy('node_modules/bootstrap-datepicker/dist', 'public/js/dist/Bootstrap-Datepicker').
     webpack([
         'resources/assets/js/main.js'
     ], 'public/js/dist/main.js');

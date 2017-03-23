@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Hash;
-
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Redirector;
 use App\Models\Usuario;
 use App\Models\Rol;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class UsuarioController extends Controller
 {
@@ -25,6 +25,13 @@ class UsuarioController extends Controller
         $usuario = new Usuario;
         $usuario->fill($request->all());
         $usuario->contra_usuario = sha1($request->contra_usuario);
+        if($request->hasFile('imagen_perfil')){
+            $file = $request->file('imagen_perfil');
+            $extension = $file->getClientOriginalExtension();
+            $newname = sha1(Carbon::now().$file->getFilename()).'.'.$extension;
+            $usuario->imagen_perfil = $newname;
+            Storage::disk('public')->put($newname,  File::get($file));
+        }
         $usuario->save();
         return redirect('/usuario');
     }
@@ -37,10 +44,17 @@ class UsuarioController extends Controller
 
     public function update(Request $request){
         try{
-            $user = Usuario::find($request->idUsuario);
-            $user->fill($request->all());
-            $user->contra_usuario = sha1($request->contra_usuario);
-            $user->save();
+            $usuario = Usuario::find($request->idUsuario);
+            $usuario->fill($request->all());
+            $usuario->contra_usuario = sha1($request->contra_usuario);
+            if($request->hasFile('imagen_perfil')){
+                $file = $request->file('imagen_perfil');
+                $extension = $file->getClientOriginalExtension();
+                $newname = sha1(Carbon::now().$file->getFilename()).'.'.$extension;
+                $usuario->imagen_perfil = $newname;
+                Storage::disk('public')->put($newname,  File::get($file));
+            }
+            $usuario->save();
             return redirect('/usuario');
         }catch(Exception $ex){
             return redirect('usuario/'.$request->idUsuario.'/edit');

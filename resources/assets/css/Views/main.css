@@ -6,6 +6,17 @@ footer.bg-lightgray {
     display: none;
 }
 
+div.box-add-edit{
+    padding: 20px 40px;
+}
+
+.img-edit-user{
+    width: 100%;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius: 5px;
+}
+
 #bgLogin{
     display: none;
 }
