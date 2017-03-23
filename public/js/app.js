@@ -2381,7 +2381,7 @@ if (typeof jQuery === 'undefined') {
 
 },{}],3:[function(require,module,exports){
 /*!
- * jQuery JavaScript Library v3.2.0
+ * jQuery JavaScript Library v3.2.1
  * https://jquery.com/
  *
  * Includes Sizzle.js
@@ -2391,7 +2391,7 @@ if (typeof jQuery === 'undefined') {
  * Released under the MIT license
  * https://jquery.org/license
  *
- * Date: 2017-03-16T21:26Z
+ * Date: 2017-03-20T18:59Z
  */
 ( function( global, factory ) {
 
@@ -2470,7 +2470,7 @@ var support = {};
 
 
 var
-	version = "3.2.0",
+	version = "3.2.1",
 
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
@@ -7725,11 +7725,9 @@ jQuery.event = {
 		},
 		click: {
 
-			// For checkable types, fire native event so checked state will be right
+			// For checkbox, fire native event so checked state will be right
 			trigger: function() {
-				if ( rcheckableType.test( this.type ) &&
-					this.click && nodeName( this, "input" ) ) {
-
+				if ( this.type === "checkbox" && this.click && nodeName( this, "input" ) ) {
 					this.click();
 					return false;
 				}
@@ -8549,6 +8547,11 @@ var getStyles = function( elem ) {
 
 function curCSS( elem, name, computed ) {
 	var width, minWidth, maxWidth, ret,
+
+		// Support: Firefox 51+
+		// Retrieving style before computed somehow
+		// fixes an issue with getting wrong values
+		// on detached elements
 		style = elem.style;
 
 	computed = computed || getStyles( elem );
@@ -8736,6 +8739,12 @@ function getWidthOrHeight( elem, name, extra ) {
 	// for getComputedStyle silently falls back to the reliable elem.style
 	valueIsBorderBox = isBorderBox &&
 		( support.boxSizingReliable() || val === elem.style[ name ] );
+
+	// Fall back to offsetWidth/Height when value is "auto"
+	// This happens for inline elements with no explicit setting (gh-3571)
+	if ( val === "auto" ) {
+		val = elem[ "offset" + name[ 0 ].toUpperCase() + name.slice( 1 ) ];
+	}
 
 	// Normalize "", auto, and prepare for extra
 	val = parseFloat( val ) || 0;
@@ -12553,16 +12562,16 @@ jQuery.fn.extend( {
 		return arguments.length === 1 ?
 			this.off( selector, "**" ) :
 			this.off( types, selector || "**", fn );
-	},
-	holdReady: function( hold ) {
-		if ( hold ) {
-			jQuery.readyWait++;
-		} else {
-			jQuery.ready( true );
-		}
 	}
 } );
 
+jQuery.holdReady = function( hold ) {
+	if ( hold ) {
+		jQuery.readyWait++;
+	} else {
+		jQuery.ready( true );
+	}
+};
 jQuery.isArray = Array.isArray;
 jQuery.parseJSON = JSON.parse;
 jQuery.nodeName = nodeName;
@@ -38430,13 +38439,32 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = {
     data: function data() {
-        return {};
+        return {
+            estadisticas: {
+                ventasTotales: 0,
+                promedioMensual: 0,
+                ventasDelMes: 0
+            }
+        };
     },
 
-    props: ['data']
+    props: ['data'],
+    methods: {
+        loadData: function loadData() {
+            $.get('/api/usuarios/' + this.data.idUsuario + '/estadisticas', function (response) {
+                this.estadisticas = response;
+            }.bind(this));
+        }
+    },
+    mounted: function mounted() {
+        this.loadData();
+    },
+    beforeUpdate: function beforeUpdate() {
+        this.loadData();
+    }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"box box-widget widget-user-2\">\n    <div class=\"widget-user-header bg-primary\">\n        <div class=\"widget-user-image\">\n            <img class=\"img-circle\" src=\"http://davidreyes.tk/img/views/me2.jpg\" alt=\"User Avatar\">\n        </div>\n        <h3 class=\"widget-user-username\">{{ data.nombres + ' ' + data.apellido_paterno + ' ' + data.apellido_materno }}</h3>\n        <h5 class=\"widget-user-desc\">{{ data.rol.nombre }}</h5>\n    </div>\n    <div class=\"box-footer no-padding\">\n        <ul class=\"nav nav-stacked\">\n            <li><a href=\"#\">Ventas promedio mensuales<span class=\"pull-right badge bg-blue\">66</span></a></li>\n            <li><a href=\"#\">Ventas del mes <span class=\"pull-right badge bg-aqua\">6</span></a></li>\n            <li><a href=\"#\">Ventas totales <span class=\"pull-right badge bg-green\">666</span></a></li>\n        </ul>\n    </div>\n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"box box-widget widget-user-2\">\n    <div class=\"widget-user-header bg-primary\">\n        <div class=\"widget-user-image\">\n            <img class=\"img-circle\" src=\"http://davidreyes.tk/img/views/me2.jpg\" alt=\"User Avatar\">\n        </div>\n        <h3 class=\"widget-user-username\">{{ data.nombres + ' ' + data.apellido_paterno + ' ' + data.apellido_materno }}</h3>\n        <h5 class=\"widget-user-desc\">{{ data.rol.nombre }}</h5>\n    </div>\n    <div class=\"box-footer no-padding\">\n        <ul class=\"nav nav-stacked\">\n            <li><a href=\"#\">Ventas promedio mensuales<span class=\"pull-right badge bg-blue\">{{ estadisticas.promedioMensual }}</span></a></li>\n            <li><a href=\"#\">Ventas del mes <span class=\"pull-right badge bg-aqua\">{{ estadisticas.ventasDelMes }}</span></a></li>\n            <li><a href=\"#\">Ventas totales <span class=\"pull-right badge bg-green\">{{ estadisticas.ventasTotales }}</span></a></li>\n        </ul>\n    </div>\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -38446,9 +38474,9 @@ if (module.hot) {(function () {  module.hot.accept()
     document.head.removeChild(__vueify_style__)
   })
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-7e53e01e", module.exports)
+    hotAPI.createRecord("_v-9ed927a2", module.exports)
   } else {
-    hotAPI.update("_v-7e53e01e", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-9ed927a2", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"vue":8,"vue-hot-reload-api":6,"vueify/lib/insert-css":9}]},{},[10]);

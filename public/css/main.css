@@ -6,8 +6,38 @@ footer.bg-lightgray {
     display: none;
 }
 
+div.box-add-edit{
+    padding: 20px 40px;
+}
+
+.img-edit-user{
+    width: 100%;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius: 5px;
+}
+
+#bgLogin{
+    display: none;
+}
+
 div.login > div{
     padding: 10px 15px;
+}
+
+#idplogin{
+    padding: 0 10px;
+    text-align: center;
+    font-size: 16pt;
+}
+
+.helpbuttons{
+    padding: 10px 0;
+    cursor: pointer;
+}
+
+#loginbody {
+    padding: 20px 20px 0 20px;
 }
 
 @media (min-width: 500px){
@@ -17,14 +47,10 @@ div.login > div{
     }
 }
 
-#loginbody {
-    padding: 20px;
-}
-
 @media (min-width: 400px) and (min-height: 400px){
     #loginbody{
         width: 500px;
-        margin: 60px auto;
+        margin: 0 auto;
     }
 }
 
@@ -37,6 +63,10 @@ div.login > div{
         bottom: 0;
         margin: 20px 0 0 0;
     }
+    #bgLogin{
+        display: block;
+        position: fixed;
+        height:100%;
+    }
 }
-
 /*# sourceMappingURL=main.css.map */
