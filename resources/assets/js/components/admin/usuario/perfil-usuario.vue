@@ -59,7 +59,7 @@
                         <hr>
 
                         <strong><i class="fa fa-calendar margin-r-5"></i> Fecha de nacimiento</strong>
-                        <p class="text-muted"> pendiente </p>
+                        <p class="text-muted"> {{ usuario.fecha_nacimiento }} </p>
 
                         <hr>
 
