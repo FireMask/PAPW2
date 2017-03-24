@@ -29,8 +29,14 @@
 <passport-authorized-clients></passport-authorized-clients>
 <passport-personal-access-tokens></passport-personal-access-tokens>
 
-<div id="pantallaUsuarios">
-    <perfil-usuario v-on:cerrar="usuarioSeleccionado = null" v-if="usuarioSeleccionado != null" :usuario="usuarioSeleccionado"></perfil-usuario>
-    <lista-usuario v-on:usuario="seleccionado"></lista-usuario>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-default box-add-edit">
+            <div id="pantallaUsuarios">
+                <perfil-usuario v-on:cerrar="usuarioSeleccionado = null" v-if="usuarioSeleccionado != null" :usuario="usuarioSeleccionado"></perfil-usuario>
+                <lista-usuario v-on:usuario="seleccionado"></lista-usuario>
+            </div>
+        </div>
+    </div>
 </div>
 @stop
