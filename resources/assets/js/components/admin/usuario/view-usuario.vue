@@ -9,9 +9,9 @@
         </div>
         <div class="box-footer no-padding">
             <ul class="nav nav-stacked">
-                <li><a href="#">Ventas promedio mensuales<span class="pull-right badge bg-blue">{{ ventasMensualesPromedio }}</span></a></li>
-                <li><a href="#">Ventas del mes <span class="pull-right badge bg-aqua">{{ ventasMensuales }}</span></a></li>
-                <li><a href="#">Ventas totales <span class="pull-right badge bg-green">{{ ventasTotales }}</span></a></li>
+                <li><a href="#">Ventas promedio mensuales<span class="pull-right badge bg-blue">{{ data.estadisticas.promedioMensual }}</span></a></li>
+                <li><a href="#">Ventas del mes <span class="pull-right badge bg-aqua">{{ data.estadisticas.ventasDelMes }}</span></a></li>
+                <li><a href="#">Ventas totales <span class="pull-right badge bg-green">{{ data.estadisticas.ventasTotales }}</span></a></li>
             </ul>
         </div>
     </div>
@@ -31,30 +31,18 @@ export default {
     props: ['data'],
     methods: {
         loadData: function () {
-            $.get('/api/usuarios/' + this.data.idUsuario + '/estadisticas', function (response) {
-                this.estadisticas = response;
-            }.bind(this));
+            this.$http.get('/api/usuarios/' + this.data.idUsuario + '/estadisticas').then(response => {
+                this.estadisticas = response.body;
+            });
         }
     },
     computed: {
         profileImagePath: function() {
             return '/storage/' + this.data.imagen_perfil;
         },
-        ventasMensuales: function() {
-            return this.estadisticas.ventasDelMes;
-        },
-        ventasMensualesPromedio: function() {
-            return this.estadisticas.promedioMensual;
-        },
-        ventasTotales: function() {
-            return this.estadisticas.ventasTotales;
-        }
     },
     mounted: function() {
-        this.loadData();
-    },
-    beforeUpdate: function() {
-        this.loadData();
+        // this.loadData();
     }
 };
 </script>

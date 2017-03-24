@@ -20,3 +20,5 @@ Route::get('/user', function (Request $request) {
 Route::get('/usuarios', 'apiController@getUsers');
 Route::get('/usuarios/{id}/clientes', 'apiController@getUserClients');
 Route::get('/usuarios/{id}/estadisticas', 'apiController@getUserStadistics');
+Route::get('/usuarios/{id}/ventas', 'apiController@getUserSells');
+Route::get('/usuarios/{id}/cotizaciones', 'apiController@getUserCotizations');

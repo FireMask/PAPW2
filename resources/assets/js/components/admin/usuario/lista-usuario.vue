@@ -27,8 +27,8 @@
                 </button>
             </div>
             <div class="col-xs-8" align="center">
-                <button style="min-width: 15%;" v-for="n in fin" class="btn btn-app" v-on:click="pagina(n + inicio - 1);" align="center">
-                    <span>{{ n + inicio }}</span>
+                <button style="min-width: 15%;" v-for="n in fin" class="btn btn-app" v-bind:class="{ disabled: (n + inicio -1 == paginaActual) }" v-on:click="pagina(n + inicio - 1);" align="center">
+                    <span class="numeroPaginado">{{ n + inicio }}</span>
                 </button>
             </div>
             <div class="col-xs-2">
@@ -93,10 +93,10 @@
         },
         methods: {
             loadData: function () {
-                $.get('/api/usuarios', function (response) {
-                    this.usuarios = response.usuarios;
+                this.$http.get('/api/usuarios').then(response => {
+                    this.usuarios = response.body.usuarios;
                     this.mostrarPagina();
-                }.bind(this));
+                });
             },
             seleccionarUsuario: function(seleccion) {
                 this.$emit('usuario', seleccion);
@@ -125,9 +125,13 @@
         },
         mounted: function () {
             this.loadData();
-            setInterval(function () {
-                this.loadData();
-            }.bind(this), 30000);
         }
     }
 </script>
+
+<style media="screen">
+    .numeroPaginado {
+        font-size: 14px;
+        font-weight: bold;
+    }
+</style>

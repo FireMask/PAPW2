@@ -1,4 +1,5 @@
-define(['jquery', 'datatables', 'vue', 'bootstrap-checkbox', 'chartjs', 'bootstrap-fileinput', 'bootstrap-datepicker'],  function($, DataTable, Vue, Checkbox, Chart, FileInput, DatePicker) {
+define(['jquery', 'datatables', 'vue', 'bootstrap-checkbox', 'chartjs', 'bootstrap-fileinput', 'bootstrap-datepicker', 'vue-router', 'vue-resource'],
+function($, DataTable, Vue, Checkbox, Chart, FileInput, DatePicker, VueRouter, VueResource) {
 	$(document).ready(function() {
 		$('#table_id').DataTable({
 			"scrollX": true
@@ -13,26 +14,33 @@ define(['jquery', 'datatables', 'vue', 'bootstrap-checkbox', 'chartjs', 'bootstr
             showCaption: false
         });
 
-		Vue.component(
-		    'passport-clients',
-		    require('./components/passport/Clients.vue')
-		);
+		Vue.use(VueResource);
+		Vue.use(VueRouter);
 
-		Vue.component(
-		    'passport-authorized-clients',
-		    require('./components/passport/AuthorizedClients.vue')
-		);
-
-		Vue.component(
-		    'passport-personal-access-tokens',
-		    require('./components/passport/PersonalAccessTokens.vue')
-		);
-
+		Vue.component('passport-clients',require('./components/passport/Clients.vue'));
+		Vue.component('passport-authorized-clients',require('./components/passport/AuthorizedClients.vue'));
+		Vue.component('passport-personal-access-tokens', require('./components/passport/PersonalAccessTokens.vue'));
 		Vue.component('lista-usuario', require('./components/admin/usuario/lista-usuario.vue'));
 		Vue.component('view-usuario', require('./components/admin/usuario/view-usuario.vue'));
 		Vue.component('perfil-usuario', require('./components/admin/usuario/perfil-usuario.vue'));
 		Vue.component('modal', require('./components/modal.vue'));
 
+		// var router = new VueRouter();
+		//
+		// router.map({
+		// 	'/': {
+		// 		component: Home
+		// 	},
+		// 	'/usuario': {
+		// 		component: SecretQuote
+		// 	}
+		// })
+		//
+		// router.redirect({
+		// 	'*': '/home'
+		// })
+		//
+		// router.start(App, '#app');
 		var usuarios = new Vue({
 		    el: '#pantallaUsuarios',
 			data: {
@@ -40,6 +48,7 @@ define(['jquery', 'datatables', 'vue', 'bootstrap-checkbox', 'chartjs', 'bootstr
 			},
 			methods: {
 				seleccionado: function(usuario) {
+					this.usuarioSeleccionado = null;
 					this.usuarioSeleccionado = usuario;
 				}
 			}
