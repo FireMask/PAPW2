@@ -2,106 +2,131 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cliente;
 use App\Models\Cotizacion;
 use App\Models\Usuario;
+use App\Models\UsuarioCliente;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class apiController extends Controller
 {
-	public function getUsers(){
+    public function getUsers(){
 		$usuarios = Usuario::with('rol')->get();
         foreach($usuarios as $user){
-
-            $ventasTotales = Cotizacion::where('idUsuario', '=', $user->idUsuario)
-                                        ->where('finalizada', '=', 1)
-                                        ->count();
-
-            $promedioMensual = Cotizacion::where('idUsuario', '=', $user->idUsuario)->select(DB::raw('avg(cotizacion.total) as promedioMensual'))->get();
-
-            $ventasDelMes = Cotizacion::where('idUsuario', '=',$user->idUsuario)
-                ->where('finalizada', '=', '1')
-                ->select(DB::raw('MONTH(IF(updated_at is null, created_at, updated_at)) mes, YEAR(IF(updated_at is null, created_at, updated_at)) ano, COUNT(*) ventas'))
-                ->groupBy(DB::raw('YEAR(IF(updated_at is null, created_at, updated_at)), MONTH(IF(updated_at is null, created_at, updated_at))'))
-                ->havingRaw('ano = YEAR(CURDATE()) and mes = MONTH(CURDATE())')
-				->get();
+            $ventasTotales = $this->getCountVentasTotales($user->idUsuario);
+            $promedioMensual = $this->getPromedioVentasMensuales($user->idUsuario);
+            $ventasDelMes = $this->getVentasDelMes($user->idUsuario);
 
             $user->estadisticas = array(
                 'ventasTotales' => $ventasTotales,
-                'promedioMensual' => $promedioMensual[0]['promedioMensual'],
+                'promedioMensual' => $promedioMensual,
                 'ventasDelMes' => $ventasDelMes
             );
-//			$promedioMensual = DB::select('call PromedioDeVentasMensualUsuario(?)',array($user->idUsuario));
 
-
-
-//			$ventasDelMes = DB::table('cotizacion')
-//				->select(DB::raw('MONTH(IF(updated_at is null, created_at, updated_at)) mes, YEAR(IF(updated_at is null, created_at, updated_at)) ano, COUNT(*) ventas'))
-//				->where([
-//				    ['idUsuario', '=', (string)$user->idUsuario],
-//				    ['finalizada', '=', '1']
-//				])
-//				->groupBy(DB::raw('YEAR(IF(updated_at is null, created_at, updated_at)), MONTH(IF(updated_at is null, created_at, updated_at))'))
-//				->havingRaw('ano = YEAR(CURDATE()) and mes = MONTH(CURDATE())')
-//				->get();
-//
-//			$user->estadisticas = array(
-//				'ventasDelMes' => (sizeof($ventasDelMes) > 0 ? $ventasDelMes[0]->ventas : 0),
-//				'promedioMensual' => ($promedioMensual[0]->promedioMensual != null ? $promedioMensual[0]->promedioMensual : 0),
-//				'ventasTotales' => $ventasTotales
-//			);
-//			$user->clientes = DB::table('cliente')
-//				->join('usuario_cliente','usuario_cliente.idCliente','=','cliente.idCliente')
-//				->select('cliente.*')
-//				->where('usuario_cliente.idUsuario','=',(string)$user->idUsuario)
-//				->get();
-//			$user->ventas = DB::select('call VentasMensualesUsuario(?)',array($user->idUsuario));
-//			$user->cotizaciones = DB::select('call CotizacionesMensualesUsuario(?)',array($user->idUsuario));
+            $user->clientes = $this->getClientes($user->idUsuario);
+            $user->ventas = $this->getVentas($user->idUsuario);
+            $user->cotizaciones = $this->getCountCotizaciones($user->idUsuario);
 		}
-		//return response()->json(['usuarios' => $usuarios]);
         return $usuarios;
 	}
 
 	public function getUserStadistics($id){
-		$promedioMensual = DB::select('call PromedioDeVentasMensualUsuario(?)',array($id));
-		$ventasTotales = DB::table('cotizacion')
-			->where([
-			    ['idUsuario', '=', (string)$id],
-			    ['finalizada', '=', '1']
-			])
-			->count();
-		$ventasDelMes = DB::table('cotizacion')
-			->select(DB::raw('MONTH(IF(updated_at is null, created_at, updated_at)) mes, YEAR(IF(updated_at is null, created_at, updated_at)) ano, COUNT(*) ventas'))
-			->where([
-			    ['idUsuario', '=', (string)$id],
-			    ['finalizada', '=', '1']
-			])
-			->groupBy(DB::raw('YEAR(IF(updated_at is null, created_at, updated_at)), MONTH(IF(updated_at is null, created_at, updated_at))'))
-			->havingRaw('ano = YEAR(CURDATE()) and mes = MONTH(CURDATE())')
-			->get();
+		$promedioMensual = $this->getPromedioVentasMensuales($id);
+		$ventasTotales = $this->getVentasTotales($id);
+		$ventasDelMes = $this->getVentasDelMes($id);
 		return response()->json([
-			'ventasDelMes' => (sizeof($ventasDelMes) > 0 ? $ventasDelMes[0]->ventas : 0),
-			'promedioMensual' => ($promedioMensual[0]->promedioMensual != null ? $promedioMensual[0]->promedioMensual : 0),
+			'ventasDelMes' => $ventasDelMes,
+			'promedioMensual' => $promedioMensual,
 			'ventasTotales' => $ventasTotales
 		]);
 	}
 
 	public function getUserClients($id){
-		$clientes = DB::table('cliente')
-			->join('usuario_cliente','usuario_cliente.idCliente','=','cliente.idCliente')
-			->select('cliente.*')
-			->where('usuario_cliente.idUsuario','=',(string)$id)
-			->get();
-		return response()->json(['clientes' => $clientes]);
+		$clientes = UsuarioCliente::with('cliente')
+            ->where('idUsuario', '=', $id)
+            ->get();
+		return $clientes;
 	}
 
 	public function getUserSells($id){
-		$ventas = DB::select('call VentasMensualesUsuario(?)',array($id));
-		return response()->json(['ventas' => $ventas]);
+		$ventas = $this->getVentas($id);
+		return $ventas;
 	}
 
 	public function getUserCotizations($id){
-		$cotizaciones = DB::select('call CotizacionesMensualesUsuario(?)',array($id));
-		return response()->json(['cotizaciones' => $cotizaciones]);
+		$cotizaciones = $this->getCotizaciones($id);
+		return $cotizaciones;
 	}
+
+    function getPromedioVentasMensuales($id){
+        $ventasMensuales = Cotizacion::select(DB::raw('MONTH(created_at) mes, COUNT(*) ventasMensuales'))
+            ->where('idUsuario', '=', $id)
+            ->where('finalizada', '=', 1)
+            ->groupBy(DB::raw('YEAR(created_at)'))
+            ->groupBy(DB::raw('MONTH(created_at)'))
+            ->get();
+
+        $sumVentas = 0;
+        $promedioMensual = 0;
+        if(count($ventasMensuales) > 0) {
+            foreach($ventasMensuales as $ventaDelMes)
+                $sumVentas += $ventaDelMes['ventasMensuales'];
+            $promedioMensual = $sumVentas / count($ventasMensuales);
+        }
+
+        return $promedioMensual;
+    }
+
+    function getCountVentasTotales($id){
+        return Cotizacion::where('idUsuario', '=', $id)
+            ->where('finalizada', '=', 1)
+            ->count();
+    }
+
+    function getVentasTotales($id){
+        return Cotizacion::where('idUsuario', '=', $id)
+            ->where('finalizada', '=', 1)
+            ->count();
+    }
+
+    function getVentasDelMes($id){
+        return Cotizacion::where('idUsuario', '=',$id)
+            ->where('finalizada', '=', '1')
+            ->selectRaw('MONTH(IF(updated_at is null, created_at, updated_at)) mes, YEAR(IF(updated_at is null, created_at, updated_at)) ano, COUNT(*) ventas')
+            ->groupBy(DB::raw('YEAR(IF(updated_at is null, created_at, updated_at)), MONTH(IF(updated_at is null, created_at, updated_at))'))
+            ->havingRaw('ano = YEAR(CURDATE()) and mes = MONTH(CURDATE())')
+            ->get();
+    }
+
+    function getClientes($id){
+        return UsuarioCliente::with('cliente')
+            ->where('idUsuario', '=', $id)
+            ->count();//count en vez de get, tarda un chingo
+    }
+
+    function getVentas($id){
+        return Cotizacion::where('idUsuario', '=', $id)
+            ->where('finalizada', '=', '1')
+            ->selectRaw('COUNT(*) ventas')
+            ->select('updated_at')
+            ->selectRaw('YEAR(IF(updated_at is null, updated_at, updated_at)) as ano')
+            ->selectRaw('MONTH(IF(updated_at is null, updated_at, updated_at)) as mes')
+            ->groupBy(DB::raw('YEAR(IF(updated_at is null, updated_at, updated_at))'))
+            ->groupBy(DB::raw('MONTH(IF(updated_at is null, updated_at, updated_at))'))
+            ->having('updated_at', '>', DB::raw('DATE_SUB(now(), INTERVAL 6 MONTH)'))
+            ->orderBy('ano')
+            ->orderBy('mes', 'desc')
+            ->get();
+    }
+
+    function getCountCotizaciones($id){
+        return Cotizacion::where('idUsuario', '=', $id)
+            ->count();
+    }
+
+    function getCotizaciones($id){
+        return Cotizacion::where('idUsuario', '=', $id)
+            ->get();
+    }
 }
