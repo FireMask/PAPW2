@@ -52,8 +52,8 @@
                     <td>{{ $pro->codigo }}</td>
                     <td>{{ $pro->modelo }}</td>
                     <td>{{ $pro->descripcion }}</td>
-                    <td>{{ $pro->fabricante->nombre }}</td>
-                    <td>{{ $pro->proveedor->nombre }}</td>
+                    <td>{{ $pro->fabricante['nombre'] }}</td>
+                    <td>{{ $pro->proveedor['nombre'] }}</td>
                     <td>{{ $pro->precio }}</td>
                     <td align="center">
                         <a href="/producto/{{ $pro->idProducto }}/edit">

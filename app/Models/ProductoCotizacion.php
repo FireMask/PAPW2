@@ -14,7 +14,8 @@ class ProductoCotizacion extends Model
     protected $primaryKey = "idUsuario";
 
     protected $fillable = [
-        //Agregar campos modificables
+        'idCotizacion',
+        'idProducto'
     ];
 
     protected $dates = [

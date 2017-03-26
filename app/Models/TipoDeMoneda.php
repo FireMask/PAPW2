@@ -9,7 +9,7 @@ class TipoDeMoneda extends Model
 {
     use SoftDeletes;
 
-    protected $table = "tipodemoneda";
+    protected $table = "moneda";
 
     protected $primaryKey = "idMoneda";
 

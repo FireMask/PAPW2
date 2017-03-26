@@ -14,6 +14,7 @@ class ProductoController extends Controller
     public function index(){
         $productos = Producto::with('fabricante', 'proveedor')->get();
         return view('admin.producto.view-producto', compact('productos'));
+//        return $productos;
     }
 
     public function create(){

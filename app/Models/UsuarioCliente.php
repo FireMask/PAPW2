@@ -11,10 +11,9 @@ class UsuarioCliente extends Model
 
     protected $table = "usuario_cliente";
 
-    //protected $primaryKey = "idUsuario";
-
     protected $fillable = [
-        //Agregar campos modificables
+        'idUsuario',
+        'idCliente'
     ];
 
     protected $dates = [
