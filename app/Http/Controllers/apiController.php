@@ -24,9 +24,9 @@ class apiController extends Controller
                 'ventasDelMes' => $ventasDelMes
             );
 
-            $user->clientes = $this->getClientes($user->idUsuario);
+            $user->clientes = $this->getUserClients($user->idUsuario);
             $user->ventas = $this->getVentas($user->idUsuario);
-            $user->cotizaciones = $this->getCountCotizaciones($user->idUsuario);
+            $user->cotizaciones = $this->getCotizacionesTabla($user->idUsuario);
 		}
         return $usuarios;
 	}
@@ -43,10 +43,15 @@ class apiController extends Controller
 	}
 
 	public function getUserClients($id){
-		$clientes = UsuarioCliente::with('cliente')
+		$clientes = UsuarioCliente::with('clientName')
+            ->select('idCliente')
             ->where('idUsuario', '=', $id)
-            ->get();
-		return $clientes;
+            ->get(['nombre']);
+
+        $clis = [];
+        foreach ($clientes as $cliente)
+            array_push($clis, $cliente['clientName']);
+		return $clis;
 	}
 
 	public function getUserSells($id){
@@ -91,12 +96,13 @@ class apiController extends Controller
     }
 
     function getVentasDelMes($id){
-        return Cotizacion::where('idUsuario', '=',$id)
+        $ventas = Cotizacion::where('idUsuario', '=',$id)
             ->where('finalizada', '=', '1')
             ->selectRaw('MONTH(IF(updated_at is null, created_at, updated_at)) mes, YEAR(IF(updated_at is null, created_at, updated_at)) ano, COUNT(*) ventas')
             ->groupBy(DB::raw('YEAR(IF(updated_at is null, created_at, updated_at)), MONTH(IF(updated_at is null, created_at, updated_at))'))
             ->havingRaw('ano = YEAR(CURDATE()) and mes = MONTH(CURDATE())')
             ->get();
+        return (sizeof($ventas) > 0 ? $ventas[0]->ventas : 0);
     }
 
     function getClientes($id){
@@ -108,13 +114,27 @@ class apiController extends Controller
     function getVentas($id){
         return Cotizacion::where('idUsuario', '=', $id)
             ->where('finalizada', '=', '1')
-            ->selectRaw('COUNT(*) ventas')
             ->select('updated_at')
             ->selectRaw('YEAR(IF(updated_at is null, updated_at, updated_at)) as ano')
             ->selectRaw('MONTH(IF(updated_at is null, updated_at, updated_at)) as mes')
+            ->selectRaw('COUNT(*) as ventas')
             ->groupBy(DB::raw('YEAR(IF(updated_at is null, updated_at, updated_at))'))
             ->groupBy(DB::raw('MONTH(IF(updated_at is null, updated_at, updated_at))'))
             ->having('updated_at', '>', DB::raw('DATE_SUB(now(), INTERVAL 6 MONTH)'))
+            ->orderBy('ano')
+            ->orderBy('mes', 'desc')
+            ->get();
+    }
+
+    function getCotizacionesTabla($id){
+        return Cotizacion::where('idUsuario', '=', $id)
+            ->select('created_at')
+            ->selectRaw('YEAR(created_at) as ano')
+            ->selectRaw('MONTH(created_at) as mes')
+            ->selectRaw('COUNT(*) as cotizaciones')
+            ->groupBy(DB::raw('YEAR(created_at)'))
+            ->groupBy(DB::raw('MONTH(created_at)'))
+            ->having('created_at', '>', DB::raw('DATE_SUB(now(), INTERVAL 6 MONTH)'))
             ->orderBy('ano')
             ->orderBy('mes', 'desc')
             ->get();

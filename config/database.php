@@ -52,36 +52,36 @@ return [
             'prefix' => '',
         ],
 
-         'mysql' => [
-             'read' => [
-                 'host' => '127.0.0.1'
-             ],
-             'write' => [
-                 'host' => '127.0.0.1'
-             ],
-             'driver'    => 'mysql',
-             'database'  => 'papw2_2',
-             'username'  => 'root',
-             'password'  => 'root',
-             'charset'   => 'utf8',
-             'collation' => 'utf8_unicode_ci',
-             'prefix'    => '',
-         ],
-//        'mysql' => [
-//            'read' => [
-//                'host' => '69.162.102.178',
-//            ],
-//            'write' => [
-//                'host' => '69.162.102.178',
-//            ],
-//            'driver'    => 'mysql',
-//            'database'  => 'moviefle_PAPW_CRM',
-//            'username'  => 'moviefle_papw2',
-//            'password'  => 'AndresDavid12345',
-//            'charset'   => 'utf8',
-//            'collation' => 'utf8_unicode_ci',
-//            'prefix'    => '',
-//        ],
+        //  'mysql' => [
+        //      'read' => [
+        //          'host' => '127.0.0.1'
+        //      ],
+        //      'write' => [
+        //          'host' => '127.0.0.1'
+        //      ],
+        //      'driver'    => 'mysql',
+        //      'database'  => 'papw2_2',
+        //      'username'  => 'root',
+        //      'password'  => 'root',
+        //      'charset'   => 'utf8',
+        //      'collation' => 'utf8_unicode_ci',
+        //      'prefix'    => '',
+        //  ],
+       'mysql' => [
+           'read' => [
+               'host' => '69.162.102.178',
+           ],
+           'write' => [
+               'host' => '69.162.102.178',
+           ],
+           'driver'    => 'mysql',
+           'database'  => 'moviefle_PAPW_CRM',
+           'username'  => 'moviefle_papw2',
+           'password'  => 'AndresDavid12345',
+           'charset'   => 'utf8',
+           'collation' => 'utf8_unicode_ci',
+           'prefix'    => '',
+       ],
         //
         // 'pgsql' => [
         //     'driver' => 'pgsql',

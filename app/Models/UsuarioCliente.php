@@ -24,6 +24,11 @@ class UsuarioCliente extends Model
         return $this->hasOne('App\Models\Cliente', 'idCliente', 'idCliente');
     }
 
+    function clientName(){
+        $name = $this->hasOne('App\Models\Cliente', 'idCliente', 'idCliente')->select('idCliente', 'nombre');
+        return $name;
+    }
+
     protected $dates = [
         'created_at',
         'updated_at',

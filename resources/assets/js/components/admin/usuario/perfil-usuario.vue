@@ -73,7 +73,7 @@
 
                             <strong><i class="fa fa-users margin-r-5"></i> Clientes</strong>
                             <ul>
-                                <li v-for="cliente in usuario.clientes">{{ cliente.nombre_comercial }}</li>
+                                <li v-for="cliente in usuario.clientes">{{ cliente.nombre }}</li>
                             </ul>
                             <hr>
 
@@ -122,9 +122,16 @@ export default {
         },
         editar: function() {
             this.showModal = false;
+            this.$http.post('/usuarios/' + this.usuario.idUsuario + '/edit').then(response => {
+                this.$emit('usuarioBorrado', this.usuario.idUsuario);
+                console.log('usuario borrado');
+            });
         },
         borrar: function() {
             this.showModal = false;
+            this.$http.post('/usuarios/' + this.usuario.idUsuario).then(response => {
+
+            });
         },
         loadData: function () {
             this.$http.get('/api/usuarios/' + this.usuario.idUsuario + '/clientes').then(response => {

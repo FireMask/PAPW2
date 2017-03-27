@@ -30,6 +30,7 @@
     "ionicons": "^3.0.0",
     "mdbootstrap": "^4.3.0",
     "vue": "^2.1.10",
-    "vue-router": "^2.3.0"
+    "vue-router": "^2.3.0",
+    "vuex": "^2.2.1"
   }
 }
