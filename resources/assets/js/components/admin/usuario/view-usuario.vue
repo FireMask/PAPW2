@@ -48,5 +48,10 @@ export default {
 </script>
 
 <style>
-
+    .widget-user-username {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        height: 30px;
+    }
 </style>

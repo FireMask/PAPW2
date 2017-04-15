@@ -1,5 +1,5 @@
 <template>
-    <transition name="fade">
+    <div class="">
         <section class="content">
             <modal v-if="showModal">
                 <h3 slot="header">Confirmar</h3>
@@ -23,7 +23,7 @@
             <div class="row">
                 <div class="col-md-2 col-offset-10 cerrar">
                     <a class="btn btn-default" href="#" v-on:click="cerrar()">
-                        <i class="fa fa-close"></i> Cerrar
+                        <i class="fa fa-arrow-left"></i> Volver
                     </a>
                 </div>
                 <br>
@@ -71,14 +71,14 @@
 
                             <hr>
 
+                            <strong><i class="fa fa-bar-chart margin-r-5"></i> Estadisticas</strong>
+                            <canvas id="estadisticas">grafica de ventas y cotizaciones</canvas>
+
                             <strong><i class="fa fa-users margin-r-5"></i> Clientes</strong>
                             <ul>
                                 <li v-for="cliente in usuario.clientes">{{ cliente.nombre }}</li>
                             </ul>
                             <hr>
-
-                            <strong><i class="fa fa-bar-chart margin-r-5"></i> Estadisticas</strong>
-                            <canvas id="estadisticas">grafica de ventas y cotizaciones</canvas>
 
                             <hr>
                         </div>
@@ -86,11 +86,12 @@
                 </div>
             </div>
         </section>
-    </transition>
+    </div>
 </template>
 
 <script>
 var Chart = require('chartjs');
+var store = require('./../../../store/store.js');
 export default {
     data () {
         return {
@@ -122,15 +123,15 @@ export default {
         },
         editar: function() {
             this.showModal = false;
-            this.$http.post('/usuarios/' + this.usuario.idUsuario + '/edit').then(response => {
-                this.$emit('usuarioBorrado', this.usuario.idUsuario);
-                console.log('usuario borrado');
-            });
+            this.$emit('editar');
         },
         borrar: function() {
             this.showModal = false;
-            this.$http.post('/usuarios/' + this.usuario.idUsuario).then(response => {
-
+            var data = {
+                _method: 'DELETE'
+            };
+            this.$http.post('/usuario/' + this.usuario.idUsuario, data).then(response => {
+                this.cerrar();
             });
         },
         loadData: function () {
@@ -213,11 +214,5 @@ export default {
     }
     .cerrar {
         margin-bottom: 15px;
-    }
-    .fade-enter-active, .fade-leave-active {
-        transition: opacity .5s
-    }
-    .fade-enter, .fade-leave-to {
-        opacity: 0
     }
 </style>

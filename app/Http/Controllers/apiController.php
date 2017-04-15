@@ -5,13 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\Cliente;
 use App\Models\Cotizacion;
 use App\Models\Usuario;
+use App\Models\Rol;
 use App\Models\UsuarioCliente;
+use App\Models\Empresa;
+use App\Models\Fabricante;
+use App\Models\TipoDeMoneda;
+use App\Models\Producto;
+use App\Models\Proveedor;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class apiController extends Controller
 {
+    public function getPaginationData() {
+        $count = DB::table('usuario')->count();
+        return $count;
+    }
+
     public function getUsers(){
+        $usersPerPage = 8;
 		$usuarios = Usuario::with('rol')->get();
         foreach($usuarios as $user){
             $ventasTotales = $this->getCountVentasTotales($user->idUsuario);
@@ -145,8 +157,40 @@ class apiController extends Controller
             ->count();
     }
 
-    function getCotizaciones($id){
+    function getCotizacionesFromUser($id){
         return Cotizacion::where('idUsuario', '=', $id)
             ->get();
+    }
+
+    function getRoles() {
+        return Rol::get();
+    }
+
+    function getClients() {
+        return Cliente::get();
+    }
+
+    function getCotizaciones() {
+        return Cotizacion::with(['usuario','moneda','cliente'])->get();
+    }
+
+    function getEmpresa() {
+        return Empresa::get();
+    }
+
+    function getFabricantes() {
+        return Fabricante::get();
+    }
+
+    function getMonedas() {
+        return TipoDeMoneda::get();
+    }
+
+    function getProductos() {
+        return Producto::with(['proveedor','fabricante'])->get();
+    }
+
+    function getProveedores() {
+        return Proveedor::get();
     }
 }

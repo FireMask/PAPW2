@@ -26,7 +26,8 @@ module.exports = {
             'chartjs': __dirname + '/node_modules/chart.js/dist/Chart.js',
             'bootstrap-fileinput': __dirname + '/node_modules/bootstrap-fileinput/js/fileinput.js',
             'vue-router': __dirname + '/node_modules/vue-router/dist/vue-router.js',
-            'vue-resource': __dirname + '/node_modules/vue-resource/dist/vue-resource.js'
+            'vue-resource': __dirname + '/node_modules/vue-resource/dist/vue-resource.js',
+            'vuex': __dirname + '/node_modules/vuex/dist/vuex.js'
         }
     },
     module: {

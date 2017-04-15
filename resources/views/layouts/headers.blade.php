@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <title>CRM - @yield('title')</title>
-<meta id="token" name="token" value="{{ csrf_token() }}">
+<meta name="token" content="{{ csrf_token() }}">
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <link rel="stylesheet" href="/js/dist/Bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="/js/dist/Font-Awesome/css/font-awesome.min.css">

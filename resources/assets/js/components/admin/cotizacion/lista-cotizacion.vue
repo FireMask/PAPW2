@@ -16,9 +16,9 @@
             </form>
         </div>
         <div class="row">
-            <transition-group name="translate-fade" tag="div" method="out-in">
-                <div :key="usuario.idUsuario" v-for="usuario in usuariosMostrados" class="col-md-6" v-on:click="seleccionarUsuario(usuario);">
-                    <view-usuario :data="usuario"></view-usuario>
+            <transition-group name="translate-fade" tag="div" mode="out-in">
+                <div :key="dato.idCliente" v-for="dato in datosMostrados" class="col-md-12" v-on:click="seleccionarDato(dato);">
+                    <view-cotizacion :cotizacion="dato"></view-cotizacion>
                 </div>
             </transition-group>
         </div>
@@ -46,32 +46,32 @@
     export default {
         data () {
             return {
-                usuarios: [],
-				usuariosMostrados: [],
+                datos: [],
+				datosMostrados: [],
 				paginaActual: 0,
 				indiceCentral: 0,
 				datosPorPagina: 8,
 				busqueda: '',
-				usuarioSeleccionado: null
+				datoseleccionado: null
             };
         },
         computed: {
-            usuariosFiltrados: function () {
+            datosFiltrados: function () {
                 var self = this;
                 this.busqueda = this.busqueda.trim().toLowerCase();
 
                 if(this.busqueda == ''){
-                    return this.usuarios;
+                    return this.datos;
                 }
 
-                var usuarios = this.usuarios.filter(function(item){
-                    return item.nombres.toLowerCase().indexOf(self.busqueda) !== -1 || item.apellido_paterno.toLowerCase().indexOf(self.busqueda) !== -1 || item.apellido_materno.toLowerCase().indexOf(self.busqueda) !== -1;
+                var datos = this.datos.filter(function(item){
+                    return item.cliente.nombre_comercial.toLowerCase().indexOf(self.busqueda) !== -1 || item.cliente.nombre.toLowerCase().indexOf(self.busqueda) !== -1;
                 });
                 this.paginaActual = 0;
-                return usuarios;
+                return datos;
             },
             paginas: function() {
-                return Math.ceil(this.usuariosFiltrados.length / this.datosPorPagina);
+                return Math.ceil(this.datosFiltrados.length / this.datosPorPagina);
             },
             centro: function() {
                 var centro = 0;
@@ -95,28 +95,28 @@
         },
         methods: {
             loadData: function () {
-                this.$http.get('/api/usuarios/').then(response => {
-                    this.usuarios = response.body;
+                this.$http.get('/api/cotizaciones/').then(response => {
+                    this.datos = response.body;
                     this.mostrarPagina();
                 });
             },
-            seleccionarUsuario: function(seleccion) {
-                this.$emit('usuario', seleccion);
+            seleccionarDato: function(dato) {
+                this.$emit('seleccionado', dato);
             },
             crear: function() {
                 this.$emit('crear');
             },
             mostrarPagina: function() {
                 var usados = (this.paginaActual * this.datosPorPagina) + this.datosPorPagina;
-                var restantes = usados > this.usuariosFiltrados.length ? this.usuariosFiltrados.length - (this.paginaActual * this.datosPorPagina) : this.datosPorPagina;
-                this.usuariosMostrados = this.usuariosFiltrados.slice((this.paginaActual * this.datosPorPagina), (this.paginaActual * this.datosPorPagina) + restantes);
+                var restantes = usados > this.datosFiltrados.length ? this.datosFiltrados.length - (this.paginaActual * this.datosPorPagina) : this.datosPorPagina;
+                this.datosMostrados = this.datosFiltrados.slice((this.paginaActual * this.datosPorPagina), (this.paginaActual * this.datosPorPagina) + restantes);
             },
             pagina: function(numero) {
                 this.paginaActual = numero;
                 this.mostrarPagina();
             },
             paginaSiguiente: function() {
-                if (this.paginaActual < Math.ceil(this.usuariosFiltrados.length / this.datosPorPagina) - 1) {
+                if (this.paginaActual < Math.ceil(this.datosFiltrados.length / this.datosPorPagina) - 1) {
                     this.paginaActual++;
                     this.mostrarPagina();
                 }
