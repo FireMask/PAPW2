@@ -14,11 +14,10 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
-
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
+        'password' => $password ?: $password = sha1('secret'),
         'remember_token' => str_random(10),
     ];
 });
@@ -61,9 +60,11 @@ $factory->define(App\Models\Cotizacion::class, function (Faker\Generator $faker)
         'idMoneda' => $faker->numberBetween(1, 5),
         'validez' => $faker->randomElement(['5', '10', '15', '30', '60']),
         'pago' => $faker->randomElement(['Credito', 'Contado']),
-        'total' => $faker->randomFloat(2, 500, 1000000),
+        'total' => $faker->randomFloat(2, 500, 10000),
         'aprobada' => $faker->numberBetween(0, 1),
-        'finalizada' => $faker->numberBetween(0, 1)
+        'finalizada' => $faker->numberBetween(0, 1),
+        'created_at' => '2017-'.$faker->numberBetween(1, 12).'-'.$faker->numberBetween(1, 25).' 01:01:01',
+        'updated_at' => '2017-'.$faker->numberBetween(1, 12).'-'.$faker->numberBetween(1, 25).' 01:01:01'
     ];
 });
 
@@ -102,7 +103,7 @@ $factory->define(App\Models\Producto::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Models\ProductoCotizacion::class, function (Faker\Generator $faker) {
     return [
-        'idCotizacion' => $faker->numberBetween(1, 1000),
+        'idCotizacion' => $faker->numberBetween(1, 5000),
         'idProducto' => $faker->numberBetween(1, 1000)
     ];
 });
