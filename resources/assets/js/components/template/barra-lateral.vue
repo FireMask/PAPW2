@@ -4,16 +4,16 @@
             <section class="sidebar">
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="/js/dist/AdminLTE/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <img :src="profileImagePath" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
-                        <p>Andres Lira</p>
+                        <p>{{ usuario.nombres +' '+ usuario.apellido_paterno }}</p> <!--UserName-->
                         <a href=""><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
                 </div>
 
                 <ul class="sidebar-menu">
-                    <li class="header">Administrador</li>
+                    <li class="header"></li>
                     <li class="treeview">
                         <a href="#" v-on:click="cambiarPagina('cotizaciones')"><i class="fa fa-file-text"></i> <span>Cotizaciones</span></a>
                     </li>
@@ -72,8 +72,16 @@
     export default {
         data() {
             return {
-
+                datos: null
             };
+        },
+        props:[
+            'usuario'
+        ],
+        computed:{
+            profileImagePath: function() {
+                return '/storage/' + this.usuario.imagen_perfil;
+            }
         },
         methods: {
             cambiarPagina: function(pagina) {

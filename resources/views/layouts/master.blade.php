@@ -7,7 +7,7 @@
 <body class="hold-transition skin-purple sidebar-mini">
     <div id="App" class="wrapper">
         <barra-superior></barra-superior>
-        <barra-lateral></barra-lateral>
+        <barra-lateral :usuario="{{ Auth::user() }}"></barra-lateral>
 
         <div id="main-container" class="content-wrapper" style="min-height: 100vh;">
             <section class="content-header">

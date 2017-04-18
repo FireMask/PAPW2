@@ -17,6 +17,15 @@ use Illuminate\Http\Request;
 
 class apiController extends Controller
 {
+    public function getFabProd(){
+        $fabricantes = Fabricante::all();
+        $proveedores = Proveedor::all();
+        return array(
+            'fabricantes' => $fabricantes,
+            'proveedores' => $proveedores
+        );
+    }
+
     public function getPaginationData() {
         $count = DB::table('usuario')->count();
         return $count;

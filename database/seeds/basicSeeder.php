@@ -19,7 +19,8 @@ class basicSeeder extends Seeder{
             'idRol' => 1,
             'imagen_perfil' => 'd66bad441f0080b0795b89e9b46dd3981398747a.png',
             'fecha_nacimiento' => '16-09-2005',
-            'remember_token' => 'fS9Cg7orXx'
+            'remember_token' => 'fS9Cg7orXx',
+            'created_at' => date_timestamp_get()
         ]);
     }
 }

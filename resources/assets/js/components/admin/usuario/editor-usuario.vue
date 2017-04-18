@@ -33,7 +33,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-md-8 col-offset-4">
-                        <label for="fecha_nacimiento">Fecha de nacimiento:</label>
+                        <label for="fecha-agregar">Fecha de nacimiento:</label>
                         <div class="input-group date" data-provide="datepicker">
                             <input id="fecha-agregar" type="text" class="form-control input-lg" name="fecha_nacimiento" :value="fecha_nacimiento">
                             <div class="input-group-addon">

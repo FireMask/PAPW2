@@ -12,9 +12,7 @@ define([
 	'./store/store'
 ],
 function($, DataTable, Vue, Vuex, Checkbox, Chart, FileInput, DatePicker, VueRouter, VueResource, store) {
-
 	Vue.use(VueResource);
-
 	$(document).ready(function() {
 		$('#table_id').DataTable({
 			"scrollX": true
@@ -86,7 +84,7 @@ function($, DataTable, Vue, Vuex, Checkbox, Chart, FileInput, DatePicker, VueRou
 		Vue.component('lista-producto', 	require('./components/admin/producto/lista-producto.vue'));
 		Vue.component('view-producto', 		require('./components/admin/producto/view-producto.vue'));
 		// Vue.component('perfil-producto', require('./components/admin/producto/perfil-producto.vue'));
-		// Vue.component('editor-producto', require('./components/admin/producto/editor-producto.vue'));
+		Vue.component('editor-producto', require('./components/admin/producto/editor-producto.vue'));
 
 		Vue.component('pantalla-empresa', 	require('./components/admin/empresa/pantalla-empresa.vue'));
 		Vue.component('view-empresa', 		require('./components/admin/empresa/view-empresa.vue'));
@@ -101,6 +99,8 @@ function($, DataTable, Vue, Vuex, Checkbox, Chart, FileInput, DatePicker, VueRou
 			methods: { },
 			computed: {
 				actualPage: function() {
+				    var titulo  = store.state.navegacion.currentPage;
+                    $("title").text('CRM - ' + titulo.charAt(0).toUpperCase() + titulo.slice(1));
 					return store.state.navegacion.currentPage;
 				},
 				accion: function() {

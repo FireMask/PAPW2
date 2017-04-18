@@ -13,15 +13,15 @@
                         >
                         </perfil-producto> -->
                         <lista-producto
-                            v-on:seleccionado="seleccionado"
+                            v-on:seleccionado="selected"
                             v-on:crear="crear()"
                             v-if="accion == 'buscar'"
                         ></lista-producto>
-                        <!-- <editor-producto
-                            :cliente="seleccionado"
+                        <editor-producto
+                            :producto="seleccionado"
                             v-if="accion == 'editar' || accion == 'crear'"
-                            v-on:cerrar="lista()"
-                        ></editor-producto> -->
+                            v-on:lista="lista()"
+                        ></editor-producto>
                     </transition>
                 </div>
             </div>
@@ -38,15 +38,12 @@
             };
         },
         methods: {
-            seleccionado: function(seleccion) {
+            selected: function(seleccion) {
                 this.seleccionado = seleccion;
-                this.accion = 'perfil';
+                this.accion = 'editar';
             },
             crear: function() {
                 this.accion = 'crear';
-            },
-            editar: function() {
-                this.accion = 'editar';
             },
             lista: function() {
                 this.seleccionado = null;

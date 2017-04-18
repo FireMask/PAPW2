@@ -24,9 +24,8 @@ class LoginController extends Controller
         if($auth){
             Auth::login($auth);
             return Redirect::to('index');
-        }else{
+        }else
             return Redirect::to('login');
-        }
     }
 
     public function logout(){

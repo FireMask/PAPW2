@@ -1,16 +1,11 @@
 <template>
     <div class="content">
-        <div align="right">
-            <a class="btn btn-app" href="#" v-on:click="crear()">
-                <i class="fa fa-plus"></i> Agregar
-            </a>
-        </div>
         <div class="row">
             <form class="form-horizontal col-md-6">
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="correo">Buscar:</label>
+                    <label class="control-label col-sm-2" for="srch">Buscar:</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" v-on:keyup="mostrarPagina();" v-model="busqueda">
+                        <input id="srch" type="text" class="form-control" v-on:keyup="mostrarPagina();" v-model="busqueda">
                     </div>
                 </div>
             </form>
