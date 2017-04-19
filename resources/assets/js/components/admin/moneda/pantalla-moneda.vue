@@ -1,28 +1,30 @@
 <template>
-    <div class="row" id="pantallaMoneda">
-        <div class="col-md-12">
-            <div class="box box-default box-add-edit">
-                <div id="pantallaMoneda">
-                    <transition name="fade" mode="out-in">
-                        <!-- <perfil-moneda
-                            v-on:cerrar="lista()"
-                            v-on:editar="editar()"
-                            v-on:usuarioBorrado="borrar()"
-                            v-if="accion == 'perfil'"
-                            :cliente="seleccionado"
-                        >
-                        </perfil-moneda> -->
-                        <lista-moneda
-                            v-on:seleccionado="seleccionado"
-                            v-on:crear="crear()"
-                            v-if="accion == 'buscar'"
-                        ></lista-moneda>
-                        <!-- <editor-moneda
-                            :cliente="seleccionado"
-                            v-if="accion == 'editar' || accion == 'crear'"
-                            v-on:cerrar="lista()"
-                        ></editor-moneda> -->
-                    </transition>
+    <div class="content" id="pantallaMoneda">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-default box-add-edit">
+                    <div id="pantallaMoneda">
+                        <transition name="fade" mode="out-in">
+                            <!-- <perfil-moneda
+                                v-on:cerrar="lista()"
+                                v-on:editar="editar()"
+                                v-on:usuarioBorrado="borrar()"
+                                v-if="accion == 'perfil'"
+                                :cliente="seleccionado"
+                            >
+                            </perfil-moneda> -->
+                            <lista-moneda
+                                v-on:seleccionado="seleccionado"
+                                v-on:crear="crear()"
+                                v-if="accion == 'buscar'"
+                            ></lista-moneda>
+                            <!-- <editor-moneda
+                                :cliente="seleccionado"
+                                v-if="accion == 'editar' || accion == 'crear'"
+                                v-on:cerrar="lista()"
+                            ></editor-moneda> -->
+                        </transition>
+                    </div>
                 </div>
             </div>
         </div>

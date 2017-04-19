@@ -1,14 +1,16 @@
 <template>
-    <div class="row" id="pantallaEmpresa">
-        <div class="col-md-12">
-            <div class="box box-default box-add-edit">
-                <div id="pantallaEmpresa">
-                    <transition name="fade" mode="out-in">
-                        <view-empresa
-                            :empresa="empresa"
-                            v-if="empresa != null"
-                        ></view-empresa>
-                    </transition>
+    <div class="content" id="pantallaEmpresa">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-default box-add-edit">
+                    <div id="pantallaEmpresa">
+                        <transition name="fade" mode="out-in">
+                            <view-empresa
+                                :empresa="empresa"
+                                v-if="empresa != null"
+                            ></view-empresa>
+                        </transition>
+                    </div>
                 </div>
             </div>
         </div>

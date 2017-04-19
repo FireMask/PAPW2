@@ -87,6 +87,9 @@
             cambiarPagina: function(pagina) {
                 store.commit('setPage', pagina);
             }
+        },
+        mounted: function() {
+            console.log(this.usuario);
         }
     }
 </script>

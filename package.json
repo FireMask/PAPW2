@@ -29,6 +29,7 @@
     "handlebars": "^4.0.6",
     "ionicons": "^3.0.0",
     "mdbootstrap": "^4.3.0",
+    "progressbar.js": "^1.0.1",
     "vue": "^2.1.10",
     "vue-router": "^2.3.0",
     "vuex": "^2.2.1"

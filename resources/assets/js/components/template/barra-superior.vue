@@ -1,6 +1,6 @@
 <template>
     <header class="main-header">
-        <a href="/index" class="logo">
+        <a href="#" class="logo" v-on:click="inicio()">
             <span class="logo-mini"><b>C</b>L</span>
             <span class="logo-lg"><b>CRM</b>Lite</span>
         </a>
@@ -45,11 +45,17 @@
 </template>
 
 <script>
+    var store = require('./../../store/store.js');
     export default {
         data() {
             return {
-
+                
             };
+        },
+        methods: {
+            inicio: function() {
+                store.commit('setPage', 'inicio');
+            }
         }
     }
 </script>

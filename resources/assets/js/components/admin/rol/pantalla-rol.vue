@@ -1,28 +1,30 @@
 <template>
-    <div class="row" id="pantallaRol">
-        <div class="col-md-12">
-            <div class="box box-default box-add-edit">
-                <div id="pantallaRol">
-                    <transition name="fade" mode="out-in">
-                        <!-- <perfil-rol
-                            v-on:cerrar="lista()"
-                            v-on:editar="editar()"
-                            v-on:usuarioBorrado="borrar()"
-                            v-if="accion == 'perfil'"
-                            :cliente="seleccionado"
-                        >
-                        </perfil-rol> -->
-                        <lista-rol
-                            v-on:seleccionado="seleccionado"
-                            v-on:crear="crear()"
-                            v-if="accion == 'buscar'"
-                        ></lista-rol>
-                        <!-- <editor-rol
-                            :cliente="seleccionado"
-                            v-if="accion == 'editar' || accion == 'crear'"
-                            v-on:cerrar="lista()"
-                        ></editor-rol> -->
-                    </transition>
+    <div class="content" id="pantallaRol">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-default box-add-edit">
+                    <div id="pantallaRol">
+                        <transition name="fade" mode="out-in">
+                            <!-- <perfil-rol
+                                v-on:cerrar="lista()"
+                                v-on:editar="editar()"
+                                v-on:usuarioBorrado="borrar()"
+                                v-if="accion == 'perfil'"
+                                :cliente="seleccionado"
+                            >
+                            </perfil-rol> -->
+                            <lista-rol
+                                v-on:seleccionado="seleccionado"
+                                v-on:crear="crear()"
+                                v-if="accion == 'buscar'"
+                            ></lista-rol>
+                            <!-- <editor-rol
+                                :cliente="seleccionado"
+                                v-if="accion == 'editar' || accion == 'crear'"
+                                v-on:cerrar="lista()"
+                            ></editor-rol> -->
+                        </transition>
+                    </div>
                 </div>
             </div>
         </div>

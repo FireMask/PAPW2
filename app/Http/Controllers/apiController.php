@@ -26,6 +26,59 @@ class apiController extends Controller
         );
     }
 
+    public function estadisticasEmpresa() {
+        $ventas = Cotizacion::where('finalizada', '=', '1')
+            ->select('updated_at')
+            ->selectRaw('YEAR(IF(updated_at is null, updated_at, updated_at)) as ano')
+            ->selectRaw('MONTH(IF(updated_at is null, updated_at, updated_at)) as mes')
+            ->selectRaw('COUNT(*) as ventas')
+            ->groupBy(DB::raw('YEAR(IF(updated_at is null, updated_at, updated_at))'))
+            ->groupBy(DB::raw('MONTH(IF(updated_at is null, updated_at, updated_at))'))
+            ->having('updated_at', '>', DB::raw('DATE_SUB(now(), INTERVAL 6 MONTH)'))
+            ->orderBy('ano')
+            ->orderBy('mes', 'desc')
+            ->get();
+
+        $cotizaciones = Cotizacion::select('created_at')
+            ->selectRaw('YEAR(created_at) as ano')
+            ->selectRaw('MONTH(created_at) as mes')
+            ->selectRaw('COUNT(*) as cotizaciones')
+            ->groupBy(DB::raw('YEAR(created_at)'))
+            ->groupBy(DB::raw('MONTH(created_at)'))
+            ->having('created_at', '>', DB::raw('DATE_SUB(now(), INTERVAL 6 MONTH)'))
+            ->orderBy('ano')
+            ->orderBy('mes', 'desc')
+            ->get();
+
+        $totalVentas = Cotizacion::selectRaw('COUNT(*) as ventas')
+            ->where('finalizada', '=', '1')
+            ->get();
+
+        $totalCotizaciones = Cotizacion::selectRaw('COUNT(*) as cotizaciones')->get();
+
+        $porcentajeExitoAnterior = 0;
+        $ventasAnteriores = 0;
+        $cotizacionesAnteriores = 0;
+        if (array_key_exists ( 1 , $ventas )) {
+            $ventasAnteriores = $ventas[1]->ventas;
+        }
+        if (array_key_exists ( 1 , $cotizaciones )) {
+            $cotizacionesAnteriores = $cotizaciones[1]->cotizaciones;
+        }
+        $porcentajeExitoAnterior = ($ventasAnteriores / ($cotizacionesAnteriores == 0 ? 1 : $cotizacionesAnteriores)) * 100;
+        $porcentajeExitoActual = ($ventas[0]->ventas / $cotizaciones[0]->cotizaciones) * 100;
+        $progresoMensual = ($porcentajeExitoAnterior == 0 ? 100 : ($porcentajeExitoAnterior / 100) * ($porcentajeExitoActual - $porcentajeExitoAnterior));
+
+        $estadisticas = array(
+            'ventas' => $ventas,
+            'cotizaciones' => $cotizaciones,
+            'progresoMensual' => $progresoMensual,
+            'porcentajeExito' => ($totalVentas[0]->ventas / $totalCotizaciones[0]->cotizaciones) * 100
+        );
+
+        return $estadisticas;
+    }
+
     public function getPaginationData() {
         $count = DB::table('usuario')->count();
         return $count;

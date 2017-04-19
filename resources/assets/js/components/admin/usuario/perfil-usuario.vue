@@ -74,6 +74,8 @@
                             <strong><i class="fa fa-bar-chart margin-r-5"></i> Estadisticas</strong>
                             <canvas id="estadisticas">grafica de ventas y cotizaciones</canvas>
 
+                            <hr>
+
                             <strong><i class="fa fa-users margin-r-5"></i> Clientes</strong>
                             <ul>
                                 <li v-for="cliente in usuario.clientes">{{ cliente.nombre }}</li>
@@ -152,7 +154,7 @@ export default {
             var meses = new Array(6);
             var ventas = [];
             var cotizaciones = [];
-            var nombresMeses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+            var nombresMeses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
             var ultimoMes = this.usuario.ventas[0] != null ? this.usuario.ventas[0].mes  - 1 : (function() { var d = new Date(); return d.getMonth() }());
             for (var i = 0; i < 6; i++) {
                 if (ultimoMes < 0) {

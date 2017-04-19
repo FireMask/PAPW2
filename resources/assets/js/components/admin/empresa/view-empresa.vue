@@ -42,7 +42,7 @@
 					<input required type="email" :value="empresa.correo_principal" class="form-control input-lg" id="correoPrincipal" name="correoPrincipal">
 				</div>
                 <div class="form-group">
-                    <label for="moneda">Moenda por Defecto:</label>
+                    <label for="moneda">Moneda por Defecto:</label>
                     <select class="form-control input-lg" id="moneda" name="idMoneda">
                         <option v-for="moneda in monedas" :value="moneda.idMoneda">{{ moneda.nombre }}</option>
                     </select>

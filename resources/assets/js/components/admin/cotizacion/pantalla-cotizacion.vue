@@ -1,28 +1,30 @@
 <template>
-    <div class="row" id="pantallaCotizaciones">
-        <div class="col-md-12">
-            <div class="box box-default box-add-edit">
-                <div id="pantallaCotizaciones">
-                    <transition name="fade" mode="out-in">
-                        <!-- <perfil-cliente
-                            v-on:cerrar="lista()"
-                            v-on:editar="editar()"
-                            v-on:usuarioBorrado="borrar()"
-                            v-if="accion == 'perfil'"
-                            :cliente="seleccionado"
-                        >
-                        </perfil-cliente> -->
-                        <lista-cotizacion
-                            v-on:seleccionado="seleccionado"
-                            v-on:crear="crear()"
-                            v-if="accion == 'buscar'"
-                        ></lista-cotizacion>
-                        <!-- <editor-cliente
-                            :cliente="seleccionado"
-                            v-if="accion == 'editar' || accion == 'crear'"
-                            v-on:cerrar="lista()"
-                        ></editor-cliente> -->
-                    </transition>
+    <div class="content" id="pantallaCotizaciones">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-default box-add-edit">
+                    <div id="pantallaCotizaciones">
+                        <transition name="fade" mode="out-in">
+                            <!-- <perfil-cliente
+                                v-on:cerrar="lista()"
+                                v-on:editar="editar()"
+                                v-on:usuarioBorrado="borrar()"
+                                v-if="accion == 'perfil'"
+                                :cliente="seleccionado"
+                            >
+                            </perfil-cliente> -->
+                            <lista-cotizacion
+                                v-on:seleccionado="seleccionado"
+                                v-on:crear="crear()"
+                                v-if="accion == 'buscar'"
+                            ></lista-cotizacion>
+                            <!-- <editor-cliente
+                                :cliente="seleccionado"
+                                v-if="accion == 'editar' || accion == 'crear'"
+                                v-on:cerrar="lista()"
+                            ></editor-cliente> -->
+                        </transition>
+                    </div>
                 </div>
             </div>
         </div>

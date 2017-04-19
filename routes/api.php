@@ -31,3 +31,5 @@ Route::get('/productos', 'apiController@getProductos');
 Route::get('/proveedores', 'apiController@getProveedores');
 
 Route::get('/empresa', 'apiController@getEmpresa');
+
+Route::get('/inicio', 'apiController@estadisticasEmpresa');

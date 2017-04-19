@@ -4,6 +4,7 @@
             <form id="dataUpdate" class="login-form" method="POST">
                 <input type="hidden" name="_token" :value="csrf_token">
                 <input v-if="producto != null" name="_method" type="hidden" value="PUT">
+                <input v-if="producto != null" type="hidden" name="idProducto" :value="producto.idProducto">
                 <div class="form-group">
                     <label for="codigo">Código:</label>
                     <input required type="text" class="form-control" id="codigo" name="codigo" :value="codigo">
@@ -101,13 +102,14 @@
                 this.$emit('lista')
             },
             sumit: function(){
-                this.$http.post('/producto', $("#dataUpdate").serialize(),{emulateJSON:true})
-                    .then(response => {
-                        console.log(response);
-                       if(response.ok){
-                           this.$emit('lista')
-                       }
-                    });
+                var path = this.producto == null ? '/producto' : '/producto/' + this.producto.idProducto;
+                let formData = new FormData(document.getElementById('dataUpdate'));
+                this.$http.post(path, formData).then(response => {
+                    console.log(response);
+                    if(response.ok){
+                       this.$emit('lista');
+                    }
+                });
             }
         },
         mounted: function(){

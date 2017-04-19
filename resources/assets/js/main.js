@@ -14,21 +14,22 @@ define([
 function($, DataTable, Vue, Vuex, Checkbox, Chart, FileInput, DatePicker, VueRouter, VueResource, store) {
 	Vue.use(VueResource);
 	$(document).ready(function() {
-		$('#table_id').DataTable({
-			"scrollX": true
-		});
-
-        $(":checkbox").checkboxpicker();
-        $("#fecha-agregar").datepicker();
-
-        $("#imagen").fileinput({
-            showUpload: false,
-            maxFileCount: 1,
-            showCaption: false
-        });
+		// $('#table_id').DataTable({
+		// 	"scrollX": true
+		// });
+		//
+        // $(":checkbox").checkboxpicker();
+        // $("#fecha-agregar").datepicker();
+		//
+        // $("#imagen").fileinput({
+        //     showUpload: false,
+        //     maxFileCount: 1,
+        //     showCaption: false
+        // });
 
 		var token = $('meta[name="token"]').attr('content');
 		Vue.http.headers.common['X-CSRF-TOKEN'] = token;
+		Vue.http.options.emulateJSON = true;
 		store.commit('setToken', token);
 
 		Vue.component('passport-clients',					require('./components/passport/Clients.vue'));
@@ -37,6 +38,8 @@ function($, DataTable, Vue, Vuex, Checkbox, Chart, FileInput, DatePicker, VueRou
 
 		Vue.component('barra-lateral', 	require('./components/template/barra-lateral.vue'));
 		Vue.component('barra-superior', require('./components/template/barra-superior.vue'));
+
+		Vue.component('pantalla-inicio', require('./components/admin/pantalla-inicio.vue'));
 
 		Vue.component('pantalla-usuario', 	require('./components/admin/usuario/pantalla-usuario.vue'));
 		Vue.component('lista-usuario', 		require('./components/admin/usuario/lista-usuario.vue'));

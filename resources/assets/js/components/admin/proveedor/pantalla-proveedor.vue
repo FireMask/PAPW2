@@ -1,28 +1,30 @@
 <template>
-    <div class="row" id="pantallaProveedor">
-        <div class="col-md-12">
-            <div class="box box-default box-add-edit">
-                <div id="pantallaProveedor">
-                    <transition name="fade" mode="out-in">
-                        <!-- <perfil-proveedor
-                            v-on:cerrar="lista()"
-                            v-on:editar="editar()"
-                            v-on:usuarioBorrado="borrar()"
-                            v-if="accion == 'perfil'"
-                            :cliente="seleccionado"
-                        >
-                        </perfil-proveedor> -->
-                        <lista-proveedor
-                            v-on:seleccionado="seleccionado"
-                            v-on:crear="crear()"
-                            v-if="accion == 'buscar'"
-                        ></lista-proveedor>
-                        <!-- <editor-proveedor
-                            :cliente="seleccionado"
-                            v-if="accion == 'editar' || accion == 'crear'"
-                            v-on:cerrar="lista()"
-                        ></editor-proveedor> -->
-                    </transition>
+    <div class="content" id="pantallaProveedor">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-default box-add-edit">
+                    <div id="pantallaProveedor">
+                        <transition name="fade" mode="out-in">
+                            <!-- <perfil-proveedor
+                                v-on:cerrar="lista()"
+                                v-on:editar="editar()"
+                                v-on:usuarioBorrado="borrar()"
+                                v-if="accion == 'perfil'"
+                                :cliente="seleccionado"
+                            >
+                            </perfil-proveedor> -->
+                            <lista-proveedor
+                                v-on:seleccionado="seleccionado"
+                                v-on:crear="crear()"
+                                v-if="accion == 'buscar'"
+                            ></lista-proveedor>
+                            <!-- <editor-proveedor
+                                :cliente="seleccionado"
+                                v-if="accion == 'editar' || accion == 'crear'"
+                                v-on:cerrar="lista()"
+                            ></editor-proveedor> -->
+                        </transition>
+                    </div>
                 </div>
             </div>
         </div>
