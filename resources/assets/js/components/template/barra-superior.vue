@@ -19,24 +19,17 @@
                         <ul class="dropdown-menu">
                             <li class="user-header">
                                 <img src="/js/dist/AdminLTE/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
                                 <p>
-                                    Alexander Pierce - Web Developer
-                                    <small>Member since Nov. 2012</small>
+                                    Andres Lira
+                                    <small>Empleado</small>
                                 </p>
                             </li>
                             <li class="user-footer">
-                                <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                </div>
                                 <div class="pull-right">
-                                    <a href="/logout" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="/logout" class="btn btn-danger btn-flat">Sign out</a>
                                 </div>
                             </li>
                         </ul>
-                    </li>
-                    <li>
-                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                     </li>
                 </ul>
             </div>

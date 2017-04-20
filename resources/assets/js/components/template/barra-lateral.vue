@@ -11,37 +11,55 @@
                         <a href=""><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
                 </div>
-
-                <ul class="sidebar-menu">
-                    <li class="header"></li>
-                    <li class="treeview">
-                        <a href="#" v-on:click="cambiarPagina('cotizaciones')"><i class="fa fa-file-text"></i> <span>Cotizaciones</span></a>
-                    </li>
-                    <li class="treeview">
-                        <a href="#" v-on:click="cambiarPagina('clientes')"><i class="fa fa-users"></i> <span>Clientes</span></a>
-                    </li>
-                    <li class="treeview">
-                        <a href="#" v-on:click="cambiarPagina('productos')"><i class="fa fa-shopping-basket"></i> <span>Productos</span></a>
-                    </li>
-                    <li class="treeview">
-                        <a href="#" v-on:click="cambiarPagina('usuarios')"><i class="fa fa-user"></i> <span>Usuarios</span></a>
-                    </li>
-                    <li class="treeview">
-                        <a href="#" v-on:click="cambiarPagina('monedas')"><i class="fa fa-money"></i> <span>Monedas</span></a>
-                    </li>
-                    <li class="treeview">
-                        <a href="#" v-on:click="cambiarPagina('roles')"><i class="fa fa-tags"></i> <span>Roles</span></a>
-                    </li>
-                    <li class="treeview">
-                        <a href="#" v-on:click="cambiarPagina('proveedores')"><i class="fa fa-truck"></i> <span>Proveedores</span></a>
-                    </li>
-                    <li class="treeview">
-                        <a href="#" v-on:click="cambiarPagina('fabricantes')"><i class="fa fa-wrench"></i> <span>Fabricantes</span></a>
-                    </li>
-                    <li class="treeview">
-                        <a href="#" v-on:click="cambiarPagina('empresa')"><i class="fa fa-gear"></i> <span>Empresa</span></a>
-                    </li>
-                </ul>
+                <div v-if="usuario.idRol == 1"> <!-- Menu del administrador -->
+                    <ul class="sidebar-menu">
+                        <li class="header"></li>
+                        <li class="treeview">
+                            <a href="#" v-on:click="inicio()"><i class="fa fa-home"></i> <span>Inicio</span></a>
+                        </li>
+                        <li class="treeview">
+                            <a href="#" v-on:click="cambiarPagina('cotizaciones')"><i class="fa fa-file-text"></i> <span>Cotizaciones</span></a>
+                        </li>
+                        <li class="treeview">
+                            <a href="#" v-on:click="cambiarPagina('clientes')"><i class="fa fa-users"></i> <span>Clientes</span></a>
+                        </li>
+                        <li class="treeview">
+                            <a href="#" v-on:click="cambiarPagina('productos')"><i class="fa fa-shopping-basket"></i> <span>Productos</span></a>
+                        </li>
+                        <li class="treeview">
+                            <a href="#" v-on:click="cambiarPagina('usuarios')"><i class="fa fa-user"></i> <span>Usuarios</span></a>
+                        </li>
+                        <li class="treeview">
+                            <a href="#" v-on:click="cambiarPagina('monedas')"><i class="fa fa-money"></i> <span>Monedas</span></a>
+                        </li>
+                        <li class="treeview">
+                            <a href="#" v-on:click="cambiarPagina('roles')"><i class="fa fa-tags"></i> <span>Roles</span></a>
+                        </li>
+                        <li class="treeview">
+                            <a href="#" v-on:click="cambiarPagina('proveedores')"><i class="fa fa-truck"></i> <span>Proveedores</span></a>
+                        </li>
+                        <li class="treeview">
+                            <a href="#" v-on:click="cambiarPagina('fabricantes')"><i class="fa fa-wrench"></i> <span>Fabricantes</span></a>
+                        </li>
+                        <li class="treeview">
+                            <a href="#" v-on:click="cambiarPagina('empresa')"><i class="fa fa-gear"></i> <span>Empresa</span></a>
+                        </li>
+                    </ul>
+                </div>
+                <div v-else>    <!-- Menu del usuario -->
+                    <ul class="sidebar-menu">
+                        <li class="header"></li>
+                        <li class="treeview">
+                            <a href="#" v-on:click="inicio()"><i class="fa fa-home"></i> <span>Inicio</span></a>
+                        </li>
+                        <li class="treeview">
+                            <a href="#" v-on:click="cambiarPagina('cotizaciones')"><i class="fa fa-file-text"></i> <span>Cotizaciones</span></a>
+                        </li>
+                        <li class="treeview">
+                            <a href="#" v-on:click="cambiarPagina('clientes')"><i class="fa fa-users"></i> <span>Clientes</span></a>
+                        </li>
+                    </ul>
+                </div>
             </section>
         </aside>
 
@@ -86,6 +104,9 @@
         methods: {
             cambiarPagina: function(pagina) {
                 store.commit('setPage', pagina);
+            },
+            inicio: function() {
+                store.commit('setPage', 'inicio');
             }
         },
         mounted: function() {
