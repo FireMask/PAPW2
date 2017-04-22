@@ -72,8 +72,8 @@
 
             <hr>
 
-            <div class="footer" v-if="estado(cotizacion) == 'Pendiente'">
-                <a class="btn btn-primary btn-lg">Aprovar</a>
+            <div class="footer">
+                <a v-if="estado(cotizacion) == 'Pendiente'" v-on:click="aprovar()" class="btn btn-primary btn-lg">Aprovar</a>
                 <a v-on:click="cerrar()" class="btn btn-danger btn-lg">Cancelar</a>
             </div>
         </div>
@@ -81,6 +81,7 @@
 </template>
 
 <script>
+    var store = require('./../../../store/store.js');
     export default {
         data: function() {
             return {
@@ -141,6 +142,19 @@
             },
             cerrar: function() {
                 this.$emit('cerrar');
+            },
+            aprovar: function() {
+                var path = '/cotizacion/' + this.cotizacion.idCotizacion;
+                let formData = new FormData();
+                formData.append('_method', 'PUT');
+                formData.append('_token', store.state.globales.token);
+                formData.append('idCotizacion', this.cotizacion.idCotizacion);
+                formData.append('aprobada', 1);
+                this.$http.post(path, formData).then(response => {
+                    if(response.ok){
+                       this.$emit('cerrar');
+                    }
+                });
             }
         },
         mounted: function() {

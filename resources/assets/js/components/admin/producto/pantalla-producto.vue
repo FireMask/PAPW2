@@ -1,28 +1,30 @@
 <template>
-    <div class="row" id="pantallaProducto">
-        <div class="col-md-12">
-            <div class="box box-default box-add-edit">
-                <div id="pantallaProducto">
-                    <transition name="fade" mode="out-in">
-                        <!-- <perfil-producto
-                            v-on:cerrar="lista()"
-                            v-on:editar="editar()"
-                            v-on:usuarioBorrado="borrar()"
-                            v-if="accion == 'perfil'"
-                            :cliente="seleccionado"
-                        >
-                        </perfil-producto> -->
-                        <lista-producto
-                            v-on:seleccionado="selected"
-                            v-on:crear="crear()"
-                            v-if="accion == 'buscar'"
-                        ></lista-producto>
-                        <editor-producto
-                            :producto="seleccionado"
-                            v-if="accion == 'editar' || accion == 'crear'"
-                            v-on:lista="lista()"
-                        ></editor-producto>
-                    </transition>
+    <div class="content" id="pantallaProducto">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-default box-add-edit">
+                    <div id="pantallaProducto">
+                        <transition name="fade" mode="out-in">
+                            <!-- <perfil-producto
+                                v-on:cerrar="lista()"
+                                v-on:editar="editar()"
+                                v-on:usuarioBorrado="borrar()"
+                                v-if="accion == 'perfil'"
+                                :cliente="seleccionado"
+                            >
+                            </perfil-producto> -->
+                            <lista-producto
+                                v-on:seleccionado="selected"
+                                v-on:crear="crear()"
+                                v-if="accion == 'buscar'"
+                            ></lista-producto>
+                            <editor-producto
+                                :producto="seleccionado"
+                                v-if="accion == 'editar' || accion == 'crear'"
+                                v-on:lista="lista()"
+                            ></editor-producto>
+                        </transition>
+                    </div>
                 </div>
             </div>
         </div>

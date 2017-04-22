@@ -33,8 +33,8 @@ class CotizacionController extends Controller
 
     public function update(Request $request){
         try{
-            $cotizacion = Cotizacion::find($request->idProducto);
-            $cotizacion->finalizada = $request->finalizada ? 1 : 0;
+            $cotizacion = Cotizacion::find($request->idCotizacion);
+            $cotizacion->aprobada = $request->aprobada;
             $cotizacion->save();
             return redirect('/cotizacion');
         }catch(Exception $ex){}
