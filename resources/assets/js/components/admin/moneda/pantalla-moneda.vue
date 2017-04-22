@@ -5,24 +5,16 @@
                 <div class="box box-default box-add-edit">
                     <div id="pantallaMoneda">
                         <transition name="fade" mode="out-in">
-                            <!-- <perfil-moneda
-                                v-on:cerrar="lista()"
-                                v-on:editar="editar()"
-                                v-on:usuarioBorrado="borrar()"
-                                v-if="accion == 'perfil'"
-                                :cliente="seleccionado"
-                            >
-                            </perfil-moneda> -->
                             <lista-moneda
-                                v-on:seleccionado="seleccionado"
+                                v-on:seleccionado="seleccionar"
                                 v-on:crear="crear()"
                                 v-if="accion == 'buscar'"
                             ></lista-moneda>
-                            <!-- <editor-moneda
-                                :cliente="seleccionado"
+                            <editor-moneda
+                                :moneda="seleccionado"
                                 v-if="accion == 'editar' || accion == 'crear'"
                                 v-on:cerrar="lista()"
-                            ></editor-moneda> -->
+                            ></editor-moneda>
                         </transition>
                     </div>
                 </div>
@@ -40,9 +32,9 @@
             };
         },
         methods: {
-            seleccionado: function(seleccion) {
+            seleccionar: function(seleccion) {
                 this.seleccionado = seleccion;
-                this.accion = 'perfil';
+                this.accion = 'editar';
             },
             crear: function() {
                 this.accion = 'crear';

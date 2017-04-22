@@ -14,7 +14,7 @@
                             >
                             </perfil-cliente> -->
                             <lista-cliente
-                                v-on:seleccionado="seleccionado"
+                                v-on:seleccionado="seleccionar"
                                 v-on:crear="crear()"
                                 v-if="accion == 'buscar'"
                             ></lista-cliente>
@@ -40,7 +40,7 @@
             };
         },
         methods: {
-            seleccionado: function(seleccion) {
+            seleccionar: function(seleccion) {
                 this.seleccionado = seleccion;
                 this.accion = 'perfil';
             },

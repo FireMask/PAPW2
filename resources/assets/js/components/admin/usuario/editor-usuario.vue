@@ -1,6 +1,8 @@
 <template>
-    <form class="login-form" enctype="multipart/form-data" action="/usuario" method="POST">
+    <form id="dataUpdate" class="login-form" enctype="multipart/form-data" action="/usuario" method="POST">
         <input type="hidden" name="_token" :value="csrf_token">
+        <input v-if="usuario != null" name="_method" type="hidden" value="PUT">
+        <input v-if="usuario != null" type="hidden" name="idUsuario" :value="usuario.idUsuario">
         <div class="row">
             <div class="col-md-4">
                 <label for="imagen">Imagen de Perfil:</label>
@@ -51,12 +53,12 @@
             </div>
             <div class="row">
                 <div class="col-md-6" align="left">
-                    <a class="btn btn-default" href="#" v-on:click="cerrar()">
+                    <a class="btn btn-default" href="#" v-on:click="regresar()">
                         <i class="fa fa-arrow-left"></i> Regresar
                     </a>
                 </div>
                 <div class="col-md-6" align="right">
-                    <button type="submit" class="btn btn-primary">{{ textoBoton }}</button>
+                    <button type="button" v-on:click="sumit()" class="btn btn-primary">{{ textoBoton }}</button>
                 </div>
             </div>
         </div>
@@ -107,6 +109,15 @@
             },
             cerrar: function() {
                 this.$emit('cerrar');
+            },
+            sumit: function(){
+                var path = this.usuario == null ? '/usuario' : '/usuario/' + this.usuario.idUsuario;
+                let formData = new FormData(document.getElementById('dataUpdate'));
+                this.$http.post(path, formData).then(response => {
+                    if(response.ok){
+                       this.$emit('cerrar');
+                    }
+                });
             }
         },
         updated: function() {

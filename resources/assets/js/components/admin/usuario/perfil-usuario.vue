@@ -73,14 +73,27 @@
 
                             <strong><i class="fa fa-bar-chart margin-r-5"></i> Estadisticas</strong>
                             <canvas id="estadisticas">grafica de ventas y cotizaciones</canvas>
+                            <div class="row" style="text-align: center; margin-top: 30px;">
+                                <div class="col-md-6">
+                                    <strong><i class="fa fa-line-chart margin-r-5"></i> Progreso mensual</strong>
+                                    <div id="progresoMensual"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <strong><i class="fa fa-dashboard margin-r-5"></i> Porcentaje de exito en ventas</strong>
+                                    <div id="PorcentajeExito"></div>
+                                </div>
+                                <div class="col-md-12" id="total" style="margin-top: 30px; margin-bottom: 30px; font-size: 30px;">
+                                    <strong><i class="fa fa-cubes margin-r-5"></i> Ventas totales</strong>
+                                    <p class="badge bg-green" style="font-size: 30px; padding: 10px 20px;">{{ ventasTotales }}</p>
+                                </div>
+                            </div>
 
                             <hr>
 
                             <strong><i class="fa fa-users margin-r-5"></i> Clientes</strong>
-                            <ul>
-                                <li v-for="cliente in usuario.clientes">{{ cliente.nombre }}</li>
-                            </ul>
-                            <hr>
+                            <div class="content">
+                                <view-cliente v-for="cliente in clientes" :cliente="cliente"></view-cliente>
+                            </div>
 
                             <hr>
                         </div>
@@ -93,6 +106,7 @@
 
 <script>
 var Chart = require('chartjs');
+var ProgressBar = require('progressbar');
 var store = require('./../../../store/store.js');
 export default {
     data () {
@@ -100,7 +114,10 @@ export default {
             showModal: false,
             clientes: [],
             ventas: [],
-            cotizaciones: []
+            cotizaciones: [],
+            progresoMensual: 0,
+            promedioMensual: 0,
+            ventasTotales: 0
         };
     },
     props: ['usuario'],
@@ -136,34 +153,131 @@ export default {
                 this.cerrar();
             });
         },
+        getColor: function(value) {
+            //value from 0 to 1
+            var hue=((value)*120).toString(10);
+            return ["hsl(",hue,",70%,50%)"].join("");
+        },
         loadData: function () {
-            this.$http.get('/api/usuarios/' + this.usuario.idUsuario + '/clientes').then(response => {
+            this.$http.get('/api/usuarios/' + this.usuario.idUsuario).then(response => {
                 this.clientes = response.body.clientes;
-            });
-            this.$http.get('/api/usuarios/' + this.usuario.idUsuario + '/ventas').then(response => {
                 this.ventas = response.body.ventas;
-                this.crearChart();
-            });
-            this.$http.get('/api/usuarios/' + this.usuario.idUsuario + '/cotizaciones').then(response => {
                 this.cotizaciones = response.body.cotizaciones;
+                this.progresoMensual = response.body.progresoMensual;
+                this.promedioMensual = response.body.promedioMensual;
+                this.ventasTotales = response.body.ventasTotales;
                 this.crearChart();
             });
         },
-        crearChart: function() {
+        crearChartProgreso: function() {
+            var self = this;
+            var progressBar = new ProgressBar.Circle('#progresoMensual', {
+                strokeWidth: 8,
+                color: '#3a3a3a',
+                svgStyle: {
+                    display: 'block',
+                    height: '150px',
+                    position: 'absolute',
+                    left: '50%',
+                    top: '50%',
+                    padding: '0px',
+                    margin: '0px',
+                    transform: 'translate(-50%, -50%)'
+                },
+                trailColor: 'rgb(170, 170, 170)',
+                trailWidth: 5,
+                text: {
+                    value: 'Text',
+                    className: 'progressbar__label',
+                    style: {
+                        color: 'rgb(170, 170, 170)',
+                        position: 'absolute',
+                        left: '50%',
+                        top: '50%',
+                        padding: 0,
+                        margin: 0,
+                        'font-size': '20px',
+                        fontFamily: '"Raleway", Helvetica, sans-serif',
+                        transform: {
+                            prefix: true,
+                            value: 'translate(-50%, -50%)'
+                        }
+                    },
+                    autoStyleContainer: true,
+                    alignToBottom: true
+                },
+                duration: 1200,
+                easing: 'easeOut',
+                step: function(state, circle, attachment) {
+                    var value = Math.round(circle.value() * 100);
+                    circle.setText(value + '%');
+                    circle.path.setAttribute('stroke', self.getColor(circle.value()));
+                }
+            });
+            progressBar.animate(this.progresoMensual / 100);
+        },
+        crearChartPorcentajeExito: function() {
+            var self = this;
+            var progressBar = new ProgressBar.Circle('#PorcentajeExito', {
+                strokeWidth: 8,
+                color: '#3a3a3a',
+                svgStyle: {
+                    display: 'block',
+                    height: '150px',
+                    position: 'absolute',
+                    left: '50%',
+                    top: '50%',
+                    padding: '0px',
+                    margin: '0px',
+                    transform: 'translate(-50%, -50%)'
+                },
+                trailColor: 'rgb(170, 170, 170)',
+                trailWidth: 5,
+                text: {
+                    value: 'Text',
+                    className: 'progressbar__label',
+                    style: {
+                        color: 'rgb(170, 170, 170)',
+                        position: 'absolute',
+                        left: '50%',
+                        top: '50%',
+                        padding: 0,
+                        margin: 0,
+                        'font-size': '20px',
+                        fontFamily: '"Raleway", Helvetica, sans-serif',
+                        transform: {
+                            prefix: true,
+                            value: 'translate(-50%, -50%)'
+                        }
+                    },
+                    autoStyleContainer: true,
+                    alignToBottom: true
+                },
+                duration: 1200,
+                easing: 'easeOut',
+                step: function(state, circle, attachment) {
+                    var value = Math.round(circle.value() * 100);
+                    circle.setText(value + '%');
+                    circle.path.setAttribute('stroke', self.getColor(circle.value()));
+                }
+            });
+            progressBar.animate(this.promedioMensual / 100);
+        },
+        crearChartVentas: function() {
             var ctx = document.getElementById("estadisticas");
             var meses = new Array(6);
             var ventas = [];
             var cotizaciones = [];
             var nombresMeses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
-            var ultimoMes = this.usuario.ventas[0] != null ? this.usuario.ventas[0].mes  - 1 : (function() { var d = new Date(); return d.getMonth() }());
+            var ultimoMes = this.ventas[0] != null ? this.ventas[0].mes  - 1 : (function() { var d = new Date(); return d.getMonth() }());
             for (var i = 0; i < 6; i++) {
                 if (ultimoMes < 0) {
                     meses[i] = nombresMeses[12 + ultimoMes];
                 } else {
                     meses[i] = nombresMeses[ultimoMes];
                 }
-                ventas[i] = this.usuario.ventas[i] != null ? this.usuario.ventas[i].ventas : 0;
-                cotizaciones[i] = this.usuario.cotizaciones[i] != null ? this.usuario.cotizaciones[i].cotizaciones : 0;
+                ventas[i] = this.ventas[i] != null ? this.ventas[i].ventas : 0;
+                cotizaciones[i] = this.cotizaciones[i] != null ? this.cotizaciones[i].cotizaciones : 0;
                 ultimoMes--;
             }
             meses.reverse();
@@ -201,10 +315,15 @@ export default {
                     }
                 }
             });
+        },
+        crearChart: function() {
+            this.crearChartVentas();
+            this.crearChartProgreso();
+            this.crearChartPorcentajeExito();
         }
     },
     mounted: function() {
-        this.crearChart();
+        this.loadData();
     }
 };
 </script>

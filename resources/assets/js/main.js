@@ -38,7 +38,6 @@ function($, DataTable, Vue, Vuex, Checkbox, Chart, FileInput, DatePicker, VueRou
 
 		Vue.component('barra-lateral', 	require('./components/template/barra-lateral.vue'));
 		Vue.component('barra-superior', require('./components/template/barra-superior.vue'));
-
 		Vue.component('pantalla-inicio', require('./components/admin/pantalla-inicio.vue'));
 
 		Vue.component('pantalla-usuario', 	require('./components/admin/usuario/pantalla-usuario.vue'));
@@ -51,43 +50,39 @@ function($, DataTable, Vue, Vuex, Checkbox, Chart, FileInput, DatePicker, VueRou
 		Vue.component('lista-cliente', 		require('./components/admin/cliente/lista-cliente.vue'));
 		Vue.component('view-cliente', 		require('./components/admin/cliente/view-cliente.vue'));
 		// Vue.component('perfil-cliente', 	require('./components/admin/cliente/perfil-cliente.vue'));
-		// Vue.component('editor-cliente', 	require('./components/admin/cliente/editor-cliente.vue'));
 
 		Vue.component('pantalla-cotizacion', 	require('./components/admin/cotizacion/pantalla-cotizacion.vue'));
 		Vue.component('lista-cotizacion', 		require('./components/admin/cotizacion/lista-cotizacion.vue'));
 		Vue.component('view-cotizacion', 		require('./components/admin/cotizacion/view-cotizacion.vue'));
-		// Vue.component('perfil-cotizacion', 	require('./components/admin/cotizacion/perfil-cotizacion.vue'));
-		// Vue.component('editor-cotizacion', 	require('./components/admin/cotizacion/editor-cotizacion.vue'));
+		Vue.component('detalle-cotizacion', 	require('./components/admin/cotizacion/detalle-cotizacion.vue'));
 
 		Vue.component('pantalla-fabricante', 	require('./components/admin/fabricante/pantalla-fabricante.vue'));
 		Vue.component('lista-fabricante', 		require('./components/admin/fabricante/lista-fabricante.vue'));
 		Vue.component('view-fabricante', 		require('./components/admin/fabricante/view-fabricante.vue'));
-		// Vue.component('perfil-fabricante', 	require('./components/admin/fabricante/perfil-fabricante.vue'));
-		// Vue.component('editor-fabricante', 	require('./components/admin/fabricante/editor-fabricante.vue'));
+		Vue.component('perfil-fabricante', 		require('./components/admin/fabricante/perfil-fabricante.vue'));
+		Vue.component('editor-fabricante', 		require('./components/admin/fabricante/editor-fabricante.vue'));
 
 		Vue.component('pantalla-moneda', 	require('./components/admin/moneda/pantalla-moneda.vue'));
 		Vue.component('lista-moneda', 		require('./components/admin/moneda/lista-moneda.vue'));
 		Vue.component('view-moneda', 		require('./components/admin/moneda/view-moneda.vue'));
-		// Vue.component('perfil-moneda', 	require('./components/admin/moneda/perfil-moneda.vue'));
-		// Vue.component('editor-moneda', 	require('./components/admin/moneda/editor-moneda.vue'));
+		Vue.component('editor-moneda', 		require('./components/admin/moneda/editor-moneda.vue'));
 
-		Vue.component('pantalla-proveedor', 	require('./components/admin/proveedor/pantalla-proveedor.vue'));
-		Vue.component('lista-proveedor', 		require('./components/admin/proveedor/lista-proveedor.vue'));
-		Vue.component('view-proveedor', 		require('./components/admin/proveedor/view-proveedor.vue'));
-		// Vue.component('perfil-proveedor', 	require('./components/admin/proveedor/perfil-proveedor.vue'));
-		// Vue.component('editor-proveedor', 	require('./components/admin/proveedor/editor-proveedor.vue'));
+		Vue.component('pantalla-proveedor', require('./components/admin/proveedor/pantalla-proveedor.vue'));
+		Vue.component('lista-proveedor', 	require('./components/admin/proveedor/lista-proveedor.vue'));
+		Vue.component('view-proveedor', 	require('./components/admin/proveedor/view-proveedor.vue'));
+		Vue.component('perfil-proveedor', 	require('./components/admin/proveedor/perfil-proveedor.vue'));
+		Vue.component('editor-proveedor', 	require('./components/admin/proveedor/editor-proveedor.vue'));
 
 		Vue.component('pantalla-rol', 	require('./components/admin/rol/pantalla-rol.vue'));
 		Vue.component('lista-rol', 		require('./components/admin/rol/lista-rol.vue'));
 		Vue.component('view-rol', 		require('./components/admin/rol/view-rol.vue'));
-		// Vue.component('perfil-rol', 	require('./components/admin/rol/perfil-rol.vue'));
-		// Vue.component('editor-rol', 	require('./components/admin/rol/editor-rol.vue'));
+		Vue.component('editor-rol', 	require('./components/admin/rol/editor-rol.vue'));
 
 		Vue.component('pantalla-producto', 	require('./components/admin/producto/pantalla-producto.vue'));
 		Vue.component('lista-producto', 	require('./components/admin/producto/lista-producto.vue'));
 		Vue.component('view-producto', 		require('./components/admin/producto/view-producto.vue'));
 		// Vue.component('perfil-producto', require('./components/admin/producto/perfil-producto.vue'));
-		Vue.component('editor-producto', require('./components/admin/producto/editor-producto.vue'));
+		Vue.component('editor-producto', 	require('./components/admin/producto/editor-producto.vue'));
 
 		Vue.component('pantalla-empresa', 	require('./components/admin/empresa/pantalla-empresa.vue'));
 		Vue.component('view-empresa', 		require('./components/admin/empresa/view-empresa.vue'));

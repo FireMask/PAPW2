@@ -1,7 +1,7 @@
 <template>
-    <form class="login-form" :action="direccion" method="POST">
+    <form id="dataUpdate" class="login-form" enctype="multipart/form-data" method="POST">
         <div class="row">
-            <input name="_method" type="hidden" value="PUT">
+            <input type="hidden" name="_method" value="PUT">
             <input type="hidden" name="_token" :value="csrf_token">
             <input type="hidden" name="idEmpresa" :value="empresa.idEmpresa">
             <div class="col-md-4">
@@ -39,7 +39,7 @@
                 </div>
 				<div class="form-group">
 					<label for="correoPrincipal">Correo:</label>
-					<input required type="email" :value="empresa.correo_principal" class="form-control input-lg" id="correoPrincipal" name="correoPrincipal">
+					<input required type="email" :value="empresa.correo_principal" class="form-control input-lg" id="correoPrincipal" name="correo_principal">
 				</div>
                 <div class="form-group">
                     <label for="moneda">Moneda por Defecto:</label>
@@ -52,7 +52,7 @@
         <div class="row">
             <div class="form-group">
                 <div class="col-xs-2 col-xs-offset-10" align="center">
-                    <button type="submit" class="btn-lg btn-primary">Acutalizar</button>
+                    <button type="button" v-on:click="sumit()" class="btn-lg btn-primary">Acutalizar</button>
                 </div>
             </div>
         </div>
@@ -70,9 +70,6 @@
         computed: {
             csrf_token: function() {
                 return store.state.globales.token;
-            },
-            direccion: function() {
-                return "/empresa/" + this.empresa.idEmpresa;
             }
         },
         methods: {
@@ -82,6 +79,15 @@
                     $('select[name="idMoneda"]').val(this.empresa.idMoneda);
                 });
             },
+            sumit: function(){
+                var path = this.empresa == null ? '/empresa' : '/empresa/' + this.empresa.idEmpresa;
+                let formData = new FormData(document.getElementById('dataUpdate'));
+                this.$http.post(path, formData).then(response => {
+                    if(response.ok){
+                       this.$emit('cerrar');
+                    }
+                });
+            }
         },
         mounted: function() {
             $("#logo").fileinput({

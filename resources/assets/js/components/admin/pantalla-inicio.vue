@@ -21,139 +21,69 @@
             </div>
 
             <div class="col-md-8" id="historico">
-                <!-- <div class="row"> -->
-                    <div class="box box-default box-add-edit">
-                        <ul class="timeline timeline-inverse">
-                            <!-- timeline time label -->
-                            <li class="time-label">
-                                <span class="bg-red">
-                                    10 Feb. 2014
+                <div class="timeline-title">
+                    <p>Actividad reciente</p>
+                </div>
+                <div class="box box-default box-add-edit">
+                    <ul class="timeline timeline-inverse">
+                        <template v-for="fecha in fechas">
+                            <li :id="fecha.fecha | fecha" class="time-label">
+                                <span class="bg-blue">
+                                    {{ fecha.fecha | fecha }}
                                 </span>
                             </li>
-                            <!-- /.timeline-label -->
-                            <!-- timeline item -->
-                            <li>
-                                <i class="fa fa-envelope bg-blue"></i>
-
-                                <div class="timeline-item">
-                                    <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
-
-                                    <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
-
-                                    <div class="timeline-body">
-                                        Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                                        weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                                        jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                                        quora plaxo ideeli hulu weebly balihoo...
+                            <template v-for="actividad in fecha.eventos">
+                                <li>
+                                    <i :class="getClass(actividad.evento)"></i>
+                                    <div class="timeline-item">
+                                        <span class="time">
+                                            <i class="fa fa-clock-o"></i>
+                                            {{ actividad.fecha | hora }}
+                                        </span>
+                                        <h3 class="timeline-header">
+                                            <a href="#">{{ actividad.responsable }}</a>
+                                            {{ actividad.evento }}
+                                        </h3>
+                                        <div class="timeline-body">
+                                            {{ actividad.descripcion }}
+                                        </div>
                                     </div>
-                                    <div class="timeline-footer">
-                                        <a class="btn btn-primary btn-xs">Read more</a>
-                                        <a class="btn btn-danger btn-xs">Delete</a>
-                                    </div>
-                                </div>
-                            </li>
-                            <!-- END timeline item -->
-                            <!-- timeline item -->
-                            <li>
-                                <i class="fa fa-user bg-aqua"></i>
-
-                                <div class="timeline-item">
-                                    <span class="time"><i class="fa fa-clock-o"></i> 5 mins ago</span>
-
-                                    <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request
-                                    </h3>
-                                </div>
-                            </li>
-                            <!-- END timeline item -->
-                            <!-- timeline item -->
-                            <li>
-                                <i class="fa fa-comments bg-yellow"></i>
-
-                                <div class="timeline-item">
-                                    <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
-
-                                    <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
-
-                                    <div class="timeline-body">
-                                        Take me to your leader!
-                                        Switzerland is small and neutral!
-                                        We are more like Germany, ambitious and misunderstood!
-                                    </div>
-                                    <div class="timeline-footer">
-                                        <a class="btn btn-warning btn-flat btn-xs">View comment</a>
-                                    </div>
-                                </div>
-                            </li>
-                            <!-- END timeline item -->
-                            <!-- timeline time label -->
-                            <li class="time-label">
-                                <span class="bg-green">
-                                    3 Jan. 2014
-                                </span>
-                            </li>
-                            <!-- /.timeline-label -->
-                            <!-- timeline item -->
-                            <li>
-                                <i class="fa fa-camera bg-purple"></i>
-
-                                <div class="timeline-item">
-                                    <span class="time"><i class="fa fa-clock-o"></i> 2 days ago</span>
-
-                                    <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-
-                                    <div class="timeline-body">
-                                        <img src="http://placehold.it/150x100" alt="..." class="margin">
-                                        <img src="http://placehold.it/150x100" alt="..." class="margin">
-                                        <img src="http://placehold.it/150x100" alt="..." class="margin">
-                                        <img src="http://placehold.it/150x100" alt="..." class="margin">
-                                    </div>
-                                </div>
-                            </li>
-                            <!-- END timeline item -->
-                            <li>
-                                <i class="fa fa-clock-o bg-gray"></i>
-                            </li>
-                        </ul>
-                    </div>
-                <!-- </div> -->
+                                </li>
+                            </template>
+                        </template>
+                        <!-- END timeline item -->
+                        <li>
+                            <i class="fa fa-clock-o bg-gray"></i>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
             <div class="col-md-4" id="notificaciones">
-                <div class="box box-primary">
+                <div class="">
                     <div class="box-header with-border">
-                        <h3 class="box-title">About Me</h3>
+                        <h3 class="box-title">Vendedores destacados</h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
-
-                        <p class="text-muted">
-                            B.S. in Computer Science from the University of Tennessee at Knoxville
-                        </p>
-
-                        <hr>
-
-                        <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
-
-                        <p class="text-muted">Malibu, California</p>
-
-                        <hr>
-
-                        <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
-
-                        <p>
-                            <span class="label label-danger">UI Design</span>
-                            <span class="label label-success">Coding</span>
-                            <span class="label label-info">Javascript</span>
-                            <span class="label label-warning">PHP</span>
-                            <span class="label label-primary">Node.js</span>
-                        </p>
-
-                        <hr>
-
-                        <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+                        <div v-for="vendedor in datos.mejoresVendedores" class="vendedor row">
+                            <div class="col-xs-4" style="height: 100%;">
+                                <img class="img-circle" :src="'/storage/' + vendedor.imagen_perfil" alt="imagen de perfil">
+                            </div>
+                            <div class="col-xs-8">
+                                <div class="col-md-12">
+                                    <strong><i class="fa fa-user margin-r-5"></i> Nombre</strong>
+                                    <p class="text-muted">{{ vendedor.nombres + ' ' + vendedor.apellido_paterno + ' ' + vendedor.apellido_materno }}</p>
+                                </div>
+                                <div class="col-md-12">
+                                    <strong><i class="fa fa-pie-chart margin-r-5"></i> Promedio de ventas</strong>
+                                    <span class="label label-success">{{ vendedor.promedio }}%</span>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <hr>
+                            </div>
+                        </div>
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -168,20 +98,73 @@
     export default {
         data: function() {
             return {
-                datos: {}
+                datos: {},
+                fechas: []
             };
         },
-        computed: {
-
+        computed: { },
+        filters: {
+            fecha: function(value) {
+                if (!value) return '';
+                var fecha = value.split(' ');
+                return fecha[0];
+            },
+            hora: function(value) {
+                if (!value) return '';
+                var fecha = value.split(' ');
+                return fecha[1];
+            }
         },
         methods: {
             loadData: function() {
                 this.$http.get('/api/inicio/').then(response => {
                     this.datos = response.body;
+                    this.ordenarFechas();
                     this.crearCharts();
                 });
             },
-            getColor: function(value){
+            ordenarFechas: function() {
+                var contador = 0;
+                this.fechas[contador] = {
+                    fecha: this.datos.actividadReciente[0].fecha,
+                    eventos: []
+                };
+                for (var i = 0; i < this.datos.actividadReciente.length; i++) {
+                    if (this.fechas[contador].fecha.split(' ')[0] != this.datos.actividadReciente[i].fecha.split(' ')[0]) {
+                        contador++;
+                        this.fechas[contador] = {
+                            fecha: this.datos.actividadReciente[i].fecha,
+                            eventos: []
+                        };
+                    }
+                    this.fechas[contador].eventos.unshift(this.datos.actividadReciente[i]);
+                }
+            },
+            getClass: function(value) {
+                switch (value) {
+                    case 'nuevo cliente': {
+                        return 'fa fa-users bg-green'
+                        break;
+                    }
+                    case 'nuevo usuario': {
+                        return 'fa fa-user bg-green'
+                        break;
+                    }
+                    case 'nueva cotizacion': {
+                        return 'fa fa-file-text bg-green'
+                        break;
+                    }
+                    case 'venta finalizada': {
+                        return 'fa fa-file-text bg-red'
+                        break;
+                    }
+                    case 'cotizacion aprobada': {
+                        return 'fa fa-file-text bg-yellow'
+                        break;
+                    }
+                }
+            },
+            getColor: function(value) {
                 //value from 0 to 1
                 var hue=((value)*120).toString(10);
                 return ["hsl(",hue,",70%,50%)"].join("");
@@ -371,11 +354,6 @@
             padding: 0;
         }
     }
-    #ventas-cotizaciones {
-        /*position: absolute;
-        top: 50%;
-        transform: translateY(-50%);*/
-    }
     #estadisticasEmpresa {
         min-height: 230px;
         background: rgb(70,90,110);
@@ -391,6 +369,41 @@
     }
     #progresoMensual, #PorcentajeExito {
         height: 200px;
+    }
+    #historico .timeline-title {
+        height: 40px;
+        background: cornflowerblue;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        color: white;
+    }
+    #historico .timeline-title p {
+        font-size: 20px;
+        padding: 5px 0;
+        text-align: center;
+    }
+    #historico .box {
+        border-top: none;
+        height: 500px;
+        overflow-y: scroll;
+    }
+    #notificaciones .vendedor {
+        height: 140px;
+        margin-bottom: 20px;
+        padding: 15px 10px;
+    }
+    #notificaciones .vendedor img {
+        height: 90px;
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+    #notificaciones hr {
+        margin-top: 33px;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     }
     .fade-enter-active, .fade-leave-active {
         transition: opacity .3s ease;

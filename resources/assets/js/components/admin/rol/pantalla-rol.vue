@@ -5,24 +5,16 @@
                 <div class="box box-default box-add-edit">
                     <div id="pantallaRol">
                         <transition name="fade" mode="out-in">
-                            <!-- <perfil-rol
-                                v-on:cerrar="lista()"
-                                v-on:editar="editar()"
-                                v-on:usuarioBorrado="borrar()"
-                                v-if="accion == 'perfil'"
-                                :cliente="seleccionado"
-                            >
-                            </perfil-rol> -->
                             <lista-rol
-                                v-on:seleccionado="seleccionado"
+                                v-on:seleccionado="seleccionar"
                                 v-on:crear="crear()"
                                 v-if="accion == 'buscar'"
                             ></lista-rol>
-                            <!-- <editor-rol
-                                :cliente="seleccionado"
+                            <editor-rol
+                                :rol="seleccionado"
                                 v-if="accion == 'editar' || accion == 'crear'"
                                 v-on:cerrar="lista()"
-                            ></editor-rol> -->
+                            ></editor-rol>
                         </transition>
                     </div>
                 </div>
@@ -40,9 +32,9 @@
             };
         },
         methods: {
-            seleccionado: function(seleccion) {
+            seleccionar: function(seleccion) {
                 this.seleccionado = seleccion;
-                this.accion = 'perfil';
+                this.accion = 'editar';
             },
             crear: function() {
                 this.accion = 'crear';

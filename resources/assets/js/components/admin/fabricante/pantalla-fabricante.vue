@@ -5,24 +5,24 @@
                 <div class="box box-default box-add-edit">
                     <div id="pantallaFabricante">
                         <transition name="fade" mode="out-in">
-                            <!-- <perfil-fabricante
+                            <perfil-fabricante
                                 v-on:cerrar="lista()"
                                 v-on:editar="editar()"
                                 v-on:usuarioBorrado="borrar()"
                                 v-if="accion == 'perfil'"
-                                :cliente="seleccionado"
+                                :fabricante="seleccionado"
                             >
-                            </perfil-fabricante> -->
+                            </perfil-fabricante>
                             <lista-fabricante
-                                v-on:seleccionado="seleccionado"
+                                v-on:seleccionado="seleccionar"
                                 v-on:crear="crear()"
                                 v-if="accion == 'buscar'"
                             ></lista-fabricante>
-                            <!-- <editor-fabricante
-                                :cliente="seleccionado"
+                            <editor-fabricante
+                                :fabricante="seleccionado"
                                 v-if="accion == 'editar' || accion == 'crear'"
                                 v-on:cerrar="lista()"
-                            ></editor-fabricante> -->
+                            ></editor-fabricante>
                         </transition>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
             };
         },
         methods: {
-            seleccionado: function(seleccion) {
+            seleccionar: function(seleccion) {
                 this.seleccionado = seleccion;
                 this.accion = 'perfil';
             },

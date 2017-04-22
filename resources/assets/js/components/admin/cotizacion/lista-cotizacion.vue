@@ -12,7 +12,7 @@
         </div>
         <div class="row">
             <transition-group name="translate-fade" tag="div" mode="out-in">
-                <div :key="dato.idCliente" v-for="dato in datosMostrados" class="col-md-12" v-on:click="seleccionarDato(dato);">
+                <div :key="dato.idCliente" v-for="dato in datosMostrados" class="col-md-12" v-on:click="seleccionarDato(dato)">
                     <view-cotizacion :cotizacion="dato"></view-cotizacion>
                 </div>
             </transition-group>
@@ -60,7 +60,7 @@
                 }
 
                 var datos = this.datos.filter(function(item){
-                    return item.cliente.nombre_comercial.toLowerCase().indexOf(self.busqueda) !== -1 || item.cliente.nombre.toLowerCase().indexOf(self.busqueda) !== -1;
+                    return item.cliente.nombre_comercial.toLowerCase().indexOf(self.busqueda) !== -1;
                 });
                 this.paginaActual = 0;
                 return datos;

@@ -17,7 +17,7 @@
         </div>
         <div class="row">
             <transition-group name="translate-fade" tag="div" method="out-in">
-                <div :key="usuario.idUsuario" v-for="usuario in usuariosMostrados" class="col-md-6" v-on:click="seleccionarUsuario(usuario);">
+                <div :key="usuario.idUsuario" v-for="usuario in usuariosMostrados" class="col-md-12" v-on:click="seleccionarUsuario(usuario);">
                     <view-usuario :data="usuario"></view-usuario>
                 </div>
             </transition-group>

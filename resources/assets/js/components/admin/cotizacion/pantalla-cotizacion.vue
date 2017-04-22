@@ -5,16 +5,15 @@
                 <div class="box box-default box-add-edit">
                     <div id="pantallaCotizaciones">
                         <transition name="fade" mode="out-in">
-                            <!-- <perfil-cliente
+                            <detalle-cotizacion
                                 v-on:cerrar="lista()"
                                 v-on:editar="editar()"
-                                v-on:usuarioBorrado="borrar()"
                                 v-if="accion == 'perfil'"
-                                :cliente="seleccionado"
+                                :cotizacion="seleccionado"
                             >
-                            </perfil-cliente> -->
+                            </detalle-cotizacion>
                             <lista-cotizacion
-                                v-on:seleccionado="seleccionado"
+                                v-on:seleccionado="seleccionar"
                                 v-on:crear="crear()"
                                 v-if="accion == 'buscar'"
                             ></lista-cotizacion>
@@ -40,7 +39,7 @@
             };
         },
         methods: {
-            seleccionado: function(seleccion) {
+            seleccionar: function(seleccion) {
                 this.seleccionado = seleccion;
                 this.accion = 'perfil';
             },

@@ -1,10 +1,10 @@
 <template>
     <div class="content">
-        <div align="right">
+        <!-- <div align="right">
             <a class="btn btn-app" href="#" v-on:click="crear()">
                 <i class="fa fa-plus"></i> Agregar
             </a>
-        </div>
+        </div> -->
         <div class="row">
             <form class="form-horizontal col-md-6">
                 <div class="form-group">

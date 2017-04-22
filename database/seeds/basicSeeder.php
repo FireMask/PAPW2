@@ -20,7 +20,7 @@ class basicSeeder extends Seeder{
             'imagen_perfil' => 'd66bad441f0080b0795b89e9b46dd3981398747a.png',
             'fecha_nacimiento' => '16-09-2005',
             'remember_token' => 'fS9Cg7orXx',
-            'created_at' => date_timestamp_get()
+            'created_at' => "2017-04-10 02:56:05"
         ]);
     }
 }

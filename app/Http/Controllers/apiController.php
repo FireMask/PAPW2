@@ -59,21 +59,84 @@ class apiController extends Controller
         $porcentajeExitoAnterior = 0;
         $ventasAnteriores = 0;
         $cotizacionesAnteriores = 0;
-        if (array_key_exists ( 1 , $ventas )) {
+        // if (array_key_exists(1,$ventas)) {
             $ventasAnteriores = $ventas[1]->ventas;
-        }
-        if (array_key_exists ( 1 , $cotizaciones )) {
+        // }
+        // if (array_key_exists(1,$cotizaciones)) {
             $cotizacionesAnteriores = $cotizaciones[1]->cotizaciones;
-        }
+        // }
         $porcentajeExitoAnterior = ($ventasAnteriores / ($cotizacionesAnteriores == 0 ? 1 : $cotizacionesAnteriores)) * 100;
         $porcentajeExitoActual = ($ventas[0]->ventas / $cotizaciones[0]->cotizaciones) * 100;
         $progresoMensual = ($porcentajeExitoAnterior == 0 ? 100 : ($porcentajeExitoAnterior / 100) * ($porcentajeExitoActual - $porcentajeExitoAnterior));
+
+        $mejoresVendedores = Usuario::join('cotizacion', 'usuario.idUsuario', '=', 'cotizacion.idUsuario')
+            ->join(DB::raw('
+                (select count(sc.idCotizacion) cotizaciones, su.idUsuario
+		        from cotizacion sc join usuario su on su.idUsuario = sc.idUsuario
+		        group by su.idUsuario) as total
+            '), function($join) {
+                $join->on("total.idUsuario","=","usuario.idUsuario");
+            })
+            ->select('usuario.nombres','usuario.apellido_paterno','usuario.apellido_materno','imagen_perfil')
+            ->selectRaw('COUNT(cotizacion.idCotizacion) as ventas, total.cotizaciones, CAST(COUNT(cotizacion.idCotizacion) / total.cotizaciones * 100 AS UNSIGNED) as promedio')
+            ->where('cotizacion.finalizada', '=', '1')
+            ->groupBy(DB::raw('usuario.idUsuario'))
+            ->orderBy('promedio', 'desc')
+            ->orderBy('ventas', 'desc')
+            ->limit(3)
+            ->get();
+
+        $eventosClientes = DB::table('cliente')
+            ->join('usuario_cliente','usuario_cliente.idCliente','=','cliente.idCliente')
+            ->join('usuario','usuario_cliente.idUsuario','=','usuario.idUsuario')
+            ->selectRaw('
+                cliente.created_at as fecha,
+                "nuevo cliente" as evento,
+                concat("Agregado por ", usuario.nombres, " ", usuario.apellido_paterno) as descripcion,
+                cliente.nombre_comercial as responsable'
+            )
+            ->orderBy('cliente.created_at', 'desc')
+            ->limit(10);
+        $eventosUsuario = DB::table('usuario')
+            ->join('rol','rol.idRol','=','usuario.idRol')
+            ->selectRaw('
+                usuario.created_at as fecha,
+                "nuevo usuario" as evento,
+                concat("Se unio al equipo de ", rol.nombre) as descripcion, concat(usuario.nombres, " ", usuario.apellido_paterno, " ", usuario.apellido_materno) as responsable'
+            )
+            ->orderBy('usuario.created_at', 'desc')
+            ->limit(10);
+        $actividadReciente = DB::table('cotizacion')
+            ->join('usuario','cotizacion.idUsuario','=','usuario.idUsuario')
+            ->join('cliente','cotizacion.idCliente','=','cliente.idCliente')
+            ->selectRaw('
+                IF(cotizacion.finalizada = 0 and cotizacion.aprobada = 0, cotizacion.created_at, cotizacion.updated_at) as fecha,
+                IF(cotizacion.finalizada = 0 and cotizacion.aprobada = 0, "nueva cotizacion", IF(cotizacion.finalizada = 1, "venta finalizada", "cotizacion aprobada")) as evento,
+                IF(cotizacion.finalizada = 0 and cotizacion.aprobada = 0,
+                    concat(usuario.nombres, " ", usuario.apellido_paterno, " envio una cotizacion al cliente ", cliente.nombre_comercial),
+                    IF(cotizacion.finalizada = 1,
+                        concat("Finalizo la venta con id ", cotizacion.idCotizacion, " al cliente ", cliente.nombre_comercial),
+                        concat("Se aprovo la cotizacion con id ", cotizacion.idCotizacion, " con pago de tipo ", cotizacion.pago, " al cliente ", cliente.nombre_comercial)
+                    )
+                ) as descripcion,
+                concat(usuario.nombres, " ", usuario.apellido_paterno) as responsable'
+            )
+            ->limit(10)
+            ->unionAll($eventosUsuario)
+            ->unionAll($eventosClientes)
+            ->orderBy('fecha', 'desc')
+            ->limit(30)
+            ->get();
 
         $estadisticas = array(
             'ventas' => $ventas,
             'cotizaciones' => $cotizaciones,
             'progresoMensual' => $progresoMensual,
-            'porcentajeExito' => ($totalVentas[0]->ventas / $totalCotizaciones[0]->cotizaciones) * 100
+            'exitoAnterior' => $porcentajeExitoAnterior,
+            'exitoActual' => $porcentajeExitoActual,
+            'porcentajeExito' => ($totalVentas[0]->ventas / $totalCotizaciones[0]->cotizaciones) * 100,
+            'mejoresVendedores' => $mejoresVendedores,
+            'actividadReciente' => $actividadReciente
         );
 
         return $estadisticas;
@@ -85,25 +148,37 @@ class apiController extends Controller
     }
 
     public function getUsers(){
-        $usersPerPage = 8;
 		$usuarios = Usuario::with('rol')->get();
-        foreach($usuarios as $user){
-            $ventasTotales = $this->getCountVentasTotales($user->idUsuario);
-            $promedioMensual = $this->getPromedioVentasMensuales($user->idUsuario);
-            $ventasDelMes = $this->getVentasDelMes($user->idUsuario);
-
-            $user->estadisticas = array(
-                'ventasTotales' => $ventasTotales,
-                'promedioMensual' => $promedioMensual,
-                'ventasDelMes' => $ventasDelMes
-            );
-
-            $user->clientes = $this->getUserClients($user->idUsuario);
-            $user->ventas = $this->getVentas($user->idUsuario);
-            $user->cotizaciones = $this->getCotizacionesTabla($user->idUsuario);
-		}
         return $usuarios;
 	}
+
+    function getUserInfo($id) {
+        $ventas = $this->getVentas($id);
+        $cotizaciones = $this->getCotizacionesTabla($id);
+
+        $porcentajeExitoAnterior = 0;
+        $ventasAnteriores = 0;
+        $cotizacionesAnteriores = 0;
+        // if (array_key_exists(1,$ventas)) {
+            $ventasAnteriores = $ventas[1]->ventas;
+        // }
+        // if (array_key_exists(1,$cotizaciones)) {
+            $cotizacionesAnteriores = $cotizaciones[1]->cotizaciones;
+        // }
+        $porcentajeExitoAnterior = ($ventasAnteriores / ($cotizacionesAnteriores == 0 ? 1 : $cotizacionesAnteriores)) * 100;
+        $porcentajeExitoActual = ($ventas[0]->ventas / $cotizaciones[0]->cotizaciones) * 100;
+        $progresoMensual = ($porcentajeExitoAnterior == 0 ? 100 : ($porcentajeExitoAnterior / 100) * ($porcentajeExitoActual - $porcentajeExitoAnterior));
+
+        return array(
+            'ventasTotales' => $this->getCountVentasTotales($id),
+            'promedioMensualAnterior' => $porcentajeExitoAnterior,
+            'promedioMensual' => $porcentajeExitoActual,
+            'progresoMensual' => $progresoMensual,
+            'clientes' => $this->getUserClients($id),
+            'ventas' => $ventas,
+            'cotizaciones' => $cotizaciones
+        );
+    }
 
 	public function getUserStadistics($id){
 		$promedioMensual = $this->getPromedioVentasMensuales($id);
@@ -117,15 +192,11 @@ class apiController extends Controller
 	}
 
 	public function getUserClients($id){
-		$clientes = UsuarioCliente::with('clientName')
-            ->select('idCliente')
+		$clientes = Cliente::join('usuario_cliente','usuario_cliente.idCliente','=','cliente.idCliente')
             ->where('idUsuario', '=', $id)
-            ->get(['nombre']);
-
-        $clis = [];
-        foreach ($clientes as $cliente)
-            array_push($clis, $cliente['clientName']);
-		return $clis;
+            ->select('cliente.*')
+            ->get();
+		return $clientes;
 	}
 
 	public function getUserSells($id){
@@ -195,7 +266,7 @@ class apiController extends Controller
             ->groupBy(DB::raw('YEAR(IF(updated_at is null, updated_at, updated_at))'))
             ->groupBy(DB::raw('MONTH(IF(updated_at is null, updated_at, updated_at))'))
             ->having('updated_at', '>', DB::raw('DATE_SUB(now(), INTERVAL 6 MONTH)'))
-            ->orderBy('ano')
+            ->orderBy('ano', 'desc')
             ->orderBy('mes', 'desc')
             ->get();
     }
@@ -209,7 +280,7 @@ class apiController extends Controller
             ->groupBy(DB::raw('YEAR(created_at)'))
             ->groupBy(DB::raw('MONTH(created_at)'))
             ->having('created_at', '>', DB::raw('DATE_SUB(now(), INTERVAL 6 MONTH)'))
-            ->orderBy('ano')
+            ->orderBy('ano', 'desc')
             ->orderBy('mes', 'desc')
             ->get();
     }
@@ -236,12 +307,25 @@ class apiController extends Controller
         return Cotizacion::with(['usuario','moneda','cliente'])->get();
     }
 
+    function getDetalleCotizacion($id){
+        $empresa = Empresa::where('idEmpresa','=','1')->select('iva')->get();
+        return Producto::join('producto_cotizacion','producto.idProducto','=','producto_cotizacion.idProducto')
+            ->where('producto_cotizacion.idCotizacion','=',$id)
+            ->select('producto.codigo','producto.precio','producto.modelo')
+            ->selectRaw('(cast(producto.precio as decimal(8,2)) + (cast(producto.precio as decimal(8,2)) * '.$empresa[0]->iva.'/100)) as precioIva')
+            ->get();
+    }
+
     function getEmpresa() {
         return Empresa::get();
     }
 
     function getFabricantes() {
         return Fabricante::get();
+    }
+
+    function getProductosDeFabricante($id) {
+        return Producto::with(['proveedor','fabricante'])->where('idFabricante','=',$id)->get();
     }
 
     function getMonedas() {
@@ -254,5 +338,9 @@ class apiController extends Controller
 
     function getProveedores() {
         return Proveedor::get();
+    }
+
+    function getProductosDeProveedor($id) {
+        return Producto::with(['proveedor','fabricante'])->where('idProveedor','=',$id)->get();
     }
 }
