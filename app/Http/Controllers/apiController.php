@@ -122,6 +122,7 @@ class apiController extends Controller
                 concat(usuario.nombres, " ", usuario.apellido_paterno) as responsable'
             )
             ->limit(10)
+            ->orderBy('fecha', 'desc')
             ->unionAll($eventosUsuario)
             ->unionAll($eventosClientes)
             ->orderBy('fecha', 'desc')
