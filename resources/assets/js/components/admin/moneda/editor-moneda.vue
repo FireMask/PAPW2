@@ -7,7 +7,7 @@
                     <input v-if="moneda != null" name="_method" type="hidden" value="PUT">
                     <input v-if="moneda != null" type="hidden" name="idMoneda" :value="moneda.idMoneda">
                     <div class="form-group">
-                        <label for="nombres">Nombre:</label>
+                        <label for="nombre">Nombre:</label>
                         <input required type="text" :value="nombre" class="form-control" id="nombre" name="nombre">
                     </div>
                     <div class="form-group">

@@ -95,7 +95,7 @@
         },
         methods: {
             loadData: function () {
-                this.$http.get('/api/monedas/').then(response => {
+                this.$http.get('/moneda/').then(response => {
                     this.datos = response.body;
                     this.mostrarPagina();
                 });

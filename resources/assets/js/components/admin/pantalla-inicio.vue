@@ -117,7 +117,7 @@
         },
         methods: {
             loadData: function() {
-                this.$http.get('/api/inicio/').then(response => {
+                this.$http.get('/inicio/').then(response => {
                     this.datos = response.body;
                     this.ordenarFechas();
                     this.crearCharts();

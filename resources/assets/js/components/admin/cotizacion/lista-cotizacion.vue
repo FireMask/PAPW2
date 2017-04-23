@@ -90,7 +90,7 @@
         },
         methods: {
             loadData: function () {
-                this.$http.get('/api/cotizaciones/').then(response => {
+                this.$http.get('/cotizacion/').then(response => {
                     this.datos = response.body;
                     this.mostrarPagina();
                 });

@@ -91,7 +91,7 @@
                 store.commit('setPage', pagina);
             },
             loadData: function(){
-                this.$http.get('/api/fabricantes_productos/').then(response => {
+                this.$http.get('/fabricantes_productos/').then(response => {
                     this.fabricantes = response.body.fabricantes;
                     this.proveedores = response.body.proveedores;
                     $('select[name="idFabricante"]').val(this.fabricante);
@@ -105,7 +105,6 @@
                 var path = this.producto == null ? '/producto' : '/producto/' + this.producto.idProducto;
                 let formData = new FormData(document.getElementById('dataUpdate'));
                 this.$http.post(path, formData).then(response => {
-                    console.log(response);
                     if(response.ok){
                        this.$emit('lista');
                     }

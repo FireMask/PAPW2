@@ -95,7 +95,7 @@
         },
         methods: {
             loadData: function () {
-                this.$http.get('/api/fabricantes/').then(response => {
+                this.$http.get('/fabricante/').then(response => {
                     this.datos = response.body;
                     this.mostrarPagina();
                 });

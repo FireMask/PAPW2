@@ -74,7 +74,7 @@
         },
         methods: {
             obtenerMonedas: function() {
-                this.$http.get('/api/monedas/').then(response => {
+                this.$http.get('/moneda/').then(response => {
                     this.monedas = response.body;
                     $('select[name="idMoneda"]').val(this.empresa.idMoneda);
                 });

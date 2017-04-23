@@ -8,7 +8,7 @@
         <div class="row">
             <form class="form-horizontal col-md-6">
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="correo">Buscar:</label>
+                    <label class="control-label col-sm-2">Buscar:</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" v-on:keyup="mostrarPagina();" v-model="busqueda">
                     </div>
@@ -95,7 +95,7 @@
         },
         methods: {
             loadData: function () {
-                this.$http.get('/api/proveedores/').then(response => {
+                this.$http.get('/proveedor/').then(response => {
                     this.datos = response.body;
                     this.mostrarPagina();
                 });

@@ -10,12 +10,11 @@ class ClienteController extends Controller
 {
 
     public function index(){
-        $clientes = Cliente::all();
-        return view('admin.cliente.view-cliente', compact('clientes'));
+        return Cliente::all();
     }
 
     public function create(){
-        return view('admin.cliente.add-cliente');
+
     }
 
     public function store(Request $request){
@@ -23,12 +22,10 @@ class ClienteController extends Controller
         $cliente->fill($request->all());
         $cliente->prospecto = ($request->prospecto)?1:0;
         $cliente->save();
-        return redirect('/cliente');
     }
 
     public function edit($id){
-        $cliente = Cliente::find($id);
-        return view('admin.cliente.edit-cliente', compact('cliente'));
+        return Cliente::find($id);
     }
 
     public function update(Request $request){
@@ -37,15 +34,12 @@ class ClienteController extends Controller
             $cliente->fill($request->all());
             $cliente->prospecto = ($request->prospecto)?1:0;
             $cliente->save();
-            return redirect('/cliente');
         }catch(Exception $ex){
-            return redirect('cliente/'.$request->idCliente.'/edit');
+
         }
     }
 
     public function destroy($id){
-        $cliente = Cliente::find($id);
-        $cliente->delete();
-        return redirect('/cliente');
+        Cliente::find($id)->delete();
     }
 }

@@ -95,7 +95,7 @@
         },
         methods: {
             loadData: function () {
-                this.$http.get('/api/usuarios/').then(response => {
+                this.$http.get('/usuario/').then(response => {
                     this.usuarios = response.body;
                     this.mostrarPagina();
                 });

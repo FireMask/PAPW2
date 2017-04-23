@@ -67,7 +67,7 @@
         },
         methods: {
             loadData: function() {
-                this.$http.get('/api/fabricante/' + this.fabricante.idFabricante + '/productos').then(response => {
+                this.$http.get('/fabricante/' + this.fabricante.idFabricante + '/productos').then(response => {
                     this.productos = response.body;
                 });
             },

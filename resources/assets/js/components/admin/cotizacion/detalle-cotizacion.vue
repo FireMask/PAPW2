@@ -74,7 +74,7 @@
 
             <div class="footer">
                 <a v-if="estado(cotizacion) == 'Pendiente'" v-on:click="aprovar()" class="btn btn-primary btn-lg">Aprovar</a>
-                <a v-on:click="cerrar()" class="btn btn-danger btn-lg">Cancelar</a>
+                <a v-on:click="cerrar()" class="btn btn-primary btn-lg"><i class="fa fa-arrow-left"></i> Regresar</a>
             </div>
         </div>
     </div>
@@ -107,7 +107,7 @@
         },
         methods: {
             loadData: function() {
-                this.$http.get('/api/cotizaciones/' + this.cotizacion.idCotizacion).then(response => {
+                this.$http.get('/cotizacion/' + this.cotizacion.idCotizacion).then(response => {
                     this.productos = response.body;
                 });
             },

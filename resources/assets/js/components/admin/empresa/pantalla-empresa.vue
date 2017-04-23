@@ -28,7 +28,7 @@
         },
         methods: {
             loadData: function () {
-                this.$http.get('/api/empresa/').then(response => {
+                this.$http.get('/empresa/').then(response => {
                     this.empresa = response.body[0];
                 });
             },

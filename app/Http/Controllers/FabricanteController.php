@@ -5,29 +5,28 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use App\Models\Fabricante;
+use App\Models\Producto;
+use App\Models\Proveedor;
 
 class FabricanteController extends Controller
 {
 
     public function index(){
-      $fabricantes = Fabricante::all();
-      return view('admin.fabricante.view-fabricante', compact('fabricantes'));
+      return Fabricante::all();
     }
 
     public function create(){
-        return view('admin.fabricante.add-fabricante');
+
     }
 
     public function store(Request $request){
         $fabricante = new Fabricante;
         $fabricante->nombre = $request->nombre;
         $fabricante->save();
-        return redirect('/fabricante');
     }
 
     public function edit($id){
-        $fabricante = Fabricante::find($id);
-        return view('admin.fabricante.edit-fabricante', compact('fabricante'));
+        return Fabricante::find($id);
     }
 
     public function update(Request $request){
@@ -35,15 +34,22 @@ class FabricanteController extends Controller
             $fabricante = Fabricante::find($request->idFabricante);
             $fabricante->fill($request->all());
             $fabricante->save();
-            return redirect('/fabricante');
         }catch(Exception $ex){
-            return redirect('fabricante/'.$request->idFabricante.'/edit');
+
         }
     }
 
     public function destroy($id){
-        $fabricante = Fabricante::find($id);
-        $fabricante->delete();
-        return redirect('/fabricante');
+        return Fabricante::find($id)->delete();
+    }
+
+    public function getProductosDeFabricante($id) {
+        return Producto::with(['proveedor','fabricante'])->where('idFabricante','=',$id)->get();
+    }
+
+    public function getFabProd(){
+        $fabricantes = Fabricante::all();
+        $proveedores = Proveedor::all();
+        return compact(['fabricantes', 'proveedores']);
     }
 }

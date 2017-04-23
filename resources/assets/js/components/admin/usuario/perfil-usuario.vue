@@ -159,7 +159,7 @@ export default {
             return ["hsl(",hue,",70%,50%)"].join("");
         },
         loadData: function () {
-            this.$http.get('/api/usuarios/' + this.usuario.idUsuario).then(response => {
+            this.$http.get('/usuario/' + this.usuario.idUsuario).then(response => {
                 this.clientes = response.body.clientes;
                 this.ventas = response.body.ventas;
                 this.cotizaciones = response.body.cotizaciones;

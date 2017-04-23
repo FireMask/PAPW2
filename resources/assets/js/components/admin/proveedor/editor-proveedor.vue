@@ -7,7 +7,7 @@
                     <input v-if="proveedor != null" name="_method" type="hidden" value="PUT">
                     <input v-if="proveedor != null" type="hidden" name="idProveedor" :value="proveedor.idProveedor">
                     <div class="form-group">
-                        <label for="nombres">Nombre:</label>
+                        <label for="nombre">Nombre:</label>
                         <input required type="text" :value="nombre" class="form-control" id="nombre" name="nombre">
                     </div>
                     <div class="row">

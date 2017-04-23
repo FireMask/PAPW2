@@ -67,7 +67,7 @@
         },
         methods: {
             loadData: function() {
-                this.$http.get('/api/proveedor/' + this.proveedor.idProveedor + '/productos').then(response => {
+                this.$http.get('/proveedor/' + this.proveedor.idProveedor + '/productos').then(response => {
                     this.productos = response.body;
                 });
             },

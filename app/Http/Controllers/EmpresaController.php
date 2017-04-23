@@ -11,15 +11,13 @@ class EmpresaController extends Controller
 {
 
     public function index(){
-      $emp = Empresa::with('moneda')->get()->first();
-      return view('admin.empresa.view-empresa', compact('emp'));
+      Empresa::with('moneda')->get()->first();
     }
 
     public function edit($id){
         $empresa = Empresa::with('moneda')->get()->first();
         $monedas = TipoDeMoneda::all();
-        return view('admin.empresa.edit-empresa', compact('empresa', 'monedas'));
-        //return $empresa;
+        return compact(['empresa', 'monedas']);
     }
 
     public function update(Request $request){
@@ -27,9 +25,8 @@ class EmpresaController extends Controller
             $empresa = Empresa::find($request->idEmpresa);
             $empresa->fill($request->all());
             $empresa->save();
-            return redirect('/empresa');
         }catch(Exception $ex){
-            return redirect('empresa/'.$id.'/edit');
+
         }
     }
 }

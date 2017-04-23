@@ -95,7 +95,7 @@
         },
         methods: {
             loadData: function () {
-                this.$http.get('/api/roles/').then(response => {
+                this.$http.get('/rol/').then(response => {
                     this.datos = response.body;
                     this.mostrarPagina();
                 });

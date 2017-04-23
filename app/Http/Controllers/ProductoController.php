@@ -12,29 +12,26 @@ class ProductoController extends Controller
 {
 
     public function index(){
-        $productos = Producto::with('fabricante', 'proveedor')->get();
-        return view('admin.producto.view-producto', compact('productos'));
-//        return $productos;
+        return Producto::with('fabricante', 'proveedor')->get();
     }
 
     public function create(){
         $proveedores = Proveedor::all();
         $fabricantes = Fabricante::all();
-        return view('admin.producto.add-producto', compact('proveedores', 'fabricantes'));
+        return compact(['proveedores', 'fabricantes']);
     }
 
     public function store(Request $request){
         $producto = new Producto;
         $producto->fill($request->all());
         $producto->save();
-        return redirect('/producto');
     }
 
     public function edit($id){
         $producto = Producto::find($id);
         $proveedores = Proveedor::all();
         $fabricantes = Fabricante::all();
-        return view('admin.producto.edit-producto', compact('producto', 'proveedores', 'fabricantes'));
+        return compact(['producto', 'proveedores', 'fabricantes']);
     }
 
     public function update(Request $request){
@@ -42,15 +39,16 @@ class ProductoController extends Controller
             $producto = Producto::find($request->idProducto);
             $producto->fill($request->all());
             $producto->save();
-            return redirect('/producto');
         }catch(Exception $ex){
-            return redirect('producto/'.$request->idProducto.'/edit');
+
         }
     }
 
     public function destroy($id){
-        $producto = Producto::find($id);
-        $producto->delete();
-        return redirect('/producto');
+        Producto::find($id)->delete();
+    }
+
+    function getProductosDeProveedor($id) {
+        return Producto::with(['proveedor','fabricante'])->where('idProveedor','=',$id)->get();
     }
 }

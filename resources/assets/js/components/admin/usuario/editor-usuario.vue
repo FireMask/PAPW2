@@ -102,7 +102,7 @@
         },
         methods: {
             obtenerRoles: function() {
-                this.$http.get('/api/roles/').then(response => {
+                this.$http.get('/rol/').then(response => {
                     this.roles = response.body;
                     $('select[name="idRol"]').val(this.puesto);
                 });

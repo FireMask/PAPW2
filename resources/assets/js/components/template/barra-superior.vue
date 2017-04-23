@@ -13,15 +13,16 @@
                 <ul class="nav navbar-nav">
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="/js/dist/AdminLTE/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                            <span class="hidden-xs">Alexander Pierce</span>
+                            <img :src="profileImagePath" class="user-image" alt="User Image">
+                            <span class="hidden-xs">{{ usuario.nombres + ' ' + usuario.apellido_paterno }}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="user-header">
-                                <img src="/js/dist/AdminLTE/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                <img :src="profileImagePath" class="img-circle" alt="User Image">
                                 <p>
-                                    Andres Lira
-                                    <small>Empleado</small>
+                                    {{ usuario.nombres + ' ' + usuario.apellido_paterno }}
+                                    <small v-if="usuario.idRol == 1">Administrador</small>
+                                    <small v-else>Empleado</small>
                                 </p>
                             </li>
                             <li class="user-footer">
@@ -44,6 +45,14 @@
             return {
                 
             };
+        },
+        props:[
+            'usuario'
+        ],
+        computed:{
+            profileImagePath: function() {
+                return '/storage/' + this.usuario.imagen_perfil;
+            }
         },
         methods: {
             inicio: function() {
