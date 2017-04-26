@@ -10,9 +10,9 @@
 | database. Just tell the factory how a default model should look.
 |
 */
-
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\User::class, function (Faker\Generator $faker) {
+    $faker = Faker\Factory::create('es_ES');
     static $password;
     return [
         'name' => $faker->name,
@@ -23,6 +23,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Models\Usuario::class, function (Faker\Generator $faker) {
+    $faker = Faker\Factory::create('es_ES');
     static $password;
     return [
         'nombres' => $faker->name,
@@ -38,6 +39,7 @@ $factory->define(App\Models\Usuario::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Models\Cliente::class, function (Faker\Generator $faker) {
+    $faker = Faker\Factory::create('es_ES');
     return [
         'nombre' => $faker->name,
         'nombre_comercial' => $faker->company,
@@ -54,6 +56,7 @@ $factory->define(App\Models\Cliente::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Models\Cotizacion::class, function (Faker\Generator $faker) {
+    $faker = Faker\Factory::create('es_ES');
     return [
         'idUsuario' => $faker->numberBetween(1, 150),
         'idCliente' => $faker->numberBetween(1, 500),
@@ -69,6 +72,7 @@ $factory->define(App\Models\Cotizacion::class, function (Faker\Generator $faker)
 });
 
 $factory->define(App\Models\TipoDeMoneda::class, function (Faker\Generator $faker) {
+    $faker = Faker\Factory::create('es_ES');
     return [
         'nombre' => $faker->name,
         'simbolo' => $faker->currencyCode,
@@ -79,18 +83,21 @@ $factory->define(App\Models\TipoDeMoneda::class, function (Faker\Generator $fake
 });
 
 $factory->define(App\Models\Fabricante::class, function (Faker\Generator $faker) {
+    $faker = Faker\Factory::create('es_ES');
     return [
         'nombre' => $faker->company
     ];
 });
 
 $factory->define(App\Models\Proveedor::class, function (Faker\Generator $faker) {
+    $faker = Faker\Factory::create('es_ES');
     return [
         'nombre' => $faker->company
     ];
 });
 
 $factory->define(App\Models\Producto::class, function (Faker\Generator $faker) {
+    $faker = Faker\Factory::create('es_ES');
     return [
         'codigo' => $faker->ean13,
         'modelo' => $faker->word . "-" . $faker->randomDigit,
@@ -102,6 +109,7 @@ $factory->define(App\Models\Producto::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Models\ProductoCotizacion::class, function (Faker\Generator $faker) {
+    $faker = Faker\Factory::create('es_ES');
     return [
         'idCotizacion' => $faker->numberBetween(1, 5000),
         'idProducto' => $faker->numberBetween(1, 1000)
@@ -109,6 +117,7 @@ $factory->define(App\Models\ProductoCotizacion::class, function (Faker\Generator
 });
 
 $factory->define(App\Models\UsuarioCliente::class, function (Faker\Generator $faker) {
+    $faker = Faker\Factory::create('es_ES');
     return [
         'idUsuario' => $faker->numberBetween(1, 150),
         'idCliente' => $faker->numberBetween(1, 500)

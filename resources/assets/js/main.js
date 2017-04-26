@@ -40,6 +40,7 @@ function($, DataTable, Vue, Vuex, Checkbox, Chart, FileInput, DatePicker, VueRou
 		Vue.component('barra-superior', require('./components/template/barra-superior.vue'));
 		Vue.component('pantalla-inicio', require('./components/admin/pantalla-inicio.vue'));
 
+		//Componentes de Administrador
 		Vue.component('pantalla-usuario', 	require('./components/admin/usuario/pantalla-usuario.vue'));
 		Vue.component('lista-usuario', 		require('./components/admin/usuario/lista-usuario.vue'));
 		Vue.component('view-usuario', 		require('./components/admin/usuario/view-usuario.vue'));
@@ -86,6 +87,17 @@ function($, DataTable, Vue, Vuex, Checkbox, Chart, FileInput, DatePicker, VueRou
 
 		Vue.component('pantalla-empresa', 	require('./components/admin/empresa/pantalla-empresa.vue'));
 		Vue.component('view-empresa', 		require('./components/admin/empresa/view-empresa.vue'));
+
+		//Componentes de usuario
+		Vue.component('pantalla-cliente-user', 	require('./components/user/cliente/pantalla-cliente.vue'));
+		Vue.component('lista-cliente-user', 	require('./components/user/cliente/lista-cliente.vue'));
+		Vue.component('view-cliente-user',		require('./components/user/cliente/view-cliente.vue'));
+		// Vue.component('perfil-cliente', 	require('./components/admin/cliente/perfil-cliente.vue'));
+
+		Vue.component('pantalla-cotizacion-user', 	require('./components/user/cotizacion/pantalla-cotizacion.vue'));
+		Vue.component('lista-cotizacion-user', 		require('./components/user/cotizacion/lista-cotizacion.vue'));
+		Vue.component('view-cotizacion-user', 		require('./components/user/cotizacion/view-cotizacion.vue'));
+		Vue.component('detalle-cotizacion-user', 	require('./components/user/cotizacion/detalle-cotizacion.vue'));
 
 		Vue.component('modal', require('./components/modal.vue'));
 

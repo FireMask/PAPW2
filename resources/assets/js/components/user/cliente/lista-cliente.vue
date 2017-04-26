@@ -1,19 +1,24 @@
 <template>
     <div class="content">
+        <!-- <div align="right">
+            <a class="btn btn-app" href="#" v-on:click="crear()">
+                <i class="fa fa-plus"></i> Agregar
+            </a>
+        </div> -->
         <div class="row">
             <form class="form-horizontal col-md-6">
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="srch">Buscar:</label>
+                    <label class="control-label col-sm-2" for="correo">Buscar:</label>
                     <div class="col-sm-10">
-                        <input id="srch" type="text" class="form-control" v-on:keyup="mostrarPagina();" v-model="busqueda">
+                        <input type="text" class="form-control" v-on:keyup="mostrarPagina();" v-model="busqueda">
                     </div>
                 </div>
             </form>
         </div>
         <div class="row">
             <transition-group name="translate-fade" tag="div" mode="out-in">
-                <div :key="dato.idCliente" v-for="dato in datosMostrados" class="col-md-12" v-on:click="seleccionarDato(dato)">
-                    <view-cotizacion :cotizacion="dato"></view-cotizacion>
+                <div :key="dato.idCliente" v-for="dato in datosMostrados" class="col-md-12" v-on:click="seleccionarDato(dato);">
+                    <view-cliente :cliente="dato"></view-cliente>
                 </div>
             </transition-group>
         </div>
@@ -60,7 +65,7 @@
                 }
 
                 var datos = this.datos.filter(function(item){
-                    return item.cliente.nombre_comercial.toLowerCase().indexOf(self.busqueda) !== -1;
+                    return item.giro.toLowerCase().indexOf(self.busqueda) !== -1 || item.nombre.toLowerCase().indexOf(self.busqueda) !== -1 || item.nombre_comercial.toLowerCase().indexOf(self.busqueda) !== -1;
                 });
                 this.paginaActual = 0;
                 return datos;
@@ -90,7 +95,7 @@
         },
         methods: {
             loadData: function () {
-                this.$http.get('/cotizacion/').then(response => {
+                this.$http.get('/cliente/').then(response => {
                     this.datos = response.body;
                     this.mostrarPagina();
                 });

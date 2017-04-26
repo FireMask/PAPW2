@@ -1,22 +1,23 @@
 <template>
-    <div class="content" id="pantallaCotizaciones">
+    <div class="content" id="pantallaCliente">
         <div class="row">
             <div class="col-md-12">
                 <div class="box box-default box-add-edit">
-                    <div id="pantallaCotizaciones">
+                    <div id="pantallaClientes">
                         <transition name="fade" mode="out-in">
-                            <detalle-cotizacion-user
+                            <!-- <perfil-cliente
                                 v-on:cerrar="lista()"
                                 v-on:editar="editar()"
+                                v-on:usuarioBorrado="borrar()"
                                 v-if="accion == 'perfil'"
-                                :cotizacion="seleccionado"
+                                :cliente="seleccionado"
                             >
-                            </detalle-cotizacion-user>
-                            <lista-cotizacion-user
+                            </perfil-cliente> -->
+                            <lista-cliente-user
                                 v-on:seleccionado="seleccionar"
                                 v-on:crear="crear()"
                                 v-if="accion == 'buscar'"
-                            ></lista-cotizacion-user>
+                            ></lista-cliente-user>
                             <!-- <editor-cliente
                                 :cliente="seleccionado"
                                 v-if="accion == 'editar' || accion == 'crear'"
@@ -59,7 +60,7 @@
 
 <style>
     @media screen and (max-width: 700px) {
-        #pantallaCotizaciones div.box-add-edit{
+        #pantallaCliente div.box-add-edit{
             padding: 0;
         }
     }
