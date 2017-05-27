@@ -16,7 +16,7 @@ class CotizacionController extends Controller
 {
 
     public function index(){
-        return Cotizacion::with('moneda', 'cliente', 'usuario')->get();
+        return Cotizacion::with('moneda', 'cliente', 'usuario')->orderBy('created_at')->get();
     }
 
     public function create(){
@@ -85,11 +85,11 @@ class CotizacionController extends Controller
     }
 
     public function getCotizacionesFromUser($id){
-        return Cotizacion::where('idUsuario', '=', $id)->get();
+        return Cotizacion::where('idUsuario', '=', $id)->orderBy('created_at')->get();
     }
 
     public function getCotizacionesFromUserDetailed($id){
-        return Cotizacion::with('moneda', 'cliente', 'usuario')->where('idUsuario', '=', $id)->get();
+        return Cotizacion::with('moneda', 'cliente', 'usuario')->where('idUsuario', '=', $id)->orderBy('created_at')->get();
     }
 
     public function estadisticasEmpresa() {
