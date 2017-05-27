@@ -6,11 +6,13 @@
                 <input type="hidden" name="idUsuario" :value="idUser">
 				<input type="hidden" id="idCotizacion" name="idCotizacion" :value="idCotizacion">
 				<div class="row">
-					<div class="form-group">
-						<label for="codigo">Cliente:</label>
-						<select required class="form-control input-md" id="cliente" name="idCliente">
-							<option v-for="cliente in clientes" :value="cliente.idCliente">{{ cliente.nombre_comercial }}</option>
-						</select>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="codigo">Cliente:</label>
+							<select required class="form-control input-md" id="cliente" name="idCliente">
+								<option v-for="cliente in clientes" :value="cliente.idCliente">{{ cliente.nombre_comercial }}</option>
+							</select>
+						</div>
 					</div>
 				</div>
 				<div class="row">
@@ -60,12 +62,30 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-10">
+					<div class="col-md-12">
 						<hr>
 						<label for="">Productos</label>
-						<div class="col-md-12">
-							asd
+						<div class="row">
+							<div class="col-xs-3"><b>Código</b></div>
+							<div class="col-xs-4"><b>Modelo</b></div>
+							<div class="col-xs-3"><b>$Precio</b></div>
+							<div class="col-xs-2"><b>Opciones</b></div>
 						</div>
+						<div id="list" v-for="prod in listaProd" class="">
+							<div class="col-xs-3">{{ prod.producto.codigo }}</div>
+							<div class="col-xs-4">{{ prod.producto.modelo }}</div>
+							<div class="col-xs-3">{{ prod.producto.precio }}</div>
+							<div class="col-xs-2">
+								<div class="btn btn-danger" v-on:click="eliminarProducto(prod.producto.idProducto)">Borrar</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<hr>
+					<div class="col-md-6 total" align="right">
+						<label for="">Total</label>
+						<label for=""><i id="totalito"></i></label>
 					</div>
 				</div>
 				<div class="row">
@@ -86,13 +106,15 @@
 <script>
 var store = require('./../../../store/store.js');
 var idCotizacion = null;
+var total = 0;
 var prodCount = 0;
 export default {
 	data() {
 		return {
 			clientes:[],
 			monedas:[],
-			productos:[]
+			productos:[],
+			listaProd:[]
 		};
 	},
 	computed:{
@@ -107,15 +129,38 @@ export default {
 		}
 	},
 	methods:{
+		eliminarProducto: function(idP){
+			var path = '/cotizacion/elminarProducto';
+			let formData = new FormData();
+			formData.append("idCotizacion", idCotizacion);
+			formData.append("idProducto", idP);
+			this.$http.post(path, formData).then(response => {
+				if(response.ok){
+					console.log(response.body);
+					this.updateList();
+				}
+			});
+		},
 		agregarProducto: function(){
 			var idP = $("#producto").val();
 			if(prodCount == 0){
-				prodCount++;
 				this.crearCotizacion();
-				$("#idCotizacion").val(idCotizacion);
+				prodCount++;
 			}else{
-
+				this.agregarProductoACotizacion($("#producto").val());
 			}
+		},
+		updateList: function(){
+			var path = '/cotizacion/'+idCotizacion+'/productos';
+			let formData = new FormData();
+			formData.append("idCotizacion", idCotizacion);
+			this.$http.get(path, formData).then(response => {
+				if(response.ok){
+					this.listaProd = response.body.prods;
+					total = response.body.total;
+					$("#totalito").text("$"+total);
+				}
+			});
 		},
 		loadData: function(){
 			this.$http.get('/cliente/'+store.state.globales.idUser+'/info_cotizacion').then(response => {
@@ -130,17 +175,25 @@ export default {
 		regresar: function(){
 			this.$emit('cerrar');
 		},
-		agregarProductoACotizacion(){
-			
+		agregarProductoACotizacion(idProducto){
+			var path = '/cotizacion/agregar_producto_cotizacion';
+			let formData = new FormData();
+			formData.append("idCotizacion", idCotizacion);
+			formData.append("idProducto", idProducto);
+			this.$http.post(path, formData).then(response => {
+				if(response.ok){
+					this.updateList();
+				}
+			});
 		},
 		crearCotizacion: function(){
 			var path = '/cotizacion';
 			let formData = new FormData(document.getElementById('dataUpdate'));
 			this.$http.post(path, formData).then(response => {
 				if(response.ok){
-					console.log(response.body);
 					idCotizacion = response.body;
-					$("#idCotizacion").val(idCotizacion);
+					this.agregarProductoACotizacion($("#producto").val());
+					this.updateList();
 				}
 			});
 		},
@@ -164,5 +217,8 @@ export default {
 </script>
 
 <style lang="css">
-
+	.total{
+		color: green;
+		font-size: 32pt;
+	}
 </style>

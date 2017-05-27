@@ -18,6 +18,10 @@ class ProductoCotizacion extends Model
         'idProducto'
     ];
 
+    function producto(){
+        return $this->hasOne('App\Models\Producto', 'idProducto', 'idProducto');
+    }
+
     protected $dates = [
         'created_at',
         'updated_at',

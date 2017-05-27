@@ -40,6 +40,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('cotizacion', 'CotizacionController');
     Route::get('/cotizacion/{id}', 'CotizacionController@getDetalleCotizacion');
+    Route::post('/cotizacion/agregar_producto_cotizacion', 'CotizacionController@agregarProductoACotizacion');
+    Route::get('/cotizacion/{id}/productos', 'CotizacionController@productosCotizacion');
+    Route::post('/cotizacion/elminarProducto', 'CotizacionController@eliminarProductoDeCotizacion');
 
     Route::get('logout', 'LoginController@logout');
 });

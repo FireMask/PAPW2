@@ -73,7 +73,6 @@
             <hr>
 
             <div class="footer">
-                <a v-if="estado(cotizacion) == 'Pendiente'" v-on:click="aprovar()" class="btn btn-primary btn-lg">Aprovar</a>
                 <a v-on:click="cerrar()" class="btn btn-primary btn-lg"><i class="fa fa-arrow-left"></i> Regresar</a>
             </div>
         </div>

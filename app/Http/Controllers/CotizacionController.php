@@ -7,6 +7,7 @@ use App\Models\TipoDeMoneda;
 use App\Models\Usuario;
 use App\Models\Empresa;
 use App\Models\Producto;
+use App\Models\ProductoCotizacion;
 use Illuminate\Http\Request;
 use App\Models\Cotizacion;
 use Illuminate\Support\Facades\DB;
@@ -39,8 +40,23 @@ class CotizacionController extends Controller
         return $cotizacion->idCotizacion;
     }
 
-    public function edit($id){
+    public function agregarProductoACotizacion(Request $request){
+        $prod_cot = new ProductoCotizacion();
+        $prod_cot->fill($request->all());
+        $prod_cot->save();
+    }
 
+    public function eliminarProductoDeCotizacion(Request $request){
+        ProductoCotizacion::where('idCotizacion', '=', $request->idCotizacion)->where('idProducto', '=', $request->idProducto)->limit(1)->delete();
+    }
+
+    public function productosCotizacion($idC){
+        $prods = ProductoCotizacion::with('producto')->where('idCotizacion', '=', $idC)->get();
+        $total = 0;
+        foreach($prods as $p ){
+            $total += $p->producto->precio;
+        }
+        return compact(['prods', 'total']);
     }
 
     public function update(Request $request){

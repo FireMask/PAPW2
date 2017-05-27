@@ -24,10 +24,6 @@ class UsuarioCliente extends Model
         return $this->hasOne('App\Models\Cliente', 'idCliente', 'idCliente');
     }
 
-    function clienteFromUser($id){
-        return $this->hasOne('App\Models\Cliente', 'idCliente', 'idCliente')->where('idUsuario', '=', $id);
-    }
-
     function clientName(){
         return $this->hasOne('App\Models\Cliente', 'idCliente', 'idCliente')->select('idCliente', 'nombre');
     }
