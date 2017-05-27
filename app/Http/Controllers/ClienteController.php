@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use App\Models\Cliente;
 use App\Models\UsuarioCliente;
+use App\Models\TipoDeMoneda;
 
 class ClienteController extends Controller
 {
@@ -19,11 +20,14 @@ class ClienteController extends Controller
     }
 
     public function store(Request $request){
-        return "asd";
-        /*$cliente = new Cliente();
+        $cliente = new Cliente();
         $cliente->fill($request->all());
-        $cliente->prospecto = ($request->prospecto)?1:0;
-        $cliente->save();*/
+        $cliente->save();
+
+        $relacion = new UsuarioCliente();
+        $relacion->idUsuario = $request->idUsuario;
+        $relacion->idCliente = $cliente->idCliente;
+        $relacion->save();
     }
 
     public function edit($id){
@@ -39,6 +43,15 @@ class ClienteController extends Controller
         }catch(Exception $ex){
 
         }
+    }
+
+    public function clientes_monedas($id){
+        $monedas = TipoDeMoneda::all();
+        $clientes = Cliente::join('usuario_cliente','usuario_cliente.idCliente','=','cliente.idCliente')
+            ->where('idUsuario', '=', $id)
+            ->select('cliente.*')
+            ->get();
+        return compact(['monedas', 'clientes']);
     }
 
     public function destroy($id){

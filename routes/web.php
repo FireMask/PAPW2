@@ -34,7 +34,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('empresa', 'EmpresaController');
     Route::resource('producto', 'ProductoController');
+
     Route::resource('cliente', 'ClienteController');
+    Route::get('/cliente/{id}/info_cotizacion', 'ClienteController@clientes_monedas');
 
     Route::resource('cotizacion', 'CotizacionController');
     Route::get('/cotizacion/{id}', 'CotizacionController@getDetalleCotizacion');

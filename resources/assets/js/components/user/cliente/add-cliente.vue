@@ -5,6 +5,7 @@
 				<input type="hidden" name="_token" :value="csrf_token">
                 <input v-if="cliente != null" name="_method" type="hidden" value="PUT">
                 <input v-if="cliente != null" type="hidden" name="idCliente" :value="cliente.idCliente">
+				<input type="hidden" name="idUsuario" :value="idUser">
 				<div class="form-group">
                     <label for="codigo">Nombre:</label>
                     <input required type="text" class="form-control" id="nombre" name="nombre" :value="nombre_cliente">
@@ -67,13 +68,16 @@
 <script>
 var store = require('./../../../store/store.js');
 export default {
-	props:['cliente'],
+	props:[
+		'cliente',
+		'idUser'
+	],
 	computed:{
 		csrf_token: function() {
 			return store.state.globales.token;
 		},
 		textoBoton: function() {
-			return this.cliente == null ? 'Actualizar' : 'Agregar';
+			return this.cliente != null ? 'Actualizar' : 'Agregar';
 		},
 		nombre_cliente: function(){
 			return this.cliente == null ? '' : this.cliente.nombre;

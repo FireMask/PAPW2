@@ -31,6 +31,7 @@
                             ></lista-cliente-user>
                             <add-cliente-user
                                 :cliente="seleccionado"
+                                :idUser="usuarioid"
                                 v-if="accion == 'editar' || accion == 'crear'"
                                 v-on:cerrar="opciones()"
                             ></add-cliente-user>

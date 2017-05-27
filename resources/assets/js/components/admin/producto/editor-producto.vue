@@ -58,7 +58,7 @@
             };
         },
         props:[
-            'producto'
+            'usuario'
         ],
         computed:{
             csrf_token: function() {
@@ -91,7 +91,7 @@
                 store.commit('setPage', pagina);
             },
             loadData: function(){
-                this.$http.get('/fabricantes_productos/').then(response => {
+                this.$http.get('/cliente/'+usuario.idUsuario+'/info_cotizacion').then(response => {
                     this.fabricantes = response.body.fabricantes;
                     this.proveedores = response.body.proveedores;
                     $('select[name="idFabricante"]').val(this.fabricante);

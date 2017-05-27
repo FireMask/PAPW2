@@ -31,6 +31,7 @@
                             ></lista-cotizacion-user>
                             <add-cotizacion-user
                                 v-if="accion == 'crear'"
+                                v-on:cerrar="opciones()"
                             ></add-cotizacion-user>
                         </transition>
                     </div>
@@ -58,6 +59,9 @@
             seleccionar: function(seleccion) {
                 this.seleccionado = seleccion;
                 this.accion = 'perfil';
+            },
+            opciones: function(){
+                this.accion = 'opciones';
             },
             crear: function() {
                 this.accion = 'crear';
