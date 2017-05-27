@@ -55,6 +55,7 @@
 				datoseleccionado: null
             };
         },
+        props: ['idUser'],
         computed: {
             datosFiltrados: function () {
                 var self = this;
@@ -95,7 +96,7 @@
         },
         methods: {
             loadData: function () {
-                this.$http.get('/cliente/').then(response => {
+                this.$http.get('/usuario/'+this.idUser+'/clientes_from_user').then(response => {
                     this.datos = response.body;
                     this.mostrarPagina();
                 });

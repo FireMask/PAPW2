@@ -5,24 +5,35 @@
                 <div class="box box-default box-add-edit">
                     <div id="pantallaClientes">
                         <transition name="fade" mode="out-in">
-                            <!-- <perfil-cliente
+                            <div class="" v-if="accion == 'opciones'">
+                                <div class="btn btn-default" v-on:click="crear()">
+                                    Agregar
+                                </div>
+                                <div class="btn btn-default" v-on:click="lista()">
+                                    Lista
+                                </div>
+                                <div class="btn btn-default" v-on:click="editar()">
+                                    Editar
+                                </div>
+                            </div>
+                            <detalle-cliente-user
                                 v-on:cerrar="lista()"
                                 v-on:editar="editar()"
                                 v-on:usuarioBorrado="borrar()"
                                 v-if="accion == 'perfil'"
                                 :cliente="seleccionado"
-                            >
-                            </perfil-cliente> -->
+                            ></detalle-cliente-user>
                             <lista-cliente-user
                                 v-on:seleccionado="seleccionar"
                                 v-on:crear="crear()"
                                 v-if="accion == 'buscar'"
+                                :idUser="usuarioid"
                             ></lista-cliente-user>
-                            <!-- <editor-cliente
+                            <add-cliente-user
                                 :cliente="seleccionado"
                                 v-if="accion == 'editar' || accion == 'crear'"
-                                v-on:cerrar="lista()"
-                            ></editor-cliente> -->
+                                v-on:cerrar="opciones()"
+                            ></add-cliente-user>
                         </transition>
                     </div>
                 </div>
@@ -36,9 +47,15 @@
         data: function() {
             return {
                 seleccionado: null,
-                accion: 'buscar'
+                accion: 'opciones'
             };
         },
+        computed:{
+            idUsuario: function(){
+                return this.idUsuario;
+            }
+        },
+        props: ['usuarioid'],
         methods: {
             seleccionar: function(seleccion) {
                 this.seleccionado = seleccion;
@@ -46,6 +63,9 @@
             },
             crear: function() {
                 this.accion = 'crear';
+            },
+            opciones: function() {
+                this.accion = 'opciones';
             },
             editar: function() {
                 this.accion = 'editar';

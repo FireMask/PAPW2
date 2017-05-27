@@ -53,10 +53,10 @@
                             <a href="#" v-on:click="inicio()"><i class="fa fa-home"></i> <span>Inicio</span></a>
                         </li>
                         <li class="treeview">
-                            <a href="#" v-on:click="cambiarPagina('cotizaciones')"><i class="fa fa-file-text"></i> <span>Cotizaciones</span></a>
+                            <a href="#" v-on:click="cambiarPagina('clientes')"><i class="fa fa-users"></i> <span>Clientes</span></a>
                         </li>
                         <li class="treeview">
-                            <a href="#" v-on:click="cambiarPagina('clientes')"><i class="fa fa-users"></i> <span>Clientes</span></a>
+                            <a href="#" v-on:click="cambiarPagina('cotizaciones')"><i class="fa fa-file-text"></i> <span>Cotizaciones</span></a>
                         </li>
                     </ul>
                 </div>

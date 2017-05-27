@@ -38,7 +38,7 @@
         },
         computed: {
             estado: function() {
-                return this.cotizacion.finalizada == 1 ? 'finalizada' : (this.cotizacion.aprobada == 1 ? 'aprovada' : 'pendiente');
+                return this.cotizacion.finalizada == 1 ? 'finalizada' : (this.cotizacion.aprobada == 1 ? 'Aprobada' : 'Pendiente');
             },
             montoTotal: function() {
                 var total = this.cotizacion.total;

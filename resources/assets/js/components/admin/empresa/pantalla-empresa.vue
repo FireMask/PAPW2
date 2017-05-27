@@ -28,8 +28,9 @@
         },
         methods: {
             loadData: function () {
-                this.$http.get('/empresa/').then(response => {
+                this.$http.get('/empresa').then(response => {
                     this.empresa = response.body[0];
+                    console.log(response.body[0]);
                 });
             },
             seleccionado: function(seleccion) {

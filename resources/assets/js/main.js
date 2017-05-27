@@ -92,12 +92,15 @@ function($, DataTable, Vue, Vuex, Checkbox, Chart, FileInput, DatePicker, VueRou
 		Vue.component('pantalla-cliente-user', 	require('./components/user/cliente/pantalla-cliente.vue'));
 		Vue.component('lista-cliente-user', 	require('./components/user/cliente/lista-cliente.vue'));
 		Vue.component('view-cliente-user',		require('./components/user/cliente/view-cliente.vue'));
+		Vue.component('add-cliente-user',		require('./components/user/cliente/add-cliente.vue'));
+		Vue.component('detalle-cliente-user',	require('./components/user/cliente/detalle-cliente.vue'));
 		// Vue.component('perfil-cliente', 	require('./components/admin/cliente/perfil-cliente.vue'));
 
 		Vue.component('pantalla-cotizacion-user', 	require('./components/user/cotizacion/pantalla-cotizacion.vue'));
 		Vue.component('lista-cotizacion-user', 		require('./components/user/cotizacion/lista-cotizacion.vue'));
 		Vue.component('view-cotizacion-user', 		require('./components/user/cotizacion/view-cotizacion.vue'));
 		Vue.component('detalle-cotizacion-user', 	require('./components/user/cotizacion/detalle-cotizacion.vue'));
+		Vue.component('add-cotizacion-user', 		require('./components/user/cotizacion/add-cotizacion.vue'));
 
 		Vue.component('modal', require('./components/modal.vue'));
 

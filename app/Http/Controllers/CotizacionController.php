@@ -62,6 +62,10 @@ class CotizacionController extends Controller
         return Cotizacion::where('idUsuario', '=', $id)->get();
     }
 
+    public function getCotizacionesFromUserDetailed($id){
+        return Cotizacion::with('moneda', 'cliente', 'usuario')->where('idUsuario', '=', $id)->get();
+    }
+
     public function estadisticasEmpresa() {
         $ventas = Cotizacion::where('finalizada', '=', '1')
             ->select('updated_at')

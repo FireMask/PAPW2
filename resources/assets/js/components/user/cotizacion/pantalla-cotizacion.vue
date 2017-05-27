@@ -5,23 +5,33 @@
                 <div class="box box-default box-add-edit">
                     <div id="pantallaCotizaciones">
                         <transition name="fade" mode="out-in">
+                            <div class="" v-if="accion == 'opciones'">
+                                <div class="btn btn-default" v-on:click="crear()">
+                                    Agregar
+                                </div>
+                                <div class="btn btn-default" v-on:click="lista()">
+                                    Lista
+                                </div>
+                                <div class="btn btn-default" v-on:click="editar()">
+                                    Editar
+                                </div>
+                            </div>
                             <detalle-cotizacion-user
                                 v-on:cerrar="lista()"
                                 v-on:editar="editar()"
                                 v-if="accion == 'perfil'"
                                 :cotizacion="seleccionado"
-                            >
-                            </detalle-cotizacion-user>
+                            ></detalle-cotizacion-user>
                             <lista-cotizacion-user
                                 v-on:seleccionado="seleccionar"
+                                v-on:cerrar="accion = 'opciones'"
                                 v-on:crear="crear()"
                                 v-if="accion == 'buscar'"
+                                :idUser="usuarioid"
                             ></lista-cotizacion-user>
-                            <!-- <editor-cliente
-                                :cliente="seleccionado"
-                                v-if="accion == 'editar' || accion == 'crear'"
-                                v-on:cerrar="lista()"
-                            ></editor-cliente> -->
+                            <add-cotizacion-user
+                                v-if="accion == 'crear'"
+                            ></add-cotizacion-user>
                         </transition>
                     </div>
                 </div>
@@ -35,9 +45,15 @@
         data: function() {
             return {
                 seleccionado: null,
-                accion: 'buscar'
+                accion: 'opciones'
             };
         },
+        computed:{
+            idUsuario: function(){
+                return this.idUsuario;
+            }
+        },
+        props: ['usuarioid'],
         methods: {
             seleccionar: function(seleccion) {
                 this.seleccionado = seleccion;

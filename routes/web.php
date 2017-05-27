@@ -19,6 +19,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/usuario/{id}/estadisticas', 'UsuarioController@getUserStadistics');
     Route::get('/usuario/{id}/ventas', 'UsuarioController@getUserSells');
     Route::get('/usuario/{id}/cotizaciones', 'CotizacionController@getCotizacionesFromUser');
+    Route::get('/usuario/{id}/cotizaciones/detalles', 'CotizacionController@getCotizacionesFromUserDetailed');
+    Route::get('/usuario/{id}/clientes_from_user', 'UsuarioController@getUserClients');
 
     Route::resource('rol', 'RolController');
     Route::resource('moneda', 'TipoDeMonedaController');

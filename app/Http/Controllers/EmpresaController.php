@@ -11,7 +11,7 @@ class EmpresaController extends Controller
 {
 
     public function index(){
-      Empresa::with('moneda')->get()->first();
+        return Empresa::with('moneda')->get()->first();
     }
 
     public function edit($id){

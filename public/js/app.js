@@ -39448,7 +39448,7 @@ Vue.http.interceptors.push(function (request, next) {
 
 },{"bootstrap-sass":4,"jquery":71,"lodash":72,"vue":76,"vue-resource":75}],80:[function(require,module,exports){
 var __vueify_insert__ = require("vueify/lib/insert-css")
-var __vueify_style__ = __vueify_insert__.insert("\n\n")
+var __vueify_style__ = __vueify_insert__.insert("\n.widget-user-username {\n    margin-top: 15px;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    overflow: hidden;\n    height: 33px;\n}\n.vista-usuario {\n    border-radius: 5px;\n    border-left-color: green;\n    border-left-style: solid;\n    border-left-width: 10px;\n    margin-bottom: 15px;\n    min-height: 10px;\n    -webkit-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);\n    -moz-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);\n    box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);\n    background: rgb(250,250,250);\n}\n@media screen and (max-width: 700px) {\n    .vista-usuario h2, .vista-usuario h4 {\n        text-align: center;\n    }\n}\n.vista-usuario img {\n    height: 90px;\n    display: block;\n    margin: 0 auto;\n}\n.vista-usuario:hover {\n    background: rgb(230,230,230);\n    border-left-color: darkgreen;\n}\n.vista-usuario .content {\n    min-height: 100px;\n}\n")
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -39466,42 +39466,20 @@ exports.default = {
     },
 
     props: ['data'],
-    methods: {
-        loadData: function loadData() {
-            $.get('/api/usuarios/' + this.data.idUsuario + '/estadisticas', function (response) {
-                this.estadisticas = response;
-            }.bind(this));
-        }
-    },
     computed: {
         profileImagePath: function profileImagePath() {
             return '/storage/' + this.data.imagen_perfil;
-        },
-        ventasMensuales: function ventasMensuales() {
-            return this.estadisticas.ventasDelMes;
-        },
-        ventasMensualesPromedio: function ventasMensualesPromedio() {
-            return this.estadisticas.promedioMensual;
-        },
-        ventasTotales: function ventasTotales() {
-            return this.estadisticas.ventasTotales;
         }
-    },
-    mounted: function mounted() {
-        this.loadData();
-    },
-    beforeUpdate: function beforeUpdate() {
-        this.loadData();
     }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"box box-widget widget-user-2\">\n    <div class=\"widget-user-header bg-primary\">\n        <div class=\"widget-user-image\">\n            <img class=\"img-circle\" :src=\"profileImagePath\" alt=\"User Avatar\">\n        </div>\n        <h3 class=\"widget-user-username\">{{ data.nombres + ' ' + data.apellido_paterno + ' ' + data.apellido_materno }}</h3>\n        <h5 class=\"widget-user-desc\">{{ data.rol.nombre }}</h5>\n    </div>\n    <div class=\"box-footer no-padding\">\n        <ul class=\"nav nav-stacked\">\n            <li><a href=\"#\">Ventas promedio mensuales<span class=\"pull-right badge bg-blue\">{{ ventasMensualesPromedio }}</span></a></li>\n            <li><a href=\"#\">Ventas del mes <span class=\"pull-right badge bg-aqua\">{{ ventasMensuales }}</span></a></li>\n            <li><a href=\"#\">Ventas totales <span class=\"pull-right badge bg-green\">{{ ventasTotales }}</span></a></li>\n        </ul>\n    </div>\n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<!-- <div class=\"box box-widget widget-user-2\">\n    <div class=\"widget-user-header bg-primary\">\n        <div class=\"widget-user-image\">\n            <img class=\"img-circle\" :src=\"profileImagePath\" alt=\"User Avatar\">\n        </div>\n        <h3 class=\"widget-user-username\">{{ data.nombres + ' ' + data.apellido_paterno + ' ' + data.apellido_materno }}</h3>\n        <h5 class=\"widget-user-desc\">{{ data.rol.nombre }}</h5>\n    </div>\n    <div class=\"box-footer no-padding\">\n        <ul class=\"nav nav-stacked\">\n            <li><a href=\"#\">Ventas promedio mensuales<span class=\"pull-right badge bg-blue\">{{ data.estadisticas.promedioMensual }}</span></a></li>\n            <li><a href=\"#\">Ventas del mes <span class=\"pull-right badge bg-aqua\">{{ data.estadisticas.ventasDelMes }}</span></a></li>\n            <li><a href=\"#\">Ventas totales <span class=\"pull-right badge bg-green\">{{ data.estadisticas.ventasTotales }}</span></a></li>\n        </ul>\n    </div>\n</div> -->\n<div class=\"vista-usuario\">\n    <div class=\"content\">\n        <div class=\"row\">\n            <div class=\"col-md-2\">\n                <div class=\"widget-user-image\">\n                    <img class=\"img-circle\" :src=\"profileImagePath\" alt=\"User Avatar\">\n                </div>\n            </div>\n            <div class=\"col-md-4\">\n                <h2 class=\"widget-user-username\">{{ data.nombres + ' ' + data.apellido_paterno + ' ' + data.apellido_materno }}</h2>\n                <h4>{{ data.rol.nombre }}</h4>\n            </div>\n            <div class=\"col-md-6\">\n                <p class=\"col-md-5\"><strong><i class=\"fa fa-envelope margin-r-5\"></i>Correo</strong></p>\n                <p class=\"col-md-7\">{{ data.correo_usuario }}</p>\n                <p class=\"col-md-5\"><strong><i class=\"fa fa-calendar margin-r-5\"></i>Fecha de nacimiento</strong></p>\n                <p class=\"col-md-7\">{{ data.fecha_nacimiento }}</p>\n                <p class=\"col-md-5\"><strong><i class=\"fa fa-calendar-check-o margin-r-5\"></i>Fecha de registro</strong></p>\n                <p class=\"col-md-7\">{{ data.created_at }}</p>\n            </div>\n        </div>\n    </div>\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.dispose(function () {
-    __vueify_insert__.cache["\n\n"] = false
+    __vueify_insert__.cache["\n.widget-user-username {\n    margin-top: 15px;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    overflow: hidden;\n    height: 33px;\n}\n.vista-usuario {\n    border-radius: 5px;\n    border-left-color: green;\n    border-left-style: solid;\n    border-left-width: 10px;\n    margin-bottom: 15px;\n    min-height: 10px;\n    -webkit-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);\n    -moz-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);\n    box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);\n    background: rgb(250,250,250);\n}\n@media screen and (max-width: 700px) {\n    .vista-usuario h2, .vista-usuario h4 {\n        text-align: center;\n    }\n}\n.vista-usuario img {\n    height: 90px;\n    display: block;\n    margin: 0 auto;\n}\n.vista-usuario:hover {\n    background: rgb(230,230,230);\n    border-left-color: darkgreen;\n}\n.vista-usuario .content {\n    min-height: 100px;\n}\n"] = false
     document.head.removeChild(__vueify_style__)
   })
   if (!module.hot.data) {

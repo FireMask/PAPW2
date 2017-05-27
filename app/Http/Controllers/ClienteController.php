@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use App\Models\Cliente;
+use App\Models\UsuarioCliente;
 
 class ClienteController extends Controller
 {
@@ -18,10 +19,11 @@ class ClienteController extends Controller
     }
 
     public function store(Request $request){
-        $cliente = new Cliente();
+        return "asd";
+        /*$cliente = new Cliente();
         $cliente->fill($request->all());
         $cliente->prospecto = ($request->prospecto)?1:0;
-        $cliente->save();
+        $cliente->save();*/
     }
 
     public function edit($id){

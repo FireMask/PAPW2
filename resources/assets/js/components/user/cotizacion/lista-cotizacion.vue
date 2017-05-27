@@ -1,5 +1,8 @@
 <template>
     <div class="content">
+        <div class="btn btn-primary" v-on:click="clous()">
+            Regresar
+        </div>
         <div class="row">
             <form class="form-horizontal col-md-6">
                 <div class="form-group">
@@ -50,6 +53,7 @@
 				datoseleccionado: null
             };
         },
+        props: ['idUser'],
         computed: {
             datosFiltrados: function () {
                 var self = this;
@@ -90,10 +94,13 @@
         },
         methods: {
             loadData: function () {
-                this.$http.get('/cotizacion/').then(response => {
+                this.$http.get('/usuario/'+this.idUser+'/cotizaciones/detalles').then(response => {
                     this.datos = response.body;
                     this.mostrarPagina();
                 });
+            },
+            clous: function(dato) {
+                this.$emit('cerrar');
             },
             seleccionarDato: function(dato) {
                 this.$emit('seleccionado', dato);

@@ -15,7 +15,8 @@
             </section>
             <section class="content-fluid">
                 <transition name="fade" mode="out-in">
-                    <pantalla-usuario       v-if="actualPage === 'usuarios'"            :accion="accion"></pantalla-usuario>
+                    @if(Auth::user()->idRol == 1)
+                    <pantalla-usuario       v-if=     "actualPage === 'usuarios'"       :accion="accion"></pantalla-usuario>
                     <pantalla-cliente       v-else-if="actualPage === 'clientes'"       :accion="accion"></pantalla-cliente>
                     <pantalla-cotizacion    v-else-if="actualPage === 'cotizaciones'"   :accion="accion"></pantalla-cotizacion>
                     <pantalla-empresa       v-else-if="actualPage === 'empresa'"        :accion="accion"></pantalla-empresa>
@@ -25,6 +26,10 @@
                     <pantalla-proveedor     v-else-if="actualPage === 'proveedores'"    :accion="accion"></pantalla-proveedor>
                     <pantalla-rol           v-else-if="actualPage === 'roles'"          :accion="accion"></pantalla-rol>
                     <pantalla-inicio        v-else-if="actualPage === 'inicio'"         :accion="accion"></pantalla-inicio>
+                    @else
+                    <pantalla-cliente-user       v-if=     "actualPage === 'clientes'"       :accion="accion" :usuarioid="{{ Auth::user()->idUsuario }}"></pantalla-cliente-user>
+                    <pantalla-cotizacion-user    v-else-if="actualPage === 'cotizaciones'"   :accion="accion" :usuarioid="{{ Auth::user()->idUsuario }}"></pantalla-cotizacion-user>
+                    @endif
                 </transition>
             </section>
         </div>
