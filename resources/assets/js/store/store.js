@@ -32,11 +32,15 @@ const stateModule = {
 
 const globals = {
     state: {
-        token: null
+        token: null,
+        idUser: null
     },
     mutations: {
         setToken: function(state, token) {
             state.token = token;
+        },
+        setId: function(state, id){
+            state.idUser = id;
         }
     }
 };

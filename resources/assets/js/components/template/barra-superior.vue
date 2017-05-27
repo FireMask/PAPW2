@@ -43,7 +43,7 @@
     export default {
         data() {
             return {
-                
+
             };
         },
         props:[
@@ -58,6 +58,9 @@
             inicio: function() {
                 store.commit('setPage', 'inicio');
             }
+        },
+        mounted:function(){
+            store.commit('setId', this.usuario.idUsuario);
         }
     }
 </script>

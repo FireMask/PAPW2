@@ -1,7 +1,7 @@
 <template>
     <div class="content" id="pantallaInicio">
         <div id="pantallaInicio" class="row" >
-            
+
         </div>
     </div>
 </template>

@@ -26,7 +26,17 @@ class CotizacionController extends Controller
     }
 
     public function store(Request $request){
-
+        $cotizacion = new Cotizacion();
+        $cotizacion->idUsuario = $request->idUsuario;
+        $cotizacion->idCliente = $request->idCliente;
+        $cotizacion->idMoneda = $request->idMoneda;
+        $cotizacion->validez = $request->validez;
+        $cotizacion->pago = $request->pago;
+        $cotizacion->total = 0;
+        $cotizacion->aprovada = 0;
+        $cotizacion->finalizada = 0;
+        $cotizacion->save();
+        return $cotizacion->idCotizacion;
     }
 
     public function edit($id){

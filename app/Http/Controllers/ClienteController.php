@@ -7,6 +7,7 @@ use Illuminate\Routing\Redirector;
 use App\Models\Cliente;
 use App\Models\UsuarioCliente;
 use App\Models\TipoDeMoneda;
+use App\Models\Producto;
 
 class ClienteController extends Controller
 {
@@ -51,7 +52,8 @@ class ClienteController extends Controller
             ->where('idUsuario', '=', $id)
             ->select('cliente.*')
             ->get();
-        return compact(['monedas', 'clientes']);
+        $productos = Producto::all();
+        return compact(['monedas', 'clientes', 'productos']);
     }
 
     public function destroy($id){
